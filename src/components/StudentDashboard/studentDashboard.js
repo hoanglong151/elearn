@@ -399,7 +399,7 @@ const Dashboard = () => {
 														!!state.StudyProcess &&
 														state.StudyProcess.TotalLesson -
 															state.StudyProcess.CompleteLessions -
-															state.StudyProcess.NumberOfLessionsLeft-
+															state.StudyProcess.NumberOfLessionsLeft -
 															state.StudyProcess.NumberOfAbsences}
 												</label>
 											</div>
@@ -454,7 +454,7 @@ const Dashboard = () => {
 									className="wd-200 mg-b-15"
 								/>
 								<p className=" tx-danger tx-medium">
-									Bạn không có buổi học nào sắp tới
+									You don't have any upcoming classes
 								</p>
 								<a
 									href="/ElearnStudent/bookingLesson"

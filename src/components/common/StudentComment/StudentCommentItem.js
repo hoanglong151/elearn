@@ -224,9 +224,7 @@ const StudentCommentItem = ({
 							<div className="card-body">
 								<div className="mg-b-30">
 									<div className="st-title-danhgia mg-b-15">
-										<h5 className="pd-b-10 bd-b">
-											Nhận xét chung của giáo viên
-										</h5>
+										<h5 className="pd-b-10 bd-b">Teacher’s General Feedback</h5>
 									</div>
 									{Note ? (
 										<div className="st-item-danhgia tx-gray-500">
@@ -379,7 +377,7 @@ const StudentCommentItem = ({
 								<div className="mg-b-30 mg-t-30">
 									<div className="st-title-danhgia mg-b-15">
 										<h5 className="pd-b-10 bd-b">
-											Học viên nhận xét về buổi học
+											Student’s Feedback on the Lesson
 										</h5>
 									</div>
 									{!!StudentEvaluation ? (

@@ -38,7 +38,7 @@ const FeedbackOption = props => {
 					</>
 				) : (
 					<>
-						<span>Tất cả đánh giá</span>
+						<span>All feedbacks</span>
 						<span>({data.count})</span>
 					</>
 				)}
@@ -208,7 +208,7 @@ const FeedbackNew = () => {
 				<>
 					<div className="d-sm-flex align-items-center justify-content-between mg-b-30">
 						<h4 className="mg-b-0 gradient-heading">
-							<i className="fas fa-comment-dots"></i>Nhận xét của giáo viên
+							<i className="fas fa-comment-dots"></i>Teacher’s Feedbacks
 						</h4>
 						{overview && Object.keys(overview).length > 0 && (
 							<div className="form-group d-inline-block wd-200 mg-b-0-f mg-t-15 mg-sm-t-0-f">
@@ -282,12 +282,12 @@ const FeedbackNew = () => {
 					<div className="wrapper-chart">
 						<div className="chart">
 							<h4 style={{ marginBottom: 16 }}>
-								Biểu đồ trung bình các kỹ năng
+								Everage Learning Performance Chart
 							</h4>
 							<ChartEverageSkill detailStatisticSkill={detailStatisticSkill} />
 						</div>
 						<div className="chart">
-							<h4 style={{ marginBottom: 16 }}>Tiến độ đặt lịch học</h4>
+							<h4 style={{ marginBottom: 16 }}>Lesson Booking Progress</h4>
 							<ChartSchedule />
 						</div>
 					</div>
