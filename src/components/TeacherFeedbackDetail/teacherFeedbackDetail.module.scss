@@ -1,0 +1,58 @@
+@media (min-width: 992px) {
+	.card.card-custom.lesson-sidebar {
+		position: sticky;
+		top: 0;
+	}
+}
+
+@media (max-width: 1023px) {
+	.card.card-custom.lesson-sidebar {
+		margin-bottom: 12px;
+	}
+}
+
+.infomation__wrap {
+	> .st-time {
+		margin-bottom: 15px;
+		> p {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.st-teacher-text {
+	> span {
+		display: block;
+	}
+	> span:last-child {
+		flex-grow: 1;
+		margin-left: 5px;
+		text-align: right;
+		font-weight: 500;
+	}
+	> span:first-child {
+		width: 130px;
+	}
+}
+.focus-link {
+	margin-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+.focus-link .btn {
+	color: #000;
+}
+.rating > label {
+	width: 20px !important;
+	height: 20px !important;
+}
+.margin-b-20 {
+	margin-bottom: 20px;
+}
+label {
+	margin-bottom: 0 !important;
+}
+.mar-r-5 {
+	margin-right: 5px;
+}
