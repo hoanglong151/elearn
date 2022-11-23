@@ -462,6 +462,7 @@ const BookingLesson = () => {
 		return () => {
 			modalRef.current && (modalRef.current = false);
 		};
+
 		/*    $('#display-schedule').on('change', function () {
       if ($('#display-schedule').prop('checked') === true) {
         $('.tutor-schedule').slideDown();

@@ -88,14 +88,14 @@ const ChartSchedule = props => {
 						className="color-status"
 						style={{ backgroundColor: '#e96b02' }}
 					></span>
-					<span>Đã đặt lịch</span>
+					<span>Đã học</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#3e98c7' }}
 					></span>
-					<span>Đã học</span>
+					<span>Đã đặt lịch</span>
 				</div>
 				<div className="schedule-item">
 					<span
