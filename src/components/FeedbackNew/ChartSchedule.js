@@ -89,28 +89,28 @@ const ChartSchedule = props => {
 						className="color-status"
 						style={{ backgroundColor: '#e96b02' }}
 					></span>
-					<span>Đã đặt lịch</span>
+					<span>Booked</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#3e98c7' }}
 					></span>
-					<span>Đã học</span>
+					<span>As shedule</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#f00' }}
 					></span>
-					<span>Học viên vắng mặt</span>
+					<span>Student no show</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#1d9e0e' }}
 					></span>
-					<span>Giáo viên vào trễ</span>
+					<span>Teacher late</span>
 				</div>
 			</div>
 		);
