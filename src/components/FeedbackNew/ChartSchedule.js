@@ -22,7 +22,6 @@ function Example(props) {
 
 const ChartSchedule = props => {
 	const { detailStatisticSchedule } = props;
-	console.log('Data: ', detailStatisticSchedule);
 	const totalPercentBooked = useMemo(() => {
 		if (!!detailStatisticSchedule) {
 			return (

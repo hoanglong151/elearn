@@ -288,7 +288,9 @@ const FeedbackNew = () => {
 						</div>
 						<div className="chart">
 							<h4 style={{ marginBottom: 16 }}>Lesson Booking Progress</h4>
-							<ChartSchedule />
+							<ChartSchedule
+								detailStatisticSchedule={detailStatisticSchedule}
+							/>
 						</div>
 					</div>
 				</>
