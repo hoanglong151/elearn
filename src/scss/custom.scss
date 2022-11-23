@@ -9444,8 +9444,7 @@ input[type='month'].form-control {
 		margin-bottom: 30px;
 		height: 420px;
 		div[data-test-id='CircularProgressbarWithChildren'] {
-			width: 55%;
-			margin-right: 16px;
+			width: 100%;
 		}
 		.CircularProgressbar-text {
 			font-weight: 500;
@@ -9453,15 +9452,15 @@ input[type='month'].form-control {
 		.chart {
 			background: #fff;
 			border-radius: 5px;
-			padding: 15px 30px;
+			padding: 15px 26px;
 			box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
 			width: 50%;
 			height: 100%;
 		}
 		.wrapper-chart-schedule {
-			display: flex;
-			align-items: flex-start;
-			justify-content: space-between;
+			.schedule-item {
+				margin-bottom: 8px;
+			}
 			.color-status {
 				width: 45px;
 				height: 14px;
@@ -9562,31 +9561,26 @@ input[type='month'].form-control {
 	border-radius: 5px;
 }
 
-@media (max-width: 1023px) {
-	#react-feedback
-		.wrapper-chart
-		div[data-test-id='CircularProgressbarWithChildren'] {
-		width: 45%;
-	}
-	#react-feedback {
-		.wrapper-chart {
-			height: 100%;
-			flex-wrap: wrap;
-			gap: 24px;
-			margin-bottom: 24px;
-			.chart {
-				width: 100%;
-			}
-		}
-	}
-}
+// @media (max-width: 1023px) {
+// 	#react-feedback
+// 		.wrapper-chart
+// 		div[data-test-id='CircularProgressbarWithChildren'] {
+// 		width: 45%;
+// 	}
+// 	#react-feedback {
+// 		.wrapper-chart {
+// 			height: 100%;
+// 			flex-wrap: wrap;
+// 			gap: 24px;
+// 			margin-bottom: 24px;
+// 			.chart {
+// 				width: 100%;
+// 			}
+// 		}
+// 	}
+// }
 
 @media (max-width: 767px) {
-	#react-feedback
-		.wrapper-chart
-		div[data-test-id='CircularProgressbarWithChildren'] {
-		width: 45%;
-	}
 	#react-feedback {
 		.wrapper-chart {
 			height: 100%;
