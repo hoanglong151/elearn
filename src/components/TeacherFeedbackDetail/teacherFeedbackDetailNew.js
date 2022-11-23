@@ -514,7 +514,9 @@ const TeacherFeedbackDetailNew = () => {
 						<div className="col-12">
 							<div className="card">
 								<div className="card-header">
-									<h5 className="mg-b-0">Student’s Learning performance</h5>
+									<h5 className="mg-b-0">
+										Đánh giá về các kỹ năng trong buổi học
+									</h5>
 								</div>
 								<div className="card-body">
 									<div className="st-danhgianguphap ">
