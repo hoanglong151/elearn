@@ -36,16 +36,9 @@ const ChartEverageSkill = props => {
 
 	return (
 		<ResponsiveContainer width="100%" height={350}>
-			<BarChart layout="vertical" width={400} height={350} data={data}>
-				<XAxis domain={[1, 10]} tickCount={10} type="number" padding={80} />
-				<YAxis
-					domain={[1, 10]}
-					tickCount={10}
-					type="category"
-					dataKey="name"
-					height={50}
-					width={75}
-				/>
+			<BarChart layout="vertical" width={450} height={350} data={data}>
+				<XAxis domain={[0, 10]} tickCount={11} type="number" padding={80} />
+				<YAxis type="category" dataKey="name" height={50} />
 				<CartesianGrid strokeDasharray="3 3" />
 				<Tooltip />
 				<Bar dataKey="pv" fill="#fd7e14" barSize={20} name="Điểm" />
