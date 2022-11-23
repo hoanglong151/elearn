@@ -236,13 +236,40 @@ const BookingLesson = () => {
 	const onSearch = (e, page) => {
 		setTeacherList(null);
 		e && e.preventDefault();
-		let x = [];
-		let min = parseInt(state.startTime.getHours());
-		let max = parseInt(state.endTime.getHours());
 
-		for (let i = min; i <= max; i++) {
-			x.push(`${i < 10 ? '0' + i : i}:00`);
-			if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
+		let x = [];
+		if (!!state.startTime && !!state.endTime) {
+			let min = parseInt(state.startTime.getHours());
+			let max = parseInt(state.endTime.getHours());
+
+			for (let i = min; i <= max; i++) {
+				x.push(`${i < 10 ? '0' + i : i}:00`);
+				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
+			}
+		} else if (!!state.startTime && !state.endTime) {
+			let min = parseInt(state.startTime.getHours());
+			let max = parseInt(new Date(new Date().setHours(23)));
+
+			for (let i = min; i <= max; i++) {
+				x.push(`${i < 10 ? '0' + i : i}:00`);
+				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
+			}
+		} else if (!state.startTime && !!state.endTime) {
+			let min = parseInt(new Date(new Date().setHours(0)));
+			let max = parseInt(state.endTime.getHours());
+
+			for (let i = min; i <= max; i++) {
+				x.push(`${i < 10 ? '0' + i : i}:00`);
+				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
+			}
+		} else {
+			let min = parseInt(new Date(new Date().setHours(0)));
+			let max = parseInt(new Date(new Date().setHours(23)));
+
+			for (let i = min; i <= max; i++) {
+				x.push(`${i < 10 ? '0' + i : i}:00`);
+				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
+			}
 		}
 		setLearnTime(x);
 
@@ -266,8 +293,10 @@ const BookingLesson = () => {
 			LevelPurpose: z.join(','),
 			Gender: state?.gender?.value ?? '0',
 			Date: state.date ? dayjs(state.date).format('DD/MM/YYYY') : '',
-			Start: `${pad(state.startTime.getHours())}:00`,
-			End: `${pad(state.endTime.getHours())}:00`,
+			Start: !!state.startTime
+				? `${pad(state.startTime.getHours())}:00`
+				: '00:00',
+			End: !!state.endTime ? `${pad(state.endTime.getHours())}:00` : '23:00',
 			Search: state.searchText,
 			Page: page,
 		});
