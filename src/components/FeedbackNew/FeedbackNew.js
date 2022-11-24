@@ -18,6 +18,7 @@ import Select, { components } from 'react-select';
 import { appSettings } from '~src/config';
 import ChartEverageSkill from './ChartEverageSkill';
 import ChartSchedule from './ChartSchedule';
+import HeaderNoDom from '../HeaderNoDom';
 
 const FeedbackOption = props => {
 	const { data, children } = props;
@@ -222,6 +223,9 @@ const FeedbackNew = () => {
 
 	return (
 		<>
+			<div className="Header">
+				<HeaderNoDom />
+			</div>
 			{!loading && (
 				<>
 					<div className="d-sm-flex align-items-center justify-content-between mg-b-30">
