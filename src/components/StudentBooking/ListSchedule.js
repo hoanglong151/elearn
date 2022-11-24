@@ -86,9 +86,9 @@ const ListSchedule = ({
 		}
 		setLoading(false);
 	};
-	useEffect(() => {
-		getAPI();
-	}, [date]);
+	// useEffect(() => {
+	// 	getAPI();
+	// }, [date]);
 
 	useEffect(() => {
 		let newSchedule = [...scheduleList];

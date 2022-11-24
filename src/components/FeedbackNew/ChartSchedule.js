@@ -73,13 +73,7 @@ const ChartSchedule = props => {
 		totalPercentStudentAbsent,
 		totalPercentTeacherLate,
 	]);
-	console.log(
-		'totalPercent: ',
-		totalPercentBooked,
-		totalPercentAsSchedule,
-		totalPercentStudentAbsent,
-		totalPercentTeacherLate,
-	);
+
 	const createLabel = () => {
 		return (
 			<div className="wrapper-chart-schedule">

@@ -75,12 +75,12 @@ const BookingLessonModal = (
 		}
 	};
 
-	useEffect(() => {
-		getLessonToBookingAPI();
-		console.log('test 1');
-		setState('');
-		feather.replace();
-	}, [TeacherUID, parseInt(StudyTimeID) ?? 0, date]);
+	// useEffect(() => {
+	// 	getLessonToBookingAPI();
+	// 	console.log('test 1');
+	// 	setState('');
+	// 	feather.replace();
+	// }, [TeacherUID, parseInt(StudyTimeID) ?? 0, date]);
 
 	// useEffect(() => {
 	// 	console.log('test 2');

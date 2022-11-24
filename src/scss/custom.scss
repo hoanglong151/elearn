@@ -2700,6 +2700,7 @@ a.no-hl {
 		&.active {
 			left: 0;
 			overflow: auto;
+			z-index: 9999;
 
 			.profile-sidebar .profile-info-list li {
 				margin-bottom: 0;
@@ -9591,5 +9592,15 @@ input[type='month'].form-control {
 				width: 100%;
 			}
 		}
+	}
+}
+
+.profilesidebar-show-only-mobile {
+	display: none;
+}
+
+@media (max-width: 1023px) {
+	.profilesidebar-show-only-mobile {
+		display: block;
 	}
 }
