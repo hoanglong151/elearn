@@ -137,10 +137,16 @@ export const getListEvaluation = async params => {
 		if (params) {
 			res = await instance.get(
 				path +
-					`/GetListEvaluation?FromDate=${params.FromDate}&ToDate=${params.ToDate}`,
+					`/GetListEvaluation?FromDate=${
+						!!params.FromDate ? params.FromDate : ''
+					}&ToDate=${!!params.ToDate ? params.ToDate : ''}&Page=${
+						!!params.Page ? params.Page : 1
+					}`,
 			);
 		} else {
-			res = await instance.get(path + `/GetListEvaluation?FromDate&ToDate`);
+			res = await instance.get(
+				path + `/GetListEvaluation?FromDate&ToDate&Page=${1}`,
+			);
 		}
 		result = res.data;
 	} catch (error) {
