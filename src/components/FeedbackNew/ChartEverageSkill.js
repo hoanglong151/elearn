@@ -12,7 +12,6 @@ import React, { useMemo, memo } from 'react';
 
 const ChartEverageSkill = props => {
 	const { detailStatisticSkill } = props;
-	console.log('detailStatisticSkill: ', detailStatisticSkill);
 	let data = [];
 	useMemo(() => {
 		// !!detailStatisticSkill &&
@@ -22,11 +21,6 @@ const ChartEverageSkill = props => {
 
 		!!detailStatisticSkill &&
 			Object.keys(detailStatisticSkill).forEach((key, index, arr) => {
-				console.log(
-					'Keey: ',
-					key.slice(0, key.indexOf('Point')),
-					detailStatisticSkill[key],
-				);
 				data.push({
 					name: key.slice(0, key.indexOf('Point')),
 					pv: detailStatisticSkill[key],

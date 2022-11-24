@@ -73,6 +73,7 @@ const FeedbackNew = () => {
 				res = await getListEvaluation({
 					FromDate: DATA_SUBMIT.fromDate,
 					ToDate: DATA_SUBMIT.toDate,
+					Page: 1,
 				});
 			} else if (fromDate.length > 0 && toDate.length == 0) {
 				let DATA_SUBMIT = {
@@ -81,6 +82,7 @@ const FeedbackNew = () => {
 				res = await getListEvaluation({
 					FromDate: DATA_SUBMIT.fromDate,
 					ToDate: DateTimeFormat.format(new Date()),
+					Page: 1,
 				});
 			} else if (fromDate.length == 0 && toDate.length > 0) {
 				let DATA_SUBMIT = {
@@ -89,11 +91,15 @@ const FeedbackNew = () => {
 				res = await getListEvaluation({
 					FromDate: DateTimeFormat.format(new Date()),
 					ToDate: DATA_SUBMIT.toDate,
+					Page: 1,
 				});
 			} else {
-				res = await getListEvaluation();
+				res = await getListEvaluation({ Page: 1 });
 			}
 			setListFeedback(res.Data);
+			setPageSize(res.PageSize);
+			setTotalResult(res.TotalResult);
+			setPage(1);
 		} catch (err) {
 			console.log('Err: ', err);
 		}
@@ -111,11 +117,13 @@ const FeedbackNew = () => {
 	const [detailStatisticSkill, setDetailStatisticSkill] = useState();
 	const [detailStatisticSchedule, setDetailStatisticSchedule] = useState();
 
-	const getAllFeedback = async () => {
+	const getAllFeedback = async params => {
 		try {
-			const res = await getListEvaluation();
+			const res = await getListEvaluation(params);
 			if (res.Code == 1) {
 				setListFeedback(res.Data);
+				setPageSize(res.PageSize);
+				setTotalResult(res.TotalResult);
 			}
 		} catch (err) {
 			console.log('Err: ', err);
@@ -151,11 +159,21 @@ const FeedbackNew = () => {
 	}, []);
 
 	const handlePageChange = pageNumber => {
+		const DateTimeFormat = new Intl.DateTimeFormat('fr-CA', {
+			year: 'numeric',
+			month: '2-digit',
+			day: '2-digit',
+		});
 		if (page !== pageNumber) {
 			setPage(pageNumber);
-			_GetListEvaluationAPI({
-				Rate: rate,
+			getAllFeedback({
 				Page: pageNumber,
+				FromDate:
+					!!fromDate.length > 0
+						? DateTimeFormat.format(new Date(fromDate))
+						: '',
+				ToDate:
+					!!toDate.length > 0 ? DateTimeFormat.format(new Date(toDate)) : '',
 			});
 		}
 	};
@@ -169,34 +187,34 @@ const FeedbackNew = () => {
 		setLoading(false);
 	};
 
-	const _GetListEvaluationAPI = async params => {
-		setLoadingListEvaluation(true);
-		const res = await getListEvaluationAPI(params);
-		if (res.Code === 1) {
-			setFeedback(res.Data);
-			setPageSize(res.PageSize);
-			setTotalResult(res.TotalResult);
-		}
-		setPage(params.Page);
-		setLoadingListEvaluation(false);
-	};
+	// const _GetListEvaluationAPI = async params => {
+	// 	setLoadingListEvaluation(true);
+	// 	const res = await getListEvaluationAPI(params);
+	// 	if (res.Code === 1) {
+	// 		setFeedback(res.Data);
+	// 		setPageSize(res.PageSize);
+	// 		setTotalResult(res.TotalResult);
+	// 	}
+	// 	setPage(params.Page);
+	// 	setLoadingListEvaluation(false);
+	// };
 
-	const fetchListEvaluation = e => {
-		let rateFilter = parseInt(e.target.value);
-		if (rateFilter === rate) return;
-		setRate(rateFilter);
-		_GetListEvaluationAPI({
-			Rate: rateFilter,
-			Page: 1,
-		});
-	};
+	// const fetchListEvaluation = e => {
+	// 	let rateFilter = parseInt(e.target.value);
+	// 	if (rateFilter === rate) return;
+	// 	setRate(rateFilter);
+	// 	_GetListEvaluationAPI({
+	// 		Rate: rateFilter,
+	// 		Page: 1,
+	// 	});
+	// };
 
-	useEffect(() => {
-		_GetListEvaluationAPI({
-			Rate: parseInt(filterOption?.value) ?? 0,
-			Page: 1,
-		});
-	}, [filterOption]);
+	// useEffect(() => {
+	// 	_GetListEvaluationAPI({
+	// 		Rate: parseInt(filterOption?.value) ?? 0,
+	// 		Page: 1,
+	// 	});
+	// }, [filterOption]);
 
 	useEffect(() => {
 		getOverViewAPI();
