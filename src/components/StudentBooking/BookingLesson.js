@@ -248,14 +248,14 @@ const BookingLesson = () => {
 			}
 		} else if (!!state.startTime && !state.endTime) {
 			let min = parseInt(state.startTime.getHours());
-			let max = parseInt(new Date(new Date().setHours(23)));
+			let max = parseInt(new Date(new Date().setHours(23)).getHours());
 
 			for (let i = min; i <= max; i++) {
 				x.push(`${i < 10 ? '0' + i : i}:00`);
 				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
 			}
 		} else if (!state.startTime && !!state.endTime) {
-			let min = parseInt(new Date(new Date().setHours(0)));
+			let min = parseInt(new Date(new Date().setHours(0)).getHours());
 			let max = parseInt(state.endTime.getHours());
 
 			for (let i = min; i <= max; i++) {
@@ -263,14 +263,15 @@ const BookingLesson = () => {
 				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
 			}
 		} else {
-			let min = parseInt(new Date(new Date().setHours(0)));
-			let max = parseInt(new Date(new Date().setHours(23)));
-
+			let min = parseInt(new Date(new Date().setHours(0)).getHours());
+			let max = parseInt(new Date(new Date().setHours(23)).getHours());
+			console.log('MM: ', min, max);
 			for (let i = min; i <= max; i++) {
 				x.push(`${i < 10 ? '0' + i : i}:00`);
 				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
 			}
 		}
+		console.log('Do: ', x);
 		setLearnTime(x);
 
 		let z = [];

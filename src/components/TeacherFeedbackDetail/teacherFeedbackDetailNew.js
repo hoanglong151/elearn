@@ -80,7 +80,6 @@ const StatelessTextarea = props => {
 
 const TeacherFeedbackDetailNew = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	console.log('state: ', state);
 	const listFeedBack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	const [feedBacks4Skill, setFeedbacks4Skill] = useState({
 		FinishedType: 0,
@@ -100,11 +99,10 @@ const TeacherFeedbackDetailNew = () => {
 	const getFeedbackDetail = async () => {
 		try {
 			const params = new URLSearchParams(window.location.search);
-			if (params.has('BookingID')) {
+			if (params.has('ID')) {
 				const res = await getTeacherFeedbackDetail({
-					BookingID: parseInt(params.get('BookingID')),
+					BookingID: parseInt(params.get('ID')),
 				});
-				console.log('Res: ', res.Data);
 				if (
 					res.Data.Pronunciation == null &&
 					res.Data.Vocabulary == null &&
@@ -118,13 +116,13 @@ const TeacherFeedbackDetailNew = () => {
 					setFeedbacks4Skill({
 						...feedBacks4Skill,
 						...res.Data,
-						ElearnBookingID: parseInt(params.get('BookingID')),
+						ElearnBookingID: parseInt(params.get('ID')),
 					});
 				} else {
 					setFeedbacks4Skill({
 						...feedBacks4Skill,
 						...res.Data,
-						EvaluationID: parseInt(params.get('BookingID')),
+						EvaluationID: parseInt(params.get('ID')),
 					});
 				}
 				dispatch({
@@ -141,8 +139,6 @@ const TeacherFeedbackDetailNew = () => {
 	useEffect(() => {
 		getFeedbackDetail();
 	}, []);
-
-	console.log('feedbackDetail: ', feedbackDetail);
 
 	const handleChangeSelect = (name, value) => {
 		setFeedbacks4Skill({ ...feedBacks4Skill, [name]: value });
