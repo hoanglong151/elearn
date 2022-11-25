@@ -15,6 +15,9 @@ import { encodeHTML, decodeHTML } from '~src/utils';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import { ToastContainer, toast } from 'react-toastify';
+import HeaderNoDom from '../HeaderNoDom';
+import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
+import BottomMenu from '../BottomMenu';
 
 const initialState = {
 	isLoading: true,
@@ -301,117 +304,128 @@ const TeacherFeedbackDetailNew = () => {
 				draggable
 				pauseOnHover
 			/>
-			<div className="row">
-				<div className="col-xl-3 col-lg-4">
-					<div className="card card-custom lesson-sidebar">
-						<div className="card-body">
-							<div className="row">
-								<div className="col-sm-12 mg-b-15">
-									{/* <!--thông tin buổi học--> */}
-									<div className="">
-										<h5 className="mg-b-15">Lesson information</h5>
-										<div className="infomation__wrap">
-											<div className="st-time">
-												<p className="st-teacher-text d-flex justify-content-between">
-													<span className="">
-														<i className="fa fa-book-open tx-primary st-icon wd-20 mg-r-5"></i>
-														Course:{' '}
-													</span>
-													<span className="">
-														{!!feedbackDetail && !!feedbackDetail.DocumentName
-															? feedbackDetail.DocumentName
-															: ''}
-													</span>
-												</p>
-											</div>
-											<div className="st-time">
-												<p className="st-teacher-text d-flex justify-content-between">
-													<span className="">
-														<i className="fa fa-book-reader tx-primary graduate st-icon wd-20 mg-r-5"></i>
-														Lesson:
-													</span>
-													<span className="st-tengv">
-														{!!feedbackDetail && !!feedbackDetail.Material
-															? feedbackDetail.Material
-															: ''}
-													</span>
-												</p>
-											</div>
-											<div className="st-time">
-												<p className="st-teacher-text d-flex justify-content-between">
-													<span className="tx-black tx-normal">
-														<i className="fa fa-clock tx-primary clock st-icon wd-20 mg-r-5"></i>
-														Time:
-													</span>
-													<span className="">
-														{!!feedbackDetail && !!feedbackDetail.ScheduleDate
-															? feedbackDetail.ScheduleDate
-															: ''}
-													</span>
-												</p>
-											</div>
-											<div className="st-time">
-												<p className="st-teacher-text d-flex justify-content-between">
-													<span className="">
-														<i className="fa fa-book tx-primary open st-icon wd-20 mg-r-5"></i>
-														Material:
-													</span>
-													<span>
-														<a
-															href={
-																!!feedbackDetail &&
-																!!feedbackDetail.MaterialLink
-																	? feedbackDetail.MaterialLink
-																	: ''
-															}
-															target="_blank"
-															rel="noreferrer"
-														>
+			<div className="Header">
+				<HeaderNoDom />
+				<BottomMenu />
+			</div>
+			<div className="wrapper-new">
+				<div
+					className="ProfileSidebar profile-sidebar-no-dom profilesidebar-show-only-mobile"
+					id="js-component-profilesidebar-1"
+				>
+					<ProfileSidebarNoDom />
+				</div>
+				<div className="row wrap-w-100-flex-1">
+					<div className="col-xl-3 col-lg-4">
+						<div className="card card-custom lesson-sidebar">
+							<div className="card-body">
+								<div className="row">
+									<div className="col-sm-12 mg-b-15">
+										{/* <!--thông tin buổi học--> */}
+										<div className="">
+											<h5 className="mg-b-15">Lesson information</h5>
+											<div className="infomation__wrap">
+												<div className="st-time">
+													<p className="st-teacher-text d-flex justify-content-between">
+														<span className="">
+															<i className="fa fa-book-open tx-primary st-icon wd-20 mg-r-5"></i>
+															Course:{' '}
+														</span>
+														<span className="">
+															{!!feedbackDetail && !!feedbackDetail.DocumentName
+																? feedbackDetail.DocumentName
+																: ''}
+														</span>
+													</p>
+												</div>
+												<div className="st-time">
+													<p className="st-teacher-text d-flex justify-content-between">
+														<span className="">
+															<i className="fa fa-book-reader tx-primary graduate st-icon wd-20 mg-r-5"></i>
+															Lesson:
+														</span>
+														<span className="st-tengv">
 															{!!feedbackDetail && !!feedbackDetail.Material
 																? feedbackDetail.Material
 																: ''}
-														</a>
-													</span>
-												</p>
-											</div>
-											<div className="st-time">
-												<div className="st-teacher-text d-flex justify-content-between align-items-center">
-													<span className="">
-														<i className="fas fa-lightbulb tx-primary open st-icon wd-20 mg-r-5"></i>
-														Finished type:
-													</span>
-													<span className="">
-														{!!feedbackDetail &&
-														!!feedbackDetail.FinishedTypeString
-															? feedbackDetail.FinishedTypeString
-															: ''}
-													</span>
+														</span>
+													</p>
+												</div>
+												<div className="st-time">
+													<p className="st-teacher-text d-flex justify-content-between">
+														<span className="tx-black tx-normal">
+															<i className="fa fa-clock tx-primary clock st-icon wd-20 mg-r-5"></i>
+															Time:
+														</span>
+														<span className="">
+															{!!feedbackDetail && !!feedbackDetail.ScheduleDate
+																? feedbackDetail.ScheduleDate
+																: ''}
+														</span>
+													</p>
+												</div>
+												<div className="st-time">
+													<p className="st-teacher-text d-flex justify-content-between">
+														<span className="">
+															<i className="fa fa-book tx-primary open st-icon wd-20 mg-r-5"></i>
+															Material:
+														</span>
+														<span>
+															<a
+																href={
+																	!!feedbackDetail &&
+																	!!feedbackDetail.MaterialLink
+																		? feedbackDetail.MaterialLink
+																		: ''
+																}
+																target="_blank"
+																rel="noreferrer"
+															>
+																{!!feedbackDetail && !!feedbackDetail.Material
+																	? feedbackDetail.Material
+																	: ''}
+															</a>
+														</span>
+													</p>
+												</div>
+												<div className="st-time">
+													<div className="st-teacher-text d-flex justify-content-between align-items-center">
+														<span className="">
+															<i className="fas fa-lightbulb tx-primary open st-icon wd-20 mg-r-5"></i>
+															Finished type:
+														</span>
+														<span className="">
+															{!!feedbackDetail &&
+															!!feedbackDetail.FinishedTypeString
+																? feedbackDetail.FinishedTypeString
+																: ''}
+														</span>
+													</div>
 												</div>
 											</div>
 										</div>
+										{/* <!--/thông tin buổi học--> */}
 									</div>
-									{/* <!--/thông tin buổi học--> */}
-								</div>
-								<div className="col-sm-12 mg-b-15">
-									{/* <!--thang danh gia--> */}
-									<div className="infomation__wrap">
-										<h5 className="mg-b-15 mg-md-t-15 mg-t-15 mg-md-t-0-f">
-											Student Information
-										</h5>
-										<div className="st-time">
-											<p className="st-teacher-text d-flex justify-content-between">
-												<span className="">
-													<i className="fa fa-user-graduate  tx-primary st-icon wd-20 mg-r-5"></i>
-													Name:{' '}
-												</span>
-												<span className="">
-													{!!feedbackDetail && !!feedbackDetail.StudentName
-														? feedbackDetail.StudentName
-														: ''}
-												</span>
-											</p>
-										</div>
-										{/* <div className="st-time">
+									<div className="col-sm-12 mg-b-15">
+										{/* <!--thang danh gia--> */}
+										<div className="infomation__wrap">
+											<h5 className="mg-b-15 mg-md-t-15 mg-t-15 mg-md-t-0-f">
+												Student Information
+											</h5>
+											<div className="st-time">
+												<p className="st-teacher-text d-flex justify-content-between">
+													<span className="">
+														<i className="fa fa-user-graduate  tx-primary st-icon wd-20 mg-r-5"></i>
+														Name:{' '}
+													</span>
+													<span className="">
+														{!!feedbackDetail && !!feedbackDetail.StudentName
+															? feedbackDetail.StudentName
+															: ''}
+													</span>
+												</p>
+											</div>
+											{/* <div className="st-time">
 											<p className="st-teacher-text d-flex justify-content-between">
 												<span className="">
 													<i className="fa fa-thumbs-up tx-primary st-icon wd-20 mg-r-5"></i>
@@ -434,251 +448,263 @@ const TeacherFeedbackDetailNew = () => {
 												</span>
 											</p>
 										</div> */}
+										</div>
 									</div>
-								</div>
-								<div className="col-sm-12">
-									<div>
-										<h5 className="mg-b-15 mg-md-t-15 mg-t-15 mg-md-t-0-f">
-											Student Feedback
-										</h5>
-										<span className="word-break">
-											{!!feedbackDetail && !!feedbackDetail.StudentNote
-												? feedbackDetail.StudentNote
-												: ''}
-										</span>
+									<div className="col-sm-12">
+										<div>
+											<h5 className="mg-b-15 mg-md-t-15 mg-t-15 mg-md-t-0-f">
+												Student Feedback
+											</h5>
+											<span className="word-break">
+												{!!feedbackDetail && !!feedbackDetail.StudentNote
+													? feedbackDetail.StudentNote
+													: ''}
+											</span>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<button
+							onClick={handleSubmitFeedback}
+							className="desktop btn btn-icon btn-warning mt-2 w-100"
+						>
+							<i className="fas fa-save"></i> Save
+						</button>
 					</div>
-					<button
-						onClick={handleSubmitFeedback}
-						className="desktop btn btn-icon btn-warning mt-2 w-100"
-					>
-						<i className="fas fa-save"></i> Save
-					</button>
-				</div>
-				<div className="col-xl-9 col-lg-8">
-					<div className="row">
-						<div className="col-12">
-							<div className="card mg-b-15">
-								<div className="card-header">
-									<h5 className="mg-b-0">
-										Student’s Performance and Behavior in the Class
-									</h5>
-									<div>
-										<button
-											className="btn btn-icon btn-warning mg-r-15"
-											onClick={() => setEditMode(!state.editMode)}
-										>
-											<i className="fas fa-edit mg-r-5"></i> Edit feedback
-										</button>
+					<div className="col-xl-9 col-lg-8">
+						<div className="row">
+							<div className="col-12">
+								<div className="card mg-b-15">
+									<div className="card-header">
+										<h5 className="mg-b-0">
+											Student’s Performance and Behavior in the Class
+										</h5>
+										<div>
+											<button
+												className="btn btn-icon btn-warning mg-r-15"
+												onClick={() => setEditMode(!state.editMode)}
+											>
+												<i className="fas fa-edit mg-r-5"></i> Edit feedback
+											</button>
+										</div>
+									</div>
+									<div className="card-body">
+										{state.editMode ? (
+											<>
+												<StatelessTextarea
+													rows={3}
+													className="form-control"
+													placeholder="General feedback......"
+													defaultValue={state?.note ?? ''}
+													value={feedBacks4Skill.Note}
+													onChange={e =>
+														setFeedbacks4Skill({
+															...feedBacks4Skill,
+															Note: e.target.value,
+														})
+													}
+												></StatelessTextarea>
+											</>
+										) : (
+											<>
+												<div
+													className="mg-t-15"
+													dangerouslySetInnerHTML={{
+														__html: decodeHTML(
+															!!state && !!state.note ? state.note : '',
+														),
+													}}
+												></div>
+											</>
+										)}
 									</div>
 								</div>
-								<div className="card-body">
-									{state.editMode ? (
-										<>
-											<StatelessTextarea
-												rows={3}
-												className="form-control"
-												placeholder="General feedback......"
-												defaultValue={state?.note ?? ''}
-												value={feedBacks4Skill.Note}
-												onChange={e =>
-													setFeedbacks4Skill({
-														...feedBacks4Skill,
-														Note: e.target.value,
-													})
-												}
-											></StatelessTextarea>
-										</>
-									) : (
-										<>
-											<div
-												className="mg-t-15"
-												dangerouslySetInnerHTML={{
-													__html: decodeHTML(
-														!!state && !!state.note ? state.note : '',
-													),
-												}}
-											></div>
-										</>
-									)}
-								</div>
 							</div>
-						</div>
-						<div className="col-12">
-							<div className="card">
-								<div className="card-header">
-									<h5 className="mg-b-0">
-										Đánh giá về các kỹ năng trong buổi học
-									</h5>
-								</div>
-								<div className="card-body">
-									<div className="st-danhgianguphap ">
-										<Table
-											striped
-											bordered
-											hover
-											className="wrapper-feedback-detail-teacher"
-										>
-											<thead>
-												<tr>
-													<th></th>
-													<th>
-														<p className="point">1</p>
-														<p>Fully insufficient</p>
-													</th>
-													<th>
-														<p className="point">2</p>
-														<p>Poor</p>
-													</th>
-													<th>
-														<p className="point">3</p>
-														<p>Very unsatisfactory</p>
-													</th>
-													<th>
-														<p className="point">4</p>
-														<p>Unsatisfactory</p>
-													</th>
-													<th>
-														<p className="point">5</p>
-														<p>Pass</p>
-													</th>
-													<th>
-														<p className="point">6</p>
-														<p>Satisfactory</p>
-													</th>
-													<th>
-														<p className="point">7</p>
-														<p>Good</p>
-													</th>
-													<th>
-														<p className="point">8</p>
-														<p>Very Good</p>
-													</th>
-													<th>
-														<p className="point">9</p>
-														<p>Outstanding</p>
-													</th>
-													<th>
-														<p className="point">10</p>
-														<p>Excellent</p>
-													</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td className="title">
-														Speaking <span className="required">*</span>
-													</td>
-													{listFeedBack.map(data => {
-														return (
-															<td key={data}>
-																{!!feedBacks4Skill &&
-																!!feedBacks4Skill.SpeakingPoint &&
-																feedBacks4Skill.SpeakingPoint == data ? (
-																	<div
-																		onClick={() =>
-																			handleChangeSelect('SpeakingPoint', data)
-																		}
-																		className="radio-btn checked"
-																	/>
-																) : (
-																	<div
-																		className="radio-btn"
-																		onClick={() =>
-																			handleChangeSelect('SpeakingPoint', data)
-																		}
-																	/>
-																)}
-															</td>
-														);
-													})}
-												</tr>
-												<tr>
-													<td className="title">
-														Listening <span className="required">*</span>
-													</td>
-													{listFeedBack.map(data => {
-														return (
-															<td key={data}>
-																{!!feedBacks4Skill &&
-																feedBacks4Skill.ListeningPoint &&
-																feedBacks4Skill.ListeningPoint == data ? (
-																	<div
-																		onClick={() =>
-																			handleChangeSelect('ListeningPoint', data)
-																		}
-																		className="radio-btn checked"
-																	/>
-																) : (
-																	<div
-																		className="radio-btn"
-																		onClick={() =>
-																			handleChangeSelect('ListeningPoint', data)
-																		}
-																	/>
-																)}
-															</td>
-														);
-													})}
-												</tr>
-												<tr>
-													<td className="title">Reading</td>
-													{listFeedBack.map(data => {
-														return (
-															<td key={data}>
-																{!!feedBacks4Skill &&
-																feedBacks4Skill.ReadingPoint &&
-																feedBacks4Skill.ReadingPoint == data ? (
-																	<div
-																		onClick={() =>
-																			handleChangeSelect('ReadingPoint', data)
-																		}
-																		className="radio-btn checked"
-																	/>
-																) : (
-																	<div
-																		className="radio-btn"
-																		onClick={() =>
-																			handleChangeSelect('ReadingPoint', data)
-																		}
-																	/>
-																)}
-															</td>
-														);
-													})}
-												</tr>
-												<tr>
-													<td className="title">Writing</td>
-													{listFeedBack.map(data => {
-														return (
-															<td key={data}>
-																{!!feedBacks4Skill &&
-																!!feedBacks4Skill.WritingPoint &&
-																feedBacks4Skill.WritingPoint == data ? (
-																	<div
-																		onClick={() =>
-																			handleChangeSelect('WritingPoint', data)
-																		}
-																		className="radio-btn checked"
-																	/>
-																) : (
-																	<div
-																		className="radio-btn"
-																		onClick={() =>
-																			handleChangeSelect('WritingPoint', data)
-																		}
-																	/>
-																)}
-															</td>
-														);
-													})}
-												</tr>
-											</tbody>
-										</Table>
-										{/* {state.editMode ? (
+							<div className="col-12">
+								<div className="card">
+									<div className="card-header">
+										<h5 className="mg-b-0">
+											Đánh giá về các kỹ năng trong buổi học
+										</h5>
+									</div>
+									<div className="card-body">
+										<div className="st-danhgianguphap ">
+											<Table
+												striped
+												bordered
+												hover
+												className="wrapper-feedback-detail-teacher"
+											>
+												<thead>
+													<tr>
+														<th></th>
+														<th>
+															<p className="point">1</p>
+															<p>Fully insufficient</p>
+														</th>
+														<th>
+															<p className="point">2</p>
+															<p>Poor</p>
+														</th>
+														<th>
+															<p className="point">3</p>
+															<p>Very unsatisfactory</p>
+														</th>
+														<th>
+															<p className="point">4</p>
+															<p>Unsatisfactory</p>
+														</th>
+														<th>
+															<p className="point">5</p>
+															<p>Pass</p>
+														</th>
+														<th>
+															<p className="point">6</p>
+															<p>Satisfactory</p>
+														</th>
+														<th>
+															<p className="point">7</p>
+															<p>Good</p>
+														</th>
+														<th>
+															<p className="point">8</p>
+															<p>Very Good</p>
+														</th>
+														<th>
+															<p className="point">9</p>
+															<p>Outstanding</p>
+														</th>
+														<th>
+															<p className="point">10</p>
+															<p>Excellent</p>
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td className="title">
+															Speaking <span className="required">*</span>
+														</td>
+														{listFeedBack.map(data => {
+															return (
+																<td key={data}>
+																	{!!feedBacks4Skill &&
+																	!!feedBacks4Skill.SpeakingPoint &&
+																	feedBacks4Skill.SpeakingPoint == data ? (
+																		<div
+																			onClick={() =>
+																				handleChangeSelect(
+																					'SpeakingPoint',
+																					data,
+																				)
+																			}
+																			className="radio-btn checked"
+																		/>
+																	) : (
+																		<div
+																			className="radio-btn"
+																			onClick={() =>
+																				handleChangeSelect(
+																					'SpeakingPoint',
+																					data,
+																				)
+																			}
+																		/>
+																	)}
+																</td>
+															);
+														})}
+													</tr>
+													<tr>
+														<td className="title">
+															Listening <span className="required">*</span>
+														</td>
+														{listFeedBack.map(data => {
+															return (
+																<td key={data}>
+																	{!!feedBacks4Skill &&
+																	feedBacks4Skill.ListeningPoint &&
+																	feedBacks4Skill.ListeningPoint == data ? (
+																		<div
+																			onClick={() =>
+																				handleChangeSelect(
+																					'ListeningPoint',
+																					data,
+																				)
+																			}
+																			className="radio-btn checked"
+																		/>
+																	) : (
+																		<div
+																			className="radio-btn"
+																			onClick={() =>
+																				handleChangeSelect(
+																					'ListeningPoint',
+																					data,
+																				)
+																			}
+																		/>
+																	)}
+																</td>
+															);
+														})}
+													</tr>
+													<tr>
+														<td className="title">Reading</td>
+														{listFeedBack.map(data => {
+															return (
+																<td key={data}>
+																	{!!feedBacks4Skill &&
+																	feedBacks4Skill.ReadingPoint &&
+																	feedBacks4Skill.ReadingPoint == data ? (
+																		<div
+																			onClick={() =>
+																				handleChangeSelect('ReadingPoint', data)
+																			}
+																			className="radio-btn checked"
+																		/>
+																	) : (
+																		<div
+																			className="radio-btn"
+																			onClick={() =>
+																				handleChangeSelect('ReadingPoint', data)
+																			}
+																		/>
+																	)}
+																</td>
+															);
+														})}
+													</tr>
+													<tr>
+														<td className="title">Writing</td>
+														{listFeedBack.map(data => {
+															return (
+																<td key={data}>
+																	{!!feedBacks4Skill &&
+																	!!feedBacks4Skill.WritingPoint &&
+																	feedBacks4Skill.WritingPoint == data ? (
+																		<div
+																			onClick={() =>
+																				handleChangeSelect('WritingPoint', data)
+																			}
+																			className="radio-btn checked"
+																		/>
+																	) : (
+																		<div
+																			className="radio-btn"
+																			onClick={() =>
+																				handleChangeSelect('WritingPoint', data)
+																			}
+																		/>
+																	)}
+																</td>
+															);
+														})}
+													</tr>
+												</tbody>
+											</Table>
+											{/* {state.editMode ? (
 											<>
 												<StatelessTextarea
 													rows={3}
@@ -697,17 +723,17 @@ const TeacherFeedbackDetailNew = () => {
 												}}
 											></div>
 										)} */}
+										</div>
 									</div>
 								</div>
+								<button
+									onClick={handleSubmitFeedback}
+									className="tablet btn btn-icon btn-warning mt-3 w-100"
+								>
+									<i className="fas fa-save"></i> Save
+								</button>
 							</div>
-							<button
-								onClick={handleSubmitFeedback}
-								className="tablet btn btn-icon btn-warning mt-3 w-100"
-							>
-								<i className="fas fa-save"></i> Save
-							</button>
-						</div>
-						{/* <div className="col-12">
+							{/* <div className="col-12">
 							<div className="card  mg-b-15">
 								<div className="card-header">
 									<h5 className="mg-b-0">Vocabulary</h5>
@@ -804,9 +830,9 @@ const TeacherFeedbackDetailNew = () => {
 								</div>
 							</div>
 						</div> */}
-					</div>
+						</div>
 
-					{/* <div className="d-flex">
+						{/* <div className="d-flex">
 						{state.editMode ? (
 							<>
 								<button
@@ -847,6 +873,7 @@ const TeacherFeedbackDetailNew = () => {
 							</button>
 						)}
 					</div> */}
+					</div>
 				</div>
 			</div>
 		</>

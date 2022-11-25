@@ -19,6 +19,7 @@ import { appSettings } from '~src/config';
 import ChartEverageSkill from './ChartEverageSkill';
 import ChartSchedule from './ChartSchedule';
 import HeaderNoDom from '../HeaderNoDom';
+import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
 
 const FeedbackOption = props => {
 	const { data, children } = props;
@@ -226,55 +227,63 @@ const FeedbackNew = () => {
 			<div className="Header">
 				<HeaderNoDom />
 			</div>
-			{!loading && (
-				<>
-					<div className="d-sm-flex align-items-center justify-content-between mg-b-30">
-						<h4 className="mg-b-0 gradient-heading">
-							<i className="fas fa-comment-dots"></i>Nhận xét của giáo viên
-						</h4>
-						{overview && Object.keys(overview).length > 0 && (
-							<div className="form-group d-inline-block wd-200 mg-b-0-f mg-t-15 mg-sm-t-0-f">
-								<Select
-									components={{ Option: FeedbackOption }}
-									value={filterOption}
-									onChange={value => setFilterOption(value)}
-									styles={appSettings.selectStyle}
-									options={[
-										{
-											label: 'Tất cả đánh giá',
-											value: '0',
-											count: overview.AllEvaluation,
-										},
-										{
-											label: '5 Stars',
-											count: overview.EvaluationRate5,
-											value: '5',
-										},
-										{
-											label: '4 Stars',
-											count: overview.EvaluationRate4,
-											value: '4',
-										},
-										{
-											label: '3 Stars',
-											count: overview.EvaluationRate3,
-											value: '3',
-										},
-										{
-											label: '2 Stars',
-											count: overview.EvaluationRate3,
-											value: '2',
-										},
-										{
-											label: '1 Stars',
-											count: overview.EvaluationRate3,
-											value: '1',
-										},
-									]}
-									getOptionLabel={option => option.label}
-									getOptionValue={option => option.value}
-								/>
-								{/* <select
+			<div className="wrapper-new">
+				<div
+					className="ProfileSidebar profile-sidebar-no-dom"
+					id="js-component-profilesidebar-1"
+				>
+					<ProfileSidebarNoDom />
+				</div>
+				<div className="wrapper-w-by-desktop">
+					{!loading && (
+						<>
+							<div className="d-sm-flex align-items-center justify-content-between mg-b-30">
+								<h4 className="mg-b-0 gradient-heading">
+									<i className="fas fa-comment-dots"></i>Nhận xét của giáo viên
+								</h4>
+								{overview && Object.keys(overview).length > 0 && (
+									<div className="form-group d-inline-block wd-200 mg-b-0-f mg-t-15 mg-sm-t-0-f">
+										<Select
+											components={{ Option: FeedbackOption }}
+											value={filterOption}
+											onChange={value => setFilterOption(value)}
+											styles={appSettings.selectStyle}
+											options={[
+												{
+													label: 'Tất cả đánh giá',
+													value: '0',
+													count: overview.AllEvaluation,
+												},
+												{
+													label: '5 Stars',
+													count: overview.EvaluationRate5,
+													value: '5',
+												},
+												{
+													label: '4 Stars',
+													count: overview.EvaluationRate4,
+													value: '4',
+												},
+												{
+													label: '3 Stars',
+													count: overview.EvaluationRate3,
+													value: '3',
+												},
+												{
+													label: '2 Stars',
+													count: overview.EvaluationRate3,
+													value: '2',
+												},
+												{
+													label: '1 Stars',
+													count: overview.EvaluationRate3,
+													value: '1',
+												},
+											]}
+											getOptionLabel={option => option.label}
+											getOptionValue={option => option.value}
+										/>
+										{/* <select
 									className="form-control main-color bg-white"
 									style={{ fontFamily: 'FontAwesome' }}
 									onChange={fetchListEvaluation}
@@ -298,135 +307,139 @@ const FeedbackNew = () => {
 										&#xf005; ({overview.EvaluationRate1})
 									</option>
 								</select> */}
+									</div>
+								)}
 							</div>
-						)}
-					</div>
-					<div className="wrapper-chart">
-						<div className="chart">
-							<h4 style={{ marginBottom: 16 }}>
-								Biểu đồ trung bình các kỹ năng
-							</h4>
-							<ChartEverageSkill detailStatisticSkill={detailStatisticSkill} />
-						</div>
-						<div className="chart">
-							<h4 style={{ marginBottom: 16 }}>Tiến độ đặt lịch học</h4>
-							<ChartSchedule
-								detailStatisticSchedule={detailStatisticSchedule}
-							/>
-						</div>
-					</div>
-				</>
-			)}
-			<div
-				className="d-flex from-to-group wd-100p ml-auto mb-4 flex-md-nowrap flex-wrap wd-md-500"
-				id="filter-time"
-			>
-				<div className="form-row flex-grow-1 mg-sm-r-5">
-					<div className="col">
-						<Flatpickr
-							placeholder="From date"
-							options={{
-								dateFormat: 'd/m/Y',
-								maxDate: new Date(),
-							}}
-							className="form-control"
-							onChange={date => setFromDate(date)}
-						/>
-						{/* <input type="text" name="start-day " onChange={(value) =>  setFromDate(value)} className="form-control datetimepicker from-date" placeholder="From date" /> */}
-					</div>
-					<div className="col">
-						<Flatpickr
-							placeholder="To date"
-							options={{
-								dateFormat: 'd/m/Y',
-								maxDate: new Date(),
-								onOpen: function(selectedDates, dateStr, instance) {
-									if (fromDate.length === 0) {
-										instance.set('minDate', null);
-										return;
-									}
-									instance.set('minDate', new Date(fromDate));
-								},
-							}}
-							className="form-control"
-							onChange={date => setToDate(date)}
-						/>
-					</div>
-				</div>
-				<div className="flex-grow-0 tx-right flex-shrink-0 mg-t-30 mg-sm-t-0">
-					<button
-						type="button"
-						className="btn btn-primary "
-						onClick={_onFilterDate}
-					>
-						<i className="fa fa-filter" /> Filter
-					</button>
-				</div>
-			</div>
-			<div className="feedback-container">
-				{loadingListEvaluation ? (
-					<SkeletonFeedback />
-				) : (
-					<div className="fb-list">
-						{!!listFeedback && listFeedback.length > 0 ? (
-							listFeedback.map(item => (
-								<StudentCommentItem
-									key={item.ElearnBookingID}
-									ScheduleTimeVN={item.ScheduleTimeVN}
-									TeacherName={item.TeacherName}
-									TeacherIMG={item.TeacherIMG}
-									TeacherUID={item.TeacherUID}
-									Note={item.Note}
-									Rate={item.Rate}
-									LinkDetail={item.LinkDetail}
-									DocumentName={item.DocumentName}
-									ListeningPoint={item.ListeningPoint}
-									ReadingPoint={item.ReadingPoint}
-									SpeakingPoint={item.SpeakingPoint}
-									WritingPoint={item.WritingPoint}
-									MaterialLink={item.MaterialLink}
-									Material={item.Material}
-									StudentRate={item.StudentRate}
-									StudentEvaluation={item.StudentEvaluation}
-									ID={item.ID}
-								/>
-							))
-						) : (
-							<div className="card card-custom shadow">
-								<div className="card-body tx-center">
-									<span className="d-block tx-center tx-danger tx-medium">
-										Bạn không có phản hồi{' '}
-										{filterOption.value !== '0' && (
-											<>
-												{filterOption.value}
-												<i className="fa fa-star"></i>
-											</>
-										)}{' '}
-										nào
-									</span>
-									<img
-										src="../assets/img/no-booking.svg"
-										alt="image"
-										className="wd-200 mg-b-15"
+							<div className="wrapper-chart">
+								<div className="chart">
+									<h4 style={{ marginBottom: 16 }}>
+										Biểu đồ trung bình các kỹ năng
+									</h4>
+									<ChartEverageSkill
+										detailStatisticSkill={detailStatisticSkill}
+									/>
+								</div>
+								<div className="chart">
+									<h4 style={{ marginBottom: 16 }}>Tiến độ đặt lịch học</h4>
+									<ChartSchedule
+										detailStatisticSchedule={detailStatisticSchedule}
 									/>
 								</div>
 							</div>
+						</>
+					)}
+					<div
+						className="d-flex from-to-group wd-100p ml-auto mb-4 flex-md-nowrap flex-wrap wd-md-500"
+						id="filter-time"
+					>
+						<div className="form-row flex-grow-1 mg-sm-r-5">
+							<div className="col">
+								<Flatpickr
+									placeholder="From date"
+									options={{
+										dateFormat: 'd/m/Y',
+										maxDate: new Date(),
+									}}
+									className="form-control"
+									onChange={date => setFromDate(date)}
+								/>
+								{/* <input type="text" name="start-day " onChange={(value) =>  setFromDate(value)} className="form-control datetimepicker from-date" placeholder="From date" /> */}
+							</div>
+							<div className="col">
+								<Flatpickr
+									placeholder="To date"
+									options={{
+										dateFormat: 'd/m/Y',
+										maxDate: new Date(),
+										onOpen: function(selectedDates, dateStr, instance) {
+											if (fromDate.length === 0) {
+												instance.set('minDate', null);
+												return;
+											}
+											instance.set('minDate', new Date(fromDate));
+										},
+									}}
+									className="form-control"
+									onChange={date => setToDate(date)}
+								/>
+							</div>
+						</div>
+						<div className="flex-grow-0 tx-right flex-shrink-0 mg-t-30 mg-sm-t-0">
+							<button
+								type="button"
+								className="btn btn-primary "
+								onClick={_onFilterDate}
+							>
+								<i className="fa fa-filter" /> Filter
+							</button>
+						</div>
+					</div>
+					<div className="feedback-container">
+						{loadingListEvaluation ? (
+							<SkeletonFeedback />
+						) : (
+							<div className="fb-list">
+								{!!listFeedback && listFeedback.length > 0 ? (
+									listFeedback.map(item => (
+										<StudentCommentItem
+											key={item.ElearnBookingID}
+											ScheduleTimeVN={item.ScheduleTimeVN}
+											TeacherName={item.TeacherName}
+											TeacherIMG={item.TeacherIMG}
+											TeacherUID={item.TeacherUID}
+											Note={item.Note}
+											Rate={item.Rate}
+											LinkDetail={item.LinkDetail}
+											DocumentName={item.DocumentName}
+											ListeningPoint={item.ListeningPoint}
+											ReadingPoint={item.ReadingPoint}
+											SpeakingPoint={item.SpeakingPoint}
+											WritingPoint={item.WritingPoint}
+											MaterialLink={item.MaterialLink}
+											Material={item.Material}
+											StudentRate={item.StudentRate}
+											StudentEvaluation={item.StudentEvaluation}
+											ID={item.ID}
+										/>
+									))
+								) : (
+									<div className="card card-custom shadow">
+										<div className="card-body tx-center">
+											<span className="d-block tx-center tx-danger tx-medium">
+												Bạn không có phản hồi{' '}
+												{filterOption.value !== '0' && (
+													<>
+														{filterOption.value}
+														<i className="fa fa-star"></i>
+													</>
+												)}{' '}
+												nào
+											</span>
+											<img
+												src="../assets/img/no-booking.svg"
+												alt="image"
+												className="wd-200 mg-b-15"
+											/>
+										</div>
+									</div>
+								)}
+							</div>
 						)}
 					</div>
-				)}
+					{pageSize < totalResult && (
+						<Pagination
+							innerClass="pagination justify-content-end mt-3"
+							activePage={page}
+							itemsCountPerPage={pageSize}
+							totalItemsCount={totalResult}
+							pageRangeDisplayed={3}
+							itemClass="page-item"
+							linkClass="page-link"
+							onChange={handlePageChange.bind(this)}
+						/>
+					)}
+				</div>
 			</div>
-			{pageSize < totalResult && (
-				<Pagination
-					innerClass="pagination justify-content-end mt-3"
-					activePage={page}
-					itemsCountPerPage={pageSize}
-					totalItemsCount={totalResult}
-					pageRangeDisplayed={3}
-					itemClass="page-item"
-					linkClass="page-link"
-					onChange={handlePageChange.bind(this)}
-				/>
-			)}
 		</>
 	);
 };

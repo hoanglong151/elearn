@@ -167,15 +167,16 @@ $(document).ready(function() {
 		btnToggleMenu.addEventListener('click', toggleMobileMenu);
 	}
 
-	$('.toggle-sidebar').on('click', function() {
-		$('#js-component-profilesidebar').addClass('active');
+	$('.toggle-sidebar').on('click', function(e) {
+		console.log('EEE: ', e);
+		$('#js-component-profilesidebar-1').addClass('active');
 		$('.sidebar-overlay').css(
 			'left',
-			$('#js-component-profilesidebar').innerWidth() + 'px',
+			$('#js-component-profilesidebar-1').innerWidth() + 'px',
 		);
 	});
 	$(document).on('click', '.sidebar-overlay', function() {
-		$('#js-component-profilesidebar').removeClass('active');
+		$('#js-component-profilesidebar-1').removeClass('active');
 		$(this).css('left', '-100%');
 	});
 

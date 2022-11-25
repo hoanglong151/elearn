@@ -6153,6 +6153,8 @@ body.drop-answer {
 	@media (min-width: 992px) {
 		position: fixed;
 		top: 60px;
+		left: 0;
+		right: 0;
 
 		.hd-menu-list {
 			margin: 0 -0.5rem;
@@ -9599,8 +9601,73 @@ input[type='month'].form-control {
 	display: none;
 }
 
+.wrapper-new {
+	display: flex;
+	align-items: flex-start;
+	.profile-sidebar-no-dom {
+		width: 300px;
+		flex-shrink: 0;
+		margin-right: 30px;
+	}
+}
+
+.mt-60 {
+	margin-top: 60px;
+}
+
+.wrapper-w-by-desktop {
+	width: calc(100% - 330px);
+}
+
 @media (max-width: 1023px) {
+	#react-teacher-feedback-detail,
+	#react-teacher-classrooms {
+		.bottom-header {
+			display: none;
+		}
+	}
+	.wrapper-w-by-desktop {
+		width: 100%;
+	}
 	.profilesidebar-show-only-mobile {
 		display: block;
+	}
+	.ProfileSidebar.active {
+		left: 0;
+		overflow: hidden;
+		z-index: 9999;
+	}
+	.ProfileSidebar {
+		position: absolute;
+		left: -300px;
+		top: 0;
+		min-width: 100%;
+		transition: 0.1s ease;
+		padding-right: calc(100% - 300px);
+		height: 100%;
+	}
+	.sidebar-overlay {
+		left: 300px !important;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		right: 0px;
+		background: rgba(0, 0, 0, 0.25);
+		display: none;
+	}
+	.toggle-sidebar {
+		position: relative;
+		z-index: 9999;
+	}
+	.ProfileSidebar.active .sidebar-overlay {
+		display: block;
+	}
+	.page-mt-50 {
+		margin-top: 50px;
+	}
+	.wrap-w-100-flex-1 {
+		width: 100%;
+		flex: 1;
 	}
 }

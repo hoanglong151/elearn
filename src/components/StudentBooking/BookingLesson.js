@@ -19,6 +19,8 @@ import { ToastContainer } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import styles from '~components/StudentBooking/BookingLesson.module.scss';
 import dayjs from 'dayjs';
+import HeaderNoDom from '../HeaderNoDom';
+import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
 const genderArr = [
 	{
 		label: 'Tất cả giới tính',
@@ -482,350 +484,374 @@ const BookingLesson = () => {
 
 	return (
 		<>
-			<div className={`${loading ? '' : 'd-none'} overlay`}>
-				<div className="lds-ellipsis">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
+			<div className="Header">
+				<HeaderNoDom />
 			</div>
-			<div className="media-body-wrap pd-15 shadow">
-				<div className="d-xl-flex align-items-center justify-content-between ">
-					<h4 className="mg-b-15 d-block gradient-heading">
-						<i className="fas fa-calendar-alt"></i>ĐĂNG KÝ HỌC
-					</h4>
+			<div className="wrapper-new">
+				<div
+					className="ProfileSidebar profile-sidebar-no-dom"
+					id="js-component-profilesidebar-1"
+				>
+					<ProfileSidebarNoDom />
 				</div>
-				<p className="mg-b-0">Vui lòng chọn ngày:</p>
-				<div className="calendar__picker swiper-container">
-					<div className="calendar-slider swiper-wrapper"></div>
-					<div className="navigation_slider">
-						<button type="button" className="prev-btn">
-							<i className="fa fa-chevron-left" aria-hidden="true"></i>
-						</button>
-						<button type="button" className="next-btn">
-							<i className="fa fa-chevron-right" aria-hidden="true"></i>
-						</button>
+				<div className="wrapper-w-by-desktop">
+					<div className={`${loading ? '' : 'd-none'} overlay`}>
+						<div className="lds-ellipsis">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
 					</div>
-				</div>
-				<a href="#" className="btn btn-danger mg-b-15" id="js-select-today">
-					<i className="fa fa-calendar mg-r-5"></i>Chọn hôm nay
-				</a>
-				<div className="filter-group-wrap metronic-form">
-					<div className="filter-group pd-t-20">
-						<div className="filter-row row booking-infomation">
-							<div className="left col-md-2">
-								<h5>THÔNG TIN</h5>
+					<div className="media-body-wrap pd-15 shadow">
+						<div className="d-xl-flex align-items-center justify-content-between ">
+							<h4 className="mg-b-15 d-block gradient-heading">
+								<i className="fas fa-calendar-alt"></i>ĐĂNG KÝ HỌC
+							</h4>
+						</div>
+						<p className="mg-b-0">Vui lòng chọn ngày:</p>
+						<div className="calendar__picker swiper-container">
+							<div className="calendar-slider swiper-wrapper"></div>
+							<div className="navigation_slider">
+								<button type="button" className="prev-btn">
+									<i className="fa fa-chevron-left" aria-hidden="true"></i>
+								</button>
+								<button type="button" className="next-btn">
+									<i className="fa fa-chevron-right" aria-hidden="true"></i>
+								</button>
 							</div>
-							<div className="right col-md-10">
-								<div className="form-row">
-									<div className="col-sm-6 col-md-3 item">
-										<Select
-											name="nation"
-											options={nationArr}
-											value={state.nation}
-											getOptionLabel={option => option.label}
-											getOptionValue={option => option.value}
-											styles={appSettings.selectStyle}
-											className="basic-multi-select"
-											placeholder="Quốc tịch"
-											classNamePrefix="select"
-											onChange={val => {
-												dispatch({
-													type: 'STATE_CHANGE',
-													payload: { key: 'nation', value: val },
-												});
-											}}
-										/>
+						</div>
+						<a href="#" className="btn btn-danger mg-b-15" id="js-select-today">
+							<i className="fa fa-calendar mg-r-5"></i>Chọn hôm nay
+						</a>
+						<div className="filter-group-wrap metronic-form">
+							<div className="filter-group pd-t-20">
+								<div className="filter-row row booking-infomation">
+									<div className="left col-md-2">
+										<h5>THÔNG TIN</h5>
 									</div>
+									<div className="right col-md-10">
+										<div className="form-row">
+											<div className="col-sm-6 col-md-3 item">
+												<Select
+													name="nation"
+													options={nationArr}
+													value={state.nation}
+													getOptionLabel={option => option.label}
+													getOptionValue={option => option.value}
+													styles={appSettings.selectStyle}
+													className="basic-multi-select"
+													placeholder="Quốc tịch"
+													classNamePrefix="select"
+													onChange={val => {
+														dispatch({
+															type: 'STATE_CHANGE',
+															payload: { key: 'nation', value: val },
+														});
+													}}
+												/>
+											</div>
 
-									<div className="col-sm-12 col-md-6 item">
-										<Select
-											isMulti
-											name="selectedLevelPurpose"
-											options={renderLevelPurpose(state.levelPurpose)}
-											value={state.selectedLevelPurpose}
-											getOptionLabel={label => label}
-											getOptionValue={value => value}
-											styles={appSettings.selectStyle}
-											className="basic-multi-select"
-											placeholder="Chương trình học"
-											classNamePrefix="select"
-											onChange={val => {
-												dispatch({
-													type: 'STATE_CHANGE',
-													payload: { key: 'selectedLevelPurpose', value: val },
-												});
-											}}
-										/>
+											<div className="col-sm-12 col-md-6 item">
+												<Select
+													isMulti
+													name="selectedLevelPurpose"
+													options={renderLevelPurpose(state.levelPurpose)}
+													value={state.selectedLevelPurpose}
+													getOptionLabel={label => label}
+													getOptionValue={value => value}
+													styles={appSettings.selectStyle}
+													className="basic-multi-select"
+													placeholder="Chương trình học"
+													classNamePrefix="select"
+													onChange={val => {
+														dispatch({
+															type: 'STATE_CHANGE',
+															payload: {
+																key: 'selectedLevelPurpose',
+																value: val,
+															},
+														});
+													}}
+												/>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div className="filter-group pd-t-20 pos-relative z-index-10">
-						<div className="filter-row row from-to-group">
-							<div className="left col-md-2">
-								<h5>THỜI GIAN</h5>
-							</div>
-							<div className="right col-md-10">
-								<div className="form-row">
-									<div className="col-md-4 item">
-										<input
-											name="date"
-											type="text"
-											className="form-control"
-											placeholder="Date"
-											disabled
-											id="date-selected"
-										/>
+							<div className="filter-group pd-t-20 pos-relative z-index-10">
+								<div className="filter-row row from-to-group">
+									<div className="left col-md-2">
+										<h5>THỜI GIAN</h5>
 									</div>
-									<div className="col-12 col-sm-6 col-md-2 item">
-										<DatePicker
-											selected={state.startTime}
-											onChange={date =>
-												dispatch({
-													type: 'STATE_CHANGE',
-													payload: { key: 'startTime', value: date },
-												})
-											}
-											showTimeSelect
-											showTimeSelectOnly
-											timeIntervals={60}
-											timeCaption="Thời gian từ"
-											timeFormat="HH:mm"
-											dateFormat="HH:mm"
-											minTime={
-												dayjs().isSame(dayjs(state.date), 'date')
-													? new Date().setHours(new Date().getHours() + 1)
-													: new Date().setHours(5)
-											}
-											maxTime={new Date().setHours(22)}
-											className="form-control"
-										/>
-									</div>
-									<div className="col-12 col-sm-6 col-md-2 item">
-										<DatePicker
-											selected={state.endTime}
-											onChange={date => {
-												console.log(date);
-												dispatch({
-													type: 'STATE_CHANGE',
-													payload: { key: 'endTime', value: date },
-												});
-											}}
-											showTimeSelect
-											showTimeSelectOnly
-											timeIntervals={60}
-											timeCaption="Thời gian đến"
-											timeFormat="HH:mm"
-											dateFormat="HH:mm"
-											minTime={new Date().setHours(5)}
-											maxTime={new Date().setHours(22)}
-											className="form-control"
-										/>
+									<div className="right col-md-10">
+										<div className="form-row">
+											<div className="col-md-4 item">
+												<input
+													name="date"
+													type="text"
+													className="form-control"
+													placeholder="Date"
+													disabled
+													id="date-selected"
+												/>
+											</div>
+											<div className="col-12 col-sm-6 col-md-2 item">
+												<DatePicker
+													selected={state.startTime}
+													onChange={date =>
+														dispatch({
+															type: 'STATE_CHANGE',
+															payload: { key: 'startTime', value: date },
+														})
+													}
+													showTimeSelect
+													showTimeSelectOnly
+													timeIntervals={60}
+													timeCaption="Thời gian từ"
+													timeFormat="HH:mm"
+													dateFormat="HH:mm"
+													minTime={
+														dayjs().isSame(dayjs(state.date), 'date')
+															? new Date().setHours(new Date().getHours() + 1)
+															: new Date().setHours(5)
+													}
+													maxTime={new Date().setHours(22)}
+													className="form-control"
+												/>
+											</div>
+											<div className="col-12 col-sm-6 col-md-2 item">
+												<DatePicker
+													selected={state.endTime}
+													onChange={date => {
+														console.log(date);
+														dispatch({
+															type: 'STATE_CHANGE',
+															payload: { key: 'endTime', value: date },
+														});
+													}}
+													showTimeSelect
+													showTimeSelectOnly
+													timeIntervals={60}
+													timeCaption="Thời gian đến"
+													timeFormat="HH:mm"
+													dateFormat="HH:mm"
+													minTime={new Date().setHours(5)}
+													maxTime={new Date().setHours(22)}
+													className="form-control"
+												/>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div className="filter-group pd-t-20">
-						<div className="filter-row row">
-							<div className="left col-md-2">
-								<h5>TÊN GIÁO VIÊN</h5>
-							</div>
-							<div className="right col-md-10">
-								<div className="form-row">
-									<div className="col-sm-5 item">
-										<input
-											className="form-control"
-											name="searchText"
-											type="text"
-											placeholder="..."
-											onChange={handleChange}
-										/>
+							<div className="filter-group pd-t-20">
+								<div className="filter-row row">
+									<div className="left col-md-2">
+										<h5>TÊN GIÁO VIÊN</h5>
 									</div>
-									<div className="col-sm-2 col-md-3 item">
-										<Select
-											name="gender"
-											options={genderArr}
-											value={state.gender}
-											getOptionLabel={option => option.label}
-											getOptionValue={option => option.value}
-											styles={appSettings.selectStyle}
-											className="basic-multi-select"
-											placeholder="Giới tính"
-											classNamePrefix="select"
-											onChange={val => {
-												dispatch({
-													type: 'STATE_CHANGE',
-													payload: { key: 'gender', value: val },
-												});
-											}}
-										/>
-									</div>
+									<div className="right col-md-10">
+										<div className="form-row">
+											<div className="col-sm-5 item">
+												<input
+													className="form-control"
+													name="searchText"
+													type="text"
+													placeholder="..."
+													onChange={handleChange}
+												/>
+											</div>
+											<div className="col-sm-2 col-md-3 item">
+												<Select
+													name="gender"
+													options={genderArr}
+													value={state.gender}
+													getOptionLabel={option => option.label}
+													getOptionValue={option => option.value}
+													styles={appSettings.selectStyle}
+													className="basic-multi-select"
+													placeholder="Giới tính"
+													classNamePrefix="select"
+													onChange={val => {
+														dispatch({
+															type: 'STATE_CHANGE',
+															payload: { key: 'gender', value: val },
+														});
+													}}
+												/>
+											</div>
 
-									<div className="col-sm-4 item search-btn-group">
-										<a
-											href={'#'}
-											className="submit-search btn btn-primary btn-block"
-											onClick={e => onSearch(e, 1)}
-										>
-											<i className="fa fa-search mg-r-5"></i>Search
-										</a>
+											<div className="col-sm-4 item search-btn-group">
+												<a
+													href={'#'}
+													className="submit-search btn btn-primary btn-block"
+													onClick={e => onSearch(e, 1)}
+												>
+													<i className="fa fa-search mg-r-5"></i>Search
+												</a>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div className="filter-group pd-t-10 mg-t-10 bd-t" id="list-tutor">
-					<div className="filter-row row">
-						<div className="left col-12">
-							<h5>Danh sách giáo viên</h5>
-						</div>
-						{/*  <div className="right col-md-10" style={{ alignItems: 'center', display: 'inline-flex' }}>
+						<div className="filter-group pd-t-10 mg-t-10 bd-t" id="list-tutor">
+							<div className="filter-row row">
+								<div className="left col-12">
+									<h5>Danh sách giáo viên</h5>
+								</div>
+								{/*  <div className="right col-md-10" style={{ alignItems: 'center', display: 'inline-flex' }}>
             <div className="custom-control custom-checkbox">
               <input type="checkbox" className="custom-control-input" id="display-schedule" />
               <label className="custom-control-label" htmlFor="display-schedule">Hiển thị lịch</label>
             </div>
           </div> */}
-					</div>
-					<div className="filter-row row">
-						<div className="col-sm-12">
-							<div className="table-tutor">
-								<ul className="list-tutors">
-									{!!teachersList && teachersList.length > 0
-										? teachersList.map(item => (
-												<li className="tutor" key={item.TeacherUID}>
-													<div className="totor-detail">
-														<a
-															href={`/ElearnStudent/teacherDetail?ID=${item.TeacherUID}`}
-															className="tutor-wrap no-hl"
-														>
-															<span className="tutor-avatar">
-																<img
-																	src={
-																		item.TeacherIMG
-																			? item.TeacherIMG
-																			: '../assets/img/default-avatar.png'
-																	}
-																	alt="Avatar"
-																	onError={e => {
-																		e.target.onerror = null;
-																		e.target.src =
-																			'../assets/img/default-avatar.png';
-																	}}
-																/>
-															</span>
-															<div className="tutor-infomation pd-5">
-																<div className="tutor-info">
-																	<div className="tutor-rating-star">
-																		<div className="rating-stars">
-																			<span className="empty-stars">
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																			</span>
-																			<span
-																				className="filled-stars"
-																				style={{ width: `${item.Rate * 20}%` }}
-																			>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																				<i className="star fa fa-star"></i>
-																			</span>
-																		</div>
-																		<div className="tutor-rate-point">
-																			{item.Rate.toFixed(1)}
-																		</div>
-																	</div>
-																</div>
-																<h6 className="mg-t-5">
-																	<span
-																		className={`flag-icon flag-icon-${
-																			item.National
-																				? nationMapToFlag(item.National)
-																				: 'vn'
-																		} flag-icon-squared`}
-																	></span>{' '}
-																	{item.TeacherName}
-																</h6>
-																<p>
-																	{dayjs(state.date).format('dddd, DD/MM/YYYY')}
-																</p>
-															</div>
-														</a>
-														<div className="tutor-schedule d-block custom-student">
-															<BookingLessonModal
-																style={{ color: '#000', textAlign: 'left' }}
-																StudyTimeID={stateBookLesson.StudyTimeID}
-																LessionName={stateBookLesson.LessionName}
-																TeacherUID={stateBookLesson.TeacherUID}
-																TeacherIMG={stateBookLesson.TeacherIMG}
-																TeacherName={stateBookLesson.TeacherName}
-																Rate={stateBookLesson.Rate}
-																date={stateBookLesson.date}
-																start={stateBookLesson.start}
-																end={stateBookLesson.end}
-																BookingID={stateBookLesson.BookingID}
-																onBook={onBook}
-																ref={modalRef}
-															/>
-															<ul className="ul-schedule">
-																<ListSchedule
-																	onBookStudyTimeID={onBookState.StudyTimeID}
-																	onBookTeacherUID={onBookState.TeacherUID}
-																	onBookDate={onBookState.date}
-																	learnTime={learnTime}
-																	TeacherUID={item.TeacherUID}
-																	TeacherIMG={item.TeacherIMG}
-																	TeacherName={item.TeacherName}
-																	Rate={item.Rate}
-																	date={dayjs(state.date).format('DD/MM/YYYY')}
-																	Start={state.startTime}
-																	End={state.endTime}
-																	handleBooking={onHandleBooking}
-																	modalRef={modalRef}
-																	onTouchBooking={() => {
-																		$(modalRef.current).modal('show');
-																	}}
-																/>
-															</ul>
-														</div>
-													</div>
-												</li>
-										  ))
-										: !!teachersList && (
-												<li className="w-100 d-block text-center">
-													<span className="tx-danger tx-medium">
-														Không tìm thấy giáo viên phù hợp
-													</span>
-												</li>
-										  )}
-								</ul>
-								{pageSize < totalResult && (
-									<Pagination
-										innerClass="pagination justify-content-end mt-3"
-										activePage={page}
-										itemsCountPerPage={pageSize}
-										totalItemsCount={totalResult}
-										pageRangeDisplayed={3}
-										itemClass="page-item"
-										linkClass="page-link"
-										onChange={handlePageChange.bind(this)}
-									/>
-								)}
 							</div>
+							<div className="filter-row row">
+								<div className="col-sm-12">
+									<div className="table-tutor">
+										<ul className="list-tutors">
+											{!!teachersList && teachersList.length > 0
+												? teachersList.map(item => (
+														<li className="tutor" key={item.TeacherUID}>
+															<div className="totor-detail">
+																<a
+																	href={`/ElearnStudent/teacherDetail?ID=${item.TeacherUID}`}
+																	className="tutor-wrap no-hl"
+																>
+																	<span className="tutor-avatar">
+																		<img
+																			src={
+																				item.TeacherIMG
+																					? item.TeacherIMG
+																					: '../assets/img/default-avatar.png'
+																			}
+																			alt="Avatar"
+																			onError={e => {
+																				e.target.onerror = null;
+																				e.target.src =
+																					'../assets/img/default-avatar.png';
+																			}}
+																		/>
+																	</span>
+																	<div className="tutor-infomation pd-5">
+																		<div className="tutor-info">
+																			<div className="tutor-rating-star">
+																				<div className="rating-stars">
+																					<span className="empty-stars">
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																					</span>
+																					<span
+																						className="filled-stars"
+																						style={{
+																							width: `${item.Rate * 20}%`,
+																						}}
+																					>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																						<i className="star fa fa-star"></i>
+																					</span>
+																				</div>
+																				<div className="tutor-rate-point">
+																					{item.Rate.toFixed(1)}
+																				</div>
+																			</div>
+																		</div>
+																		<h6 className="mg-t-5">
+																			<span
+																				className={`flag-icon flag-icon-${
+																					item.National
+																						? nationMapToFlag(item.National)
+																						: 'vn'
+																				} flag-icon-squared`}
+																			></span>{' '}
+																			{item.TeacherName}
+																		</h6>
+																		<p>
+																			{dayjs(state.date).format(
+																				'dddd, DD/MM/YYYY',
+																			)}
+																		</p>
+																	</div>
+																</a>
+																<div className="tutor-schedule d-block custom-student">
+																	<BookingLessonModal
+																		style={{ color: '#000', textAlign: 'left' }}
+																		StudyTimeID={stateBookLesson.StudyTimeID}
+																		LessionName={stateBookLesson.LessionName}
+																		TeacherUID={stateBookLesson.TeacherUID}
+																		TeacherIMG={stateBookLesson.TeacherIMG}
+																		TeacherName={stateBookLesson.TeacherName}
+																		Rate={stateBookLesson.Rate}
+																		date={stateBookLesson.date}
+																		start={stateBookLesson.start}
+																		end={stateBookLesson.end}
+																		BookingID={stateBookLesson.BookingID}
+																		onBook={onBook}
+																		ref={modalRef}
+																	/>
+																	<ul className="ul-schedule">
+																		<ListSchedule
+																			onBookStudyTimeID={
+																				onBookState.StudyTimeID
+																			}
+																			onBookTeacherUID={onBookState.TeacherUID}
+																			onBookDate={onBookState.date}
+																			learnTime={learnTime}
+																			TeacherUID={item.TeacherUID}
+																			TeacherIMG={item.TeacherIMG}
+																			TeacherName={item.TeacherName}
+																			Rate={item.Rate}
+																			date={dayjs(state.date).format(
+																				'DD/MM/YYYY',
+																			)}
+																			Start={state.startTime}
+																			End={state.endTime}
+																			handleBooking={onHandleBooking}
+																			modalRef={modalRef}
+																			onTouchBooking={() => {
+																				$(modalRef.current).modal('show');
+																			}}
+																		/>
+																	</ul>
+																</div>
+															</div>
+														</li>
+												  ))
+												: !!teachersList && (
+														<li className="w-100 d-block text-center">
+															<span className="tx-danger tx-medium">
+																Không tìm thấy giáo viên phù hợp
+															</span>
+														</li>
+												  )}
+										</ul>
+										{pageSize < totalResult && (
+											<Pagination
+												innerClass="pagination justify-content-end mt-3"
+												activePage={page}
+												itemsCountPerPage={pageSize}
+												totalItemsCount={totalResult}
+												pageRangeDisplayed={3}
+												itemClass="page-item"
+												linkClass="page-link"
+												onChange={handlePageChange.bind(this)}
+											/>
+										)}
+									</div>
+								</div>
+							</div>
+
+							<ListNationModal selectNation={onSelectNation} />
+							<ToastContainer />
 						</div>
 					</div>
-
-					<ListNationModal selectNation={onSelectNation} />
-					<ToastContainer />
 				</div>
 			</div>
 		</>
