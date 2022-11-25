@@ -18,6 +18,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import HeaderNoDom from '../HeaderNoDom';
 import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
 import BottomMenu from '../BottomMenu';
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
+import common_en from '../../public/static/locales/en/language.json';
+import common_vi from '../../public/static/locales/vi/language.json';
+
+i18next.init({
+	interpolation: { escapeValue: false },
+});
+i18next.init({
+	interpolation: { escapeValue: false },
+	lng: 'vi',
+	resources: {
+		en: {
+			common: common_en,
+		},
+		vi: {
+			common: common_vi,
+		},
+	},
+});
 
 const initialState = {
 	isLoading: true,
@@ -84,6 +105,7 @@ const StatelessTextarea = props => {
 const TeacherFeedbackDetailNew = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	const listFeedBack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+	const { t, i18n } = useTranslation('common');
 	const [feedBacks4Skill, setFeedbacks4Skill] = useState({
 		FinishedType: 0,
 		Rate: 0,
@@ -99,6 +121,40 @@ const TeacherFeedbackDetailNew = () => {
 	});
 
 	const [feedbackDetail, setFeedbackDetail] = useState();
+	useEffect(() => {
+		var language = window.localStorage.getItem('language');
+		if (!!language) {
+			if (language.includes('en')) {
+				i18next.init({
+					interpolation: { escapeValue: false },
+					lng: 'en',
+					compatibilityJSON: 'v2',
+					resources: {
+						en: {
+							common: common_en,
+						},
+						vi: {
+							common: common_vi,
+						},
+					},
+				});
+			} else if (language.includes('vi')) {
+				i18next.init({
+					interpolation: { escapeValue: false },
+					lng: 'vi',
+					compatibilityJSON: 'v2',
+					resources: {
+						en: {
+							common: common_en,
+						},
+						vi: {
+							common: common_vi,
+						},
+					},
+				});
+			}
+		}
+	}, []);
 	const getFeedbackDetail = async () => {
 		try {
 			const params = new URLSearchParams(window.location.search);
@@ -525,7 +581,7 @@ const TeacherFeedbackDetailNew = () => {
 								<div className="card">
 									<div className="card-header">
 										<h5 className="mg-b-0">
-											Đánh giá về các kỹ năng trong buổi học
+											{t('students-learning-performance')}
 										</h5>
 									</div>
 									<div className="card-body">
@@ -881,6 +937,8 @@ const TeacherFeedbackDetailNew = () => {
 };
 
 ReactDOM.render(
-	<TeacherFeedbackDetailNew />,
+	<I18nextProvider i18n={i18next}>
+		<TeacherFeedbackDetailNew />,
+	</I18nextProvider>,
 	document.getElementById('react-teacher-feedback-detail'),
 );

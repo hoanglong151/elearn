@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const SideMenu = () => {
 	const [activePage, setActivePage] = useState('');
+	const { t, i18n } = useTranslation('common');
 	useEffect(() => {
 		let pathUrl = window.location.pathname;
 		setActivePage(pathUrl.toUpperCase());
@@ -15,7 +17,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/DashBoard">
-					<i className="fas fa-home icon"></i> Trang Chủ
+					<i className="fas fa-home icon"></i> {t('dashboad')}
 				</a>
 			</li>
 			<li
@@ -26,7 +28,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/ProfileUser">
-					<i className="fas fa-user-graduate icon"></i> Thông Tin Cá Nhân
+					<i className="fas fa-user-graduate icon"></i> {t('mypage')}
 				</a>
 			</li>
 			<li
@@ -37,7 +39,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/BookedLesson">
-					<i className="fas fa-calendar icon"></i> Lịch Học
+					<i className="fas fa-calendar icon"></i> {t('lessonschedule')}
 				</a>
 			</li>
 			<li
@@ -48,7 +50,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/LessonHistory">
-					<i className="fas fa-list icon"></i> Lộ Trình Đã Học
+					<i className="fas fa-list icon"></i> {t('lessonhistory')}
 				</a>
 			</li>
 			<li
@@ -57,7 +59,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/FeedBack">
-					<i className="fas fa-comment icon"></i> Nhận Xét Của Giáo Viên
+					<i className="fas fa-comment icon"></i> {t('teacher’sfeedback')}
 				</a>
 			</li>
 			<li
@@ -68,7 +70,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/Announcements">
-					<i className="fas fa-bell icon"></i> Thông Báo
+					<i className="fas fa-bell icon"></i> {t('notification')}
 				</a>
 			</li>
 			<li
@@ -77,7 +79,7 @@ const SideMenu = () => {
 				}
 			>
 				<a href="/ElearnStudent/FAQ">
-					<i className="fas fa-question-circle icon"></i> Câu Hỏi Thường Gặp
+					<i className="fas fa-question-circle icon"></i> {t('faqs')}
 				</a>
 			</li>
 		</ul>

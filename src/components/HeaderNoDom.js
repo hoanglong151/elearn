@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { appSettings } from '~src/config';
+import { useTranslation } from 'react-i18next';
 const HeaderNoDom = () => {
+	const { t, i18n } = useTranslation('common');
 	return (
 		<>
 			<header className="header-no-dom navbar navbar-header navbar-header-fixed">
@@ -199,7 +201,7 @@ const HeaderNoDom = () => {
 								</a>
 								<a href={`#`} className="action-icon log-out">
 									<i className="fas fa-sign-out-alt mg-r-5"></i>
-									Đăng xuất
+									{t('auth.logout')}
 								</a>
 							</div>
 						)}

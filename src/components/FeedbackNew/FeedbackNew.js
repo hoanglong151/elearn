@@ -4,6 +4,11 @@ import StudentCommentItem from '~components/common/StudentComment/StudentComment
 import SkeletonFeedback from '~components/common/Skeleton/SkeletonFeedback';
 import Pagination from 'react-js-pagination';
 import Flatpickr from 'react-flatpickr';
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
+import common_en from '../../public/static/locales/en/language.json';
+import common_vi from '../../public/static/locales/vi/language.json';
 
 import { getFeedbackOverviewAPI } from '~src/api/studentAPI';
 import {
@@ -20,6 +25,22 @@ import ChartEverageSkill from './ChartEverageSkill';
 import ChartSchedule from './ChartSchedule';
 import HeaderNoDom from '../HeaderNoDom';
 import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
+
+i18next.init({
+	interpolation: { escapeValue: false },
+});
+i18next.init({
+	interpolation: { escapeValue: false },
+	lng: 'vi',
+	resources: {
+		en: {
+			common: common_en,
+		},
+		vi: {
+			common: common_vi,
+		},
+	},
+});
 
 const FeedbackOption = props => {
 	const { data, children } = props;
@@ -40,7 +61,7 @@ const FeedbackOption = props => {
 					</>
 				) : (
 					<>
-						<span>Tất cả đánh giá</span>
+						<span>{t('all-feedback')}</span>
 						<span>({data.count})</span>
 					</>
 				)}
@@ -58,6 +79,41 @@ const FeedbackNew = () => {
 	const [totalResult, setTotalResult] = useState(0);
 	const [fromDate, setFromDate] = useState([]);
 	const [toDate, setToDate] = useState([]);
+	const { t, i18n } = useTranslation('common');
+	useEffect(() => {
+		var language = window.localStorage.getItem('language');
+		if (!!language) {
+			if (language.includes('en')) {
+				i18next.init({
+					interpolation: { escapeValue: false },
+					lng: 'en',
+					compatibilityJSON: 'v2',
+					resources: {
+						en: {
+							common: common_en,
+						},
+						vi: {
+							common: common_vi,
+						},
+					},
+				});
+			} else if (language.includes('vi')) {
+				i18next.init({
+					interpolation: { escapeValue: false },
+					lng: 'vi',
+					compatibilityJSON: 'v2',
+					resources: {
+						en: {
+							common: common_en,
+						},
+						vi: {
+							common: common_vi,
+						},
+					},
+				});
+			}
+		}
+	}, []);
 	const _onFilterDate = async e => {
 		e.preventDefault();
 		let res;
@@ -239,7 +295,8 @@ const FeedbackNew = () => {
 						<>
 							<div className="d-sm-flex align-items-center justify-content-between mg-b-30">
 								<h4 className="mg-b-0 gradient-heading">
-									<i className="fas fa-comment-dots"></i>Nhận xét của giáo viên
+									<i className="fas fa-comment-dots"></i>
+									{t('teacher’sfeedback')}
 								</h4>
 								{overview && Object.keys(overview).length > 0 && (
 									<div className="form-group d-inline-block wd-200 mg-b-0-f mg-t-15 mg-sm-t-0-f">
@@ -313,14 +370,16 @@ const FeedbackNew = () => {
 							<div className="wrapper-chart">
 								<div className="chart">
 									<h4 style={{ marginBottom: 16 }}>
-										Biểu đồ trung bình các kỹ năng
+										{t('everage-learing-performance-chart')}
 									</h4>
 									<ChartEverageSkill
 										detailStatisticSkill={detailStatisticSkill}
 									/>
 								</div>
 								<div className="chart">
-									<h4 style={{ marginBottom: 16 }}>Tiến độ đặt lịch học</h4>
+									<h4 style={{ marginBottom: 16 }}>
+										{t('lesson-booking-progress')}
+									</h4>
 									<ChartSchedule
 										detailStatisticSchedule={detailStatisticSchedule}
 									/>
@@ -444,4 +503,9 @@ const FeedbackNew = () => {
 	);
 };
 
-ReactDOM.render(<FeedbackNew />, document.getElementById('react-feedback'));
+ReactDOM.render(
+	<I18nextProvider i18n={i18next}>
+		<FeedbackNew />
+	</I18nextProvider>,
+	document.getElementById('react-feedback'),
+);

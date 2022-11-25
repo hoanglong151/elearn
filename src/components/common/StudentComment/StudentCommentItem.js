@@ -5,6 +5,7 @@ import { decodeHTML } from '~src/utils';
 import Collapse from 'react-bootstrap/Collapse';
 import Table from 'react-bootstrap/Table';
 import RatingLessonModal from '~components/RatingLessonModal';
+import { useTranslation } from 'react-i18next';
 
 const StudentCommentItem = ({
 	ScheduleTimeVN,
@@ -30,6 +31,7 @@ const StudentCommentItem = ({
 	ID,
 }) => {
 	const [state, setState] = useState({});
+	const { t, i18n } = useTranslation('common');
 	const onCallbackRating = (result, message, rating, BookingID, TeacherUID) => {
 		if (result === 1) {
 			setState({
@@ -225,7 +227,7 @@ const StudentCommentItem = ({
 								<div className="mg-b-30">
 									<div className="st-title-danhgia mg-b-15">
 										<h5 className="pd-b-10 bd-b">
-											Nhận xét chung của giáo viên
+											{t('teachers-general-feedback')}
 										</h5>
 									</div>
 									{Note ? (
@@ -379,7 +381,7 @@ const StudentCommentItem = ({
 								<div className="mg-b-30 mg-t-30">
 									<div className="st-title-danhgia mg-b-15">
 										<h5 className="pd-b-10 bd-b">
-											Học viên nhận xét về buổi học
+											{t('student’sfeedbackaboutthelesson')}
 										</h5>
 									</div>
 									{!!StudentEvaluation ? (

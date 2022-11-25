@@ -5,6 +5,7 @@ import {
 	CircularProgressbarWithChildren,
 	buildStyles,
 } from 'react-circular-progressbar';
+import { useTranslation } from 'react-i18next';
 
 function Example(props) {
 	return (
@@ -22,6 +23,7 @@ function Example(props) {
 
 const ChartSchedule = props => {
 	const { detailStatisticSchedule } = props;
+	const { t, i18n } = useTranslation('common');
 	const totalPercentBooked = useMemo(() => {
 		if (!!detailStatisticSchedule) {
 			return (
@@ -81,28 +83,28 @@ const ChartSchedule = props => {
 						className="color-status"
 						style={{ backgroundColor: '#e96b02' }}
 					></span>
-					<span>Đã học</span>
+					<span>{t('as-schedule')}</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#3e98c7' }}
 					></span>
-					<span>Đã đặt lịch</span>
+					<span>{t('booked')}</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#f00' }}
 					></span>
-					<span>Học viên vắng mặt</span>
+					<span>{t('student-no-show')}</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#1d9e0e' }}
 					></span>
-					<span>Giáo viên vào trễ</span>
+					<span>{t('teacher-late')}</span>
 				</div>
 			</div>
 		);

@@ -194,7 +194,9 @@ const LessonDetail = () => {
 							{/*  <!--Đánh giá giáo viên--> */}
 							<div className="st-danhgianguphap mg-b-30">
 								<div className="st-title-danhgia mg-b-15">
-									<h5 className="pd-b-10 bd-b">Nhận xét chung của giáo viên</h5>
+									<h5 className="pd-b-10 bd-b">
+										{t('teachers-general-feedback')}
+									</h5>
 								</div>
 								{state.Note ? (
 									<div className="st-item-danhgia tx-gray-500">
@@ -302,7 +304,7 @@ const LessonDetail = () => {
 							<div className="st-danhgianguphap mg-b-30">
 								<div className="st-title-danhgia mg-b-15">
 									<h5 className="pd-b-10 bd-b">
-										Học viên nhận xét về buổi học
+										{t('student’sfeedbackaboutthelesson')}
 									</h5>
 								</div>
 								{Object.keys(state).length === 0 ? (

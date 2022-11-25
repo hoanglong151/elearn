@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import SideMenu from './SideMenu';
 import { getProfile } from '~src/api/studentAPI';
 import SkeletonProfileSidebar from '~components/common/Skeleton/SkeletonProfileSidebar';
+import { useTranslation } from 'react-i18next';
 
 const ProfileSidebarNoDom = () => {
 	const [state, setState] = useState({});
 	const [loading, setLoading] = useState(false);
+	const { t, i18n } = useTranslation('common');
 
 	const getAPI = async () => {
 		setLoading(true);
@@ -72,7 +74,7 @@ const ProfileSidebarNoDom = () => {
 								href="/ElearnStudent/bookingLesson"
 							>
 								<i className="far fa-calendar-alt mg-r-5"></i>
-								ĐẶT LỊCH HỌC
+								{t('bookinglesson')}
 							</a>
 						</div>
 					</div>
