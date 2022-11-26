@@ -168,7 +168,6 @@ $(document).ready(function() {
 	}
 
 	$('.toggle-sidebar').on('click', function(e) {
-		console.log('EEE: ', e);
 		$('#js-component-profilesidebar-1').addClass('active');
 		$('.sidebar-overlay').css(
 			'left',

@@ -83,28 +83,36 @@ const ChartSchedule = props => {
 						className="color-status"
 						style={{ backgroundColor: '#e96b02' }}
 					></span>
-					<span>{t('as-schedule')}</span>
+					<span style={{ marginLeft: '4px' }}>{t('as-schedule')}:</span>
+					<span>{detailStatisticSchedule?.Status1}</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#3e98c7' }}
 					></span>
-					<span>{t('booked')}</span>
+					<span style={{ marginLeft: '4px' }}>{t('booked')}:</span>
+					<span>{detailStatisticSchedule?.Status0}</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#f00' }}
 					></span>
-					<span>{t('student-no-show')}</span>
+					<span style={{ marginLeft: '4px' }}>{t('student-no-show')}:</span>
+					<span>{detailStatisticSchedule?.Status3}</span>
 				</div>
 				<div className="schedule-item">
 					<span
 						className="color-status"
 						style={{ backgroundColor: '#1d9e0e' }}
 					></span>
-					<span>{t('teacher-late')}</span>
+					<span style={{ marginLeft: '4px' }}>{t('teacher-late')}:</span>
+					<span>{detailStatisticSchedule?.Status5}</span>
+				</div>
+				<div className="schedule-item">
+					<span style={{ marginLeft: '4px' }}>{t('totallessons')}:</span>
+					<span>{detailStatisticSchedule?.TotalLesson}</span>
 				</div>
 			</div>
 		);

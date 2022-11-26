@@ -42,33 +42,33 @@ i18next.init({
 	},
 });
 
-const FeedbackOption = props => {
-	const { data, children } = props;
-	const numberStar = parseInt(data.value);
-	return (
-		<components.Option {...props}>
-			<div className="d-flex justify-content-between align-items-center">
-				{numberStar > 0 ? (
-					<>
-						<span>
-							{[...Array(numberStar)].map((item, index) => {
-								return (
-									<i key={`${index}`} className="fas fa-star tx-warning"></i>
-								);
-							})}
-						</span>
-						<span>({data.count})</span>
-					</>
-				) : (
-					<>
-						<span>{t('all-feedback')}</span>
-						<span>({data.count})</span>
-					</>
-				)}
-			</div>
-		</components.Option>
-	);
-};
+// const FeedbackOption = props => {
+// 	const { data, children } = props;
+// 	const numberStar = parseInt(data.value);
+// 	return (
+// 		<components.Option {...props}>
+// 			<div className="d-flex justify-content-between align-items-center">
+// 				{numberStar > 0 ? (
+// 					<>
+// 						<span>
+// 							{[...Array(numberStar)].map((item, index) => {
+// 								return (
+// 									<i key={`${index}`} className="fas fa-star tx-warning"></i>
+// 								);
+// 							})}
+// 						</span>
+// 						<span>({data.count})</span>
+// 					</>
+// 				) : (
+// 					<>
+// 						<span>{t('all-feedback')}</span>
+// 						<span>({data.count})</span>
+// 					</>
+// 				)}
+// 			</div>
+// 		</components.Option>
+// 	);
+// };
 
 const FeedbackNew = () => {
 	const [overview, setOverview] = useState({});
@@ -300,7 +300,7 @@ const FeedbackNew = () => {
 								</h4>
 								{overview && Object.keys(overview).length > 0 && (
 									<div className="form-group d-inline-block wd-200 mg-b-0-f mg-t-15 mg-sm-t-0-f">
-										<Select
+										{/* <Select
 											components={{ Option: FeedbackOption }}
 											value={filterOption}
 											onChange={value => setFilterOption(value)}
@@ -339,7 +339,7 @@ const FeedbackNew = () => {
 											]}
 											getOptionLabel={option => option.label}
 											getOptionValue={option => option.value}
-										/>
+										/> */}
 										{/* <select
 									className="form-control main-color bg-white"
 									style={{ fontFamily: 'FontAwesome' }}

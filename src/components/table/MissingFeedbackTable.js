@@ -56,7 +56,7 @@ const MissingFeedbackRow = ({ data }) => {
 				<a
 					target="_blank"
 					rel="noopener"
-					href={`/ElearnTeacher/EvaluationLesson?ID=${data.BookingID}`}
+					href={`/ElearnTeacher/FeedbackDetail?ID=${data.BookingID}`}
 					className="btn btn-sm btn-warning rounded-5"
 				>
 					<i className="fa fa-comment-alt clrm-icon" /> Feedback

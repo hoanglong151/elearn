@@ -21,6 +21,26 @@ import styles from '~components/StudentBooking/BookingLesson.module.scss';
 import dayjs from 'dayjs';
 import HeaderNoDom from '../HeaderNoDom';
 import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+import { useTranslation } from 'react-i18next';
+import common_en from '../../public/static/locales/en/language.json';
+import common_vi from '../../public/static/locales/vi/language.json';
+i18next.init({
+	interpolation: { escapeValue: false },
+});
+i18next.init({
+	interpolation: { escapeValue: false },
+	lng: 'vi',
+	resources: {
+		en: {
+			common: common_en,
+		},
+		vi: {
+			common: common_vi,
+		},
+	},
+});
 const genderArr = [
 	{
 		label: 'Tất cả giới tính',
@@ -123,6 +143,41 @@ const BookingLesson = () => {
 	const [page, setPage] = useState(1);
 	const [pageSize, setPageSize] = useState(0);
 	const [totalResult, setTotalResult] = useState(0);
+	const { t, i18n } = useTranslation('common');
+	useEffect(() => {
+		var language = window.localStorage.getItem('language');
+		if (!!language) {
+			if (language.includes('en')) {
+				i18next.init({
+					interpolation: { escapeValue: false },
+					lng: 'en',
+					compatibilityJSON: 'v2',
+					resources: {
+						en: {
+							common: common_en,
+						},
+						vi: {
+							common: common_vi,
+						},
+					},
+				});
+			} else if (language.includes('vi')) {
+				i18next.init({
+					interpolation: { escapeValue: false },
+					lng: 'vi',
+					compatibilityJSON: 'v2',
+					resources: {
+						en: {
+							common: common_en,
+						},
+						vi: {
+							common: common_vi,
+						},
+					},
+				});
+			}
+		}
+	}, []);
 
 	let modalRef = useRef(true);
 	const errorToast = () =>
@@ -267,13 +322,11 @@ const BookingLesson = () => {
 		} else {
 			let min = parseInt(new Date(new Date().setHours(0)).getHours());
 			let max = parseInt(new Date(new Date().setHours(23)).getHours());
-			console.log('MM: ', min, max);
 			for (let i = min; i <= max; i++) {
 				x.push(`${i < 10 ? '0' + i : i}:00`);
 				if (i !== max) x.push(`${i < 10 ? '0' + i : i}:30`);
 			}
 		}
-		console.log('Do: ', x);
 		setLearnTime(x);
 
 		let z = [];
@@ -506,10 +559,11 @@ const BookingLesson = () => {
 					<div className="media-body-wrap pd-15 shadow">
 						<div className="d-xl-flex align-items-center justify-content-between ">
 							<h4 className="mg-b-15 d-block gradient-heading">
-								<i className="fas fa-calendar-alt"></i>ĐĂNG KÝ HỌC
+								<i className="fas fa-calendar-alt"></i>
+								{t('bkbooklesson')}
 							</h4>
 						</div>
-						<p className="mg-b-0">Vui lòng chọn ngày:</p>
+						<p className="mg-b-0">{t('bkselectdate')}:</p>
 						<div className="calendar__picker swiper-container">
 							<div className="calendar-slider swiper-wrapper"></div>
 							<div className="navigation_slider">
@@ -522,13 +576,14 @@ const BookingLesson = () => {
 							</div>
 						</div>
 						<a href="#" className="btn btn-danger mg-b-15" id="js-select-today">
-							<i className="fa fa-calendar mg-r-5"></i>Chọn hôm nay
+							<i className="fa fa-calendar mg-r-5"></i>
+							{t('bkselecttoday')}
 						</a>
 						<div className="filter-group-wrap metronic-form">
 							<div className="filter-group pd-t-20">
 								<div className="filter-row row booking-infomation">
 									<div className="left col-md-2">
-										<h5>THÔNG TIN</h5>
+										<h5>{t('bkinfomation')}</h5>
 									</div>
 									<div className="right col-md-10">
 										<div className="form-row">
@@ -582,7 +637,7 @@ const BookingLesson = () => {
 							<div className="filter-group pd-t-20 pos-relative z-index-10">
 								<div className="filter-row row from-to-group">
 									<div className="left col-md-2">
-										<h5>THỜI GIAN</h5>
+										<h5>{t('bktime')}</h5>
 									</div>
 									<div className="right col-md-10">
 										<div className="form-row">
@@ -648,7 +703,7 @@ const BookingLesson = () => {
 							<div className="filter-group pd-t-20">
 								<div className="filter-row row">
 									<div className="left col-md-2">
-										<h5>TÊN GIÁO VIÊN</h5>
+										<h5>{t('bkteachername')}</h5>
 									</div>
 									<div className="right col-md-10">
 										<div className="form-row">
@@ -698,7 +753,7 @@ const BookingLesson = () => {
 						<div className="filter-group pd-t-10 mg-t-10 bd-t" id="list-tutor">
 							<div className="filter-row row">
 								<div className="left col-12">
-									<h5>Danh sách giáo viên</h5>
+									<h5>{t('bkteacherlist')}</h5>
 								</div>
 								{/*  <div className="right col-md-10" style={{ alignItems: 'center', display: 'inline-flex' }}>
             <div className="custom-control custom-checkbox">
@@ -859,6 +914,8 @@ const BookingLesson = () => {
 };
 
 ReactDOM.render(
-	<BookingLesson />,
+	<I18nextProvider i18n={i18next}>
+		<BookingLesson />,
+	</I18nextProvider>,
 	document.getElementById('react-booking-lesson'),
 );

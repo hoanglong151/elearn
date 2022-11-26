@@ -11,6 +11,8 @@ import { Tab } from 'react-bootstrap';
 import HeaderNoDom from '../HeaderNoDom';
 import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
 import BottomMenu from '../BottomMenu';
+import ProfileSidebarNoDomTeacher from '../ProfileSidebarNoDomTeacher';
+import HeaderNoDomTeacher from '../HeaderNoDomTeacher';
 
 const TeacherClassRoomsNew = () => {
 	const [studentId, setStudentId] = React.useState(null);
@@ -32,7 +34,7 @@ const TeacherClassRoomsNew = () => {
 	return (
 		<>
 			<div className="Header">
-				<HeaderNoDom />
+				<HeaderNoDomTeacher />
 				<BottomMenu />
 			</div>
 			<div className="wrapper-new">
@@ -40,7 +42,7 @@ const TeacherClassRoomsNew = () => {
 					className="ProfileSidebar profile-sidebar-no-dom profilesidebar-show-only-mobile"
 					id="js-component-profilesidebar-1"
 				>
-					<ProfileSidebarNoDom />
+					<ProfileSidebarNoDomTeacher />
 				</div>
 				<div style={{ width: '100%' }}>
 					<div className="teacher__detail__wrap ">

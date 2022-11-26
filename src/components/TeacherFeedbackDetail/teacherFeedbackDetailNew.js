@@ -23,6 +23,8 @@ import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import common_en from '../../public/static/locales/en/language.json';
 import common_vi from '../../public/static/locales/vi/language.json';
+import ProfileSidebarNoDomTeacher from '../ProfileSidebarNoDomTeacher';
+import HeaderNoDomTeacher from '../HeaderNoDomTeacher';
 
 i18next.init({
 	interpolation: { escapeValue: false },
@@ -361,7 +363,7 @@ const TeacherFeedbackDetailNew = () => {
 				pauseOnHover
 			/>
 			<div className="Header">
-				<HeaderNoDom />
+				<HeaderNoDomTeacher />
 				<BottomMenu />
 			</div>
 			<div className="wrapper-new">
@@ -369,7 +371,7 @@ const TeacherFeedbackDetailNew = () => {
 					className="ProfileSidebar profile-sidebar-no-dom profilesidebar-show-only-mobile"
 					id="js-component-profilesidebar-1"
 				>
-					<ProfileSidebarNoDom />
+					<ProfileSidebarNoDomTeacher />
 				</div>
 				<div className="row wrap-w-100-flex-1">
 					<div className="col-xl-3 col-lg-4">

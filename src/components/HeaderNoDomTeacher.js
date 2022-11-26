@@ -1,50 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { appSettings } from '~src/config';
-import { useTranslation } from 'react-i18next';
-import Select, { components } from 'react-select';
-const LangOptions = [
-	{
-		value: 'vi',
-		label: 'Vietnamese',
-		flag: 'vn',
-	},
-	{
-		value: 'en',
-		label: 'English',
-		flag: 'us',
-	},
-];
-const FlatOption = props => {
-	const { data } = props;
-	return (
-		<components.Option {...props}>
-			<div className="d-flex align-items-center">
-				<span className={`flag-icon flag-icon-${data.flag}`}></span>
-				<span className="mg-l-10">{data.label}</span>
-			</div>
-		</components.Option>
-	);
-};
-const HeaderNoDom = () => {
-	const { t, i18n } = useTranslation('common');
-	let language = window.localStorage.getItem('language');
-	const [lang, setLang] = useState(
-		(() => {
-			if (!!!language) {
-				language = 'vi';
-				window.localStorage.setItem('language', 'vi');
-			}
-			return LangOptions.find(
-				item => item.value === (language.includes('en') ? 'en' : 'vi'),
-			);
-		})(),
-	);
-	const _handleChangeSelect = selected => {
-		setLang(selected);
-		i18n.changeLanguage(selected.value === 'en' ? 'en' : 'vi');
-		window.localStorage.setItem('language', JSON.stringify(selected.value));
-	};
+const HeaderNoDomTeacher = () => {
 	return (
 		<>
 			<header className="header-no-dom navbar navbar-header navbar-header-fixed">
@@ -224,29 +181,8 @@ const HeaderNoDom = () => {
 							</>
 						) : (
 							<div className="group-action-header">
-								<div className="wd-150" style={{ marginRight: '15px' }}>
-									<Select
-										options={LangOptions}
-										isSearchable={false}
-										formatOptionLabel={context => (
-											<div className="d-flex align-items-center">
-												<span
-													className={`flag-icon flag-icon-${context.flag}`}
-												></span>
-												<span className="mg-l-10">{context.label}</span>
-											</div>
-										)}
-										components={{
-											Option: FlatOption,
-											IndicatorSeparator: () => null,
-										}}
-										styles={appSettings.selectStyle}
-										value={lang}
-										onChange={_handleChangeSelect}
-									/>
-								</div>
 								<a
-									href={`https://www.facebook.com/Globalelearn.DayTiengAnhTrucTuyen1kem1`}
+									href={`#`}
 									className="action-icon facebook-icon"
 									target="_blank"
 									rel="noreferrer"
@@ -254,16 +190,16 @@ const HeaderNoDom = () => {
 									<i className="fab fa-facebook-f"></i>
 								</a>
 								<a
-									href={`mailto:support@e-learn.com.vn`}
+									href={`#`}
 									className="action-icon email-icon"
 									target="_blank"
 									rel="noreferrer"
 								>
 									<i className="far fa-envelope"></i>
 								</a>
-								<a href={`/log-in`} className="action-icon log-out">
+								<a href={`#`} className="action-icon log-out">
 									<i className="fas fa-sign-out-alt mg-r-5"></i>
-									{t('auth.logout')}
+									Logout
 								</a>
 							</div>
 						)}
@@ -328,4 +264,4 @@ const HeaderNoDom = () => {
 	);
 };
 
-export default HeaderNoDom;
+export default HeaderNoDomTeacher;
