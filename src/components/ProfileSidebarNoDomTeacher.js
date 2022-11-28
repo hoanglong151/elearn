@@ -79,7 +79,7 @@ const ProfileSidebarNoDomTeacher = () => {
 					</div>
 				</div>
 				<div className="user__navigation">
-					<div className="w-100">
+					<div className="w-100 h-100">
 						{/* <label className="tx-sans tx-10 tx-semibold tx-uppercase tx-color-01 tx-spacing-1 mg-b-15">Navigation</label> */}
 						<SideMenuTeacher />
 					</div>

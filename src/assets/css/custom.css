@@ -7002,9 +7002,6 @@ blockquote.messageText {
 .mt-60 {
 	margin-top: 60px;
 }
-.wrapper-w-by-desktop {
-	width: calc(100% - 330px);
-}
 
 @media (max-width: 1023px) {
 	.menu-header-no-dom {
@@ -7075,7 +7072,7 @@ blockquote.messageText {
 	align-items: center;
 	gap: 8px;
 	margin-bottom: 30px;
-	height: 420px;
+	height: 100%;
 }
 #react-feedback
 	.wrapper-chart

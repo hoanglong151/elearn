@@ -171,6 +171,8 @@ const FeedbackNew = () => {
 	const [feedback, setFeedback] = useState([]);
 	const [rate, setRate] = useState(0);
 
+	// Fake data Feedback
+
 	const [listFeedback, setListFeedback] = useState([]);
 	const [detailStatisticSkill, setDetailStatisticSkill] = useState();
 	const [detailStatisticSchedule, setDetailStatisticSchedule] = useState();

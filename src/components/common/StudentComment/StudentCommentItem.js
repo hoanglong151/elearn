@@ -42,6 +42,34 @@ const StudentCommentItem = ({
 		}
 	};
 
+	const renderRatingStars = rate => {
+		return rate == 5 ? (
+			<span className="badge badge-light text-white bg-success mg-l-5">
+				<i className="fa fa-check-circle mg-r-3"></i>Excellent
+			</span>
+		) : rate == 4 ? (
+			<span className="badge badge-light text-white bg-success mg-l-5">
+				<i className="fa fa-check-circle mg-r-3"></i>Good
+			</span>
+		) : rate == 3 ? (
+			<span className="badge badge-light text-white bg-info mg-l-5">
+				<i className="fa fa-check-circle mg-r-3"></i>Average
+			</span>
+		) : rate == 2 ? (
+			<span className="badge badge-light text-white bg-warning mg-l-5">
+				<i className="fa fa-check-circle mg-r-3"></i>Bad
+			</span>
+		) : rate == 1 ? (
+			<span className="badge badge-light text-white bg-danger mg-l-5">
+				<i className="fa fa-check-circle mg-r-3"></i>Very Bad
+			</span>
+		) : (
+			<span className="badge badge-light text-white bg-black-4 mg-l-5">
+				Not Rated
+			</span>
+		);
+	};
+
 	const listFeedBack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	const [open, setOpen] = useState(false);
 	return (

@@ -10,9 +10,9 @@ import { useTranslation } from 'react-i18next';
 function Example(props) {
 	return (
 		<>
-			<div style={{ marginTop: 30, display: 'flex' }}>
-				<div style={{ width: '60%', paddingRight: 16 }}>{props.children}</div>
-				<div style={{ width: '40%' }}>
+			<div style={{ display: 'flex' }}>
+				<div style={{ paddingRight: 16 }}>{props.children}</div>
+				<div>
 					<h3 className="h5">{props.label}</h3>
 					<p>{props.description}</p>
 				</div>
@@ -119,11 +119,11 @@ const ChartSchedule = props => {
 	};
 
 	return (
-		<div>
+		<div className="chart-higher">
 			<Example label={createLabel()}>
 				<CircularProgressbarWithChildren
 					value={totalPercent}
-					text={!!totalPercent ? `${totalPercent.toFixed(2)}%` : null}
+					text={!!totalPercent ? `${totalPercent.toFixed(2)}%` : ''}
 					styles={buildStyles({
 						textColor: '#fd7e14',
 						pathColor: '#fd7e14',

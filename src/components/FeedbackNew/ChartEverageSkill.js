@@ -8,12 +8,15 @@ import {
 	YAxis,
 	XAxis,
 } from 'recharts';
-import React, { useMemo, memo } from 'react';
+import React, { useMemo, memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useRef } from 'react';
+import { BarChart2 } from 'styled-icons/evaicons-solid';
 
 const ChartEverageSkill = props => {
 	const { detailStatisticSkill } = props;
 	const { t, i18n } = useTranslation('common');
+	const [height, setHeight] = useState();
 	const dataChart = useMemo(() => {
 		let data = [];
 		// !!detailStatisticSkill &&
@@ -30,10 +33,17 @@ const ChartEverageSkill = props => {
 		}
 		return data;
 	}, [detailStatisticSkill]);
-
+	useEffect(() => {
+		const getElement = document.querySelector('.chart-higher');
+		setHeight(getElement.clientHeight);
+		window.addEventListener('resize', () => {
+			const getElement = document.querySelector('.chart-higher');
+			setHeight(getElement.clientHeight);
+		});
+	}, []);
 	return (
-		<ResponsiveContainer width="100%" height={350}>
-			<BarChart layout="vertical" width={450} height={350} data={dataChart}>
+		<ResponsiveContainer width="100%" height={height}>
+			<BarChart layout="vertical" width={450} height={height} data={dataChart}>
 				<XAxis domain={[0, 10]} tickCount={11} type="number" padding={80} />
 				<YAxis type="category" dataKey="name" height={50} />
 				<CartesianGrid strokeDasharray="3 3" />

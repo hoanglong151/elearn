@@ -309,7 +309,7 @@ const TeacherFeedbackDetailNew = () => {
 			// 			parseInt(params.get('BookingID')) ||
 			// 			parseInt(params.get('EvaluationID')),
 			// 	});
-			console.log('data: ', DATA_SUBMIT);
+			console.log('data: ', DATA_SUBMIT, feedbackDetail);
 			try {
 				if (
 					feedbackDetail.Pronunciation == null &&

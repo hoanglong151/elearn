@@ -915,7 +915,7 @@ const BookingLesson = () => {
 
 ReactDOM.render(
 	<I18nextProvider i18n={i18next}>
-		<BookingLesson />,
+		<BookingLesson />
 	</I18nextProvider>,
 	document.getElementById('react-booking-lesson'),
 );

@@ -158,3 +158,511 @@ nav div ul li a {
 .wrapper-feedback-detail-teacher {
 	text-align: center;
 }
+
+.fb-wrap-item {
+	padding: 30px;
+	background: #fff;
+	margin-bottom: 30px;
+	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+	border-radius: 5px;
+}
+
+.fb-wrap-item .fb-item {
+	display: flex;
+	align-items: flex-start;
+	padding: 0;
+	background: unset;
+	margin-bottom: 0;
+	box-shadow: none;
+	border-radius: 0;
+}
+.fb-item .fb-avatar .avatar {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50px;
+}
+@media (max-width: 767px) {
+	.fb-item .fb-avatar .avatar {
+		width: 50px;
+		height: 50px;
+	}
+}
+.fb-item .fb-info {
+	flex-grow: 1;
+	margin-left: 30px;
+}
+.fb-item .fb-info .name-rating {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+.fb-item .fb-info .name-rating .name {
+	flex-grow: 1;
+	margin-bottom: 0;
+	font-size: 1.15rem;
+	font-weight: 600;
+}
+.fb-item .fb-info .feedback-comment {
+	margin-bottom: 5px;
+}
+.fb-item .fb-info .feedback-comment p {
+	margin-bottom: 0px;
+}
+.fb-item .fb-info .actions {
+	margin-top: 5px;
+}
+@media (max-width: 767px) {
+	.fb-item {
+		padding: 15px;
+	}
+	.fb-summary-container {
+		padding: 15px;
+	}
+	.fb-summary-container .fb-type {
+		flex-basis: 50%;
+	}
+}
+@media (max-width: 600px) {
+	.fb-item {
+		flex-wrap: wrap;
+	}
+	.fb-item .fb-info {
+		margin-left: 0;
+	}
+	.fb-summary-container .fb-type {
+		flex-basis: 100%;
+	}
+	.fb-item .fb-info .name-rating {
+		flex-wrap: wrap;
+	}
+	.fb-item .fb-info .name-rating .name {
+		margin: 5px 0;
+		margin-bottom: 5px;
+	}
+	.fb-item .fb-info .name-rating .rating-wrap {
+		width: 100%;
+	}
+	.fb-item .fb-info .name-rating .rating-wrap .rating {
+		justify-content: flex-end;
+	}
+}
+.profilesidebar-show-only-mobile {
+	display: none;
+}
+.wrapper-new {
+	display: flex;
+	align-items: flex-start;
+}
+.wrapper-new .profile-sidebar-no-dom {
+	width: 300px;
+	flex-shrink: 0;
+	margin-right: 30px;
+}
+.mt-60 {
+	margin-top: 60px;
+}
+.wrapper-w-by-desktop {
+	width: 100%;
+}
+#js-component-profilesidebar {
+	position: relative;
+	margin-right: 30px;
+	min-width: 300px !important;
+}
+
+@media (max-width: 1023px) {
+	/* .menu-header-no-dom {
+		margin-top: 50px;
+	} */
+	.header-no-dom {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 9999;
+	}
+}
+
+#react-feedback .wrapper-chart {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 30px;
+	min-height: 420px;
+}
+#react-feedback
+	.wrapper-chart
+	div[data-test-id='CircularProgressbarWithChildren'] {
+	width: 100%;
+}
+#react-feedback .wrapper-chart .CircularProgressbar-text {
+	font-weight: 500;
+}
+#react-feedback .wrapper-chart .chart {
+	background: #fff;
+	border-radius: 5px;
+	padding: 15px 26px;
+	box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+	width: 50%;
+	height: 100%;
+}
+#react-feedback .wrapper-chart .wrapper-chart-schedule .schedule-item {
+	margin-bottom: 8px;
+}
+#react-feedback .wrapper-chart .wrapper-chart-schedule .color-status {
+	width: 45px;
+	height: 14px;
+	display: inline-block;
+	margin-right: 8px;
+}
+
+@media (max-width: 767px) {
+	#react-feedback .wrapper-chart {
+		height: 100%;
+		flex-wrap: wrap;
+		gap: 24px;
+		margin-bottom: 24px;
+	}
+	#react-feedback .wrapper-chart .chart {
+		width: 100%;
+	}
+}
+
+.profile-sidebar {
+	flex-shrink: 0;
+	padding: 30px 0 0 0;
+	text-align: center;
+	background-color: #fff;
+	border-radius: 5px;
+	height: 100%;
+}
+.profile-sidebar .avatar {
+	margin: 0 auto;
+}
+@media screen and (min-width: 992px) {
+	.profile-sidebar {
+		max-width: 300px !important;
+	}
+}
+@media (max-width: 991px) {
+	.profile-sidebar {
+		padding: 30px 0 0 0;
+		height: 100%;
+		border-radius: 0;
+	}
+}
+.profile-sidebar .profile-info-list li {
+	margin-bottom: 0;
+	transition: 0.3s;
+}
+.profile-sidebar .profile-info-list li a {
+	display: block;
+	padding: 1rem !important;
+	text-align: left;
+	color: rgba(0, 0, 0, 0.87);
+	font-weight: 400;
+	transition: 0.3s;
+	font-size: 1rem;
+}
+.profile-sidebar .profile-info-list li a .icon {
+	width: 20px;
+	margin-right: 10px;
+	display: inline-block;
+	text-align: center;
+}
+.profile-sidebar .profile-info-list li:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+.profile-sidebar .profile-info-list li:hover a {
+	color: #fd7e14;
+}
+.profile-sidebar .profile-info-list li.active {
+	color: #fff;
+}
+.profile-sidebar .profile-info-list li.active a:hover {
+	color: #fff;
+}
+.profile-sidebar .profile-info-list li:last-child {
+	margin-bottom: 0;
+}
+.profile-sidebar .label-tag {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.user__navigation {
+	height: calc(100% - 220px);
+}
+
+@media (max-width: 1023px) {
+	.user__navigation {
+		height: calc(100vh - 250px);
+	}
+}
+
+.list-unstyled {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.list-unstyled::-webkit-scrollbar {
+	width: 0;
+}
+
+/* Track */
+.list-unstyled::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 10px;
+}
+
+/* Handle */
+.list-unstyled::-webkit-scrollbar-thumb {
+	background: transparent;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+.list-unstyled::-webkit-scrollbar-thumb:hover {
+	background: transparent;
+}
+
+#react-teacher-feedback-detail .card-header,
+#example-collapse-text .card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#react-teacher-feedback-detail .tablet,
+#example-collapse-text .tablet {
+	display: none;
+}
+#react-teacher-feedback-detail .wrapper-feedback-detail-teacher,
+#example-collapse-text .wrapper-feedback-detail-teacher {
+	text-align: center;
+}
+#react-teacher-feedback-detail .wrapper-feedback-detail-teacher thead th,
+#example-collapse-text .wrapper-feedback-detail-teacher thead th {
+	background-color: #ffc000;
+	color: #fff;
+}
+#react-teacher-feedback-detail
+	.wrapper-feedback-detail-teacher
+	.table-striped
+	tbody
+	tr:nth-of-type(2n + 1),
+#example-collapse-text
+	.wrapper-feedback-detail-teacher
+	.table-striped
+	tbody
+	tr:nth-of-type(2n + 1) {
+	background-color: #ffe8cb;
+}
+#react-teacher-feedback-detail
+	.wrapper-feedback-detail-teacher
+	.table-striped
+	tr:nth-child(even),
+#example-collapse-text
+	.wrapper-feedback-detail-teacher
+	.table-striped
+	tr:nth-child(even) {
+	background-color: #fff4e7;
+}
+#react-teacher-feedback-detail .wrapper-feedback-detail-teacher .point,
+#example-collapse-text .wrapper-feedback-detail-teacher .point {
+	margin-bottom: 0;
+}
+#react-teacher-feedback-detail .wrapper-feedback-detail-teacher .title,
+#example-collapse-text .wrapper-feedback-detail-teacher .title {
+	font-weight: 500;
+	font-size: 18px;
+}
+#react-teacher-feedback-detail
+	.wrapper-feedback-detail-teacher
+	.title
+	.required,
+#example-collapse-text .wrapper-feedback-detail-teacher .title .required {
+	margin-left: 2px;
+	color: red;
+}
+#react-teacher-feedback-detail
+	.wrapper-feedback-detail-teacher
+	.form-check-input,
+#example-collapse-text .wrapper-feedback-detail-teacher .form-check-input {
+	width: 24px;
+	height: 24px;
+}
+#react-teacher-feedback-detail .wrapper-feedback-detail-teacher .radio-btn,
+#example-collapse-text .wrapper-feedback-detail-teacher .radio-btn {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	border: 4px solid #fd7e14;
+	margin: 0 auto;
+}
+#react-teacher-feedback-detail
+	.wrapper-feedback-detail-teacher
+	.radio-btn.checked,
+#example-collapse-text .wrapper-feedback-detail-teacher .radio-btn.checked {
+	background-color: red;
+}
+@media screen and (max-width: 1023px) {
+	#react-teacher-feedback-detail .desktop,
+	#example-collapse-text .desktop {
+		display: none;
+	}
+	#react-teacher-feedback-detail .tablet,
+	#example-collapse-text .tablet {
+		display: block;
+	}
+}
+
+.st-danhgianguphap {
+	overflow: scroll;
+}
+.st-danhgianguphap hr {
+	margin: 3px;
+}
+.st-danhgianguphap .st-item-danhgia .row .col-6 {
+	padding-bottom: 3px;
+}
+.st-danhgianguphap .st-item-danhgia .row .col-6 p {
+	padding-bottom: 3px;
+	margin-bottom: 0;
+}
+
+.ProfileSidebar {
+	position: absolute;
+	left: 15px;
+	top: 90px;
+	height: 570px;
+	overflow-y: hidden;
+	width: 300px;
+}
+
+/* * react-circular-progressbar styles * All of the styles in this file are configurable! */
+.CircularProgressbar {
+	/* * This fixes an issue where the CircularProgressbar svg has * 0 width inside a "display: flex" container, and thus not visible. */
+	width: 100%;
+	/* * This fixes a centering issue with CircularProgressbarWithChildren: * https://github.com/kevinsqi/react-circular-progressbar/issues/94 */
+	vertical-align: middle;
+}
+.CircularProgressbar .CircularProgressbar-path {
+	stroke: #3e98c7;
+	stroke-linecap: round;
+	-webkit-transition: stroke-dashoffset 0.5s ease 0s;
+	transition: stroke-dashoffset 0.5s ease 0s;
+}
+.CircularProgressbar .CircularProgressbar-trail {
+	stroke: #d6d6d6;
+	/* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+	stroke-linecap: round;
+}
+.CircularProgressbar .CircularProgressbar-text {
+	fill: #3e98c7;
+	font-size: 20px;
+	dominant-baseline: middle;
+	text-anchor: middle;
+}
+.CircularProgressbar .CircularProgressbar-background {
+	fill: #d6d6d6;
+}
+/* * Sample background styles. Use these with e.g.: * * <CircularProgressbar * className="CircularProgressbar-inverted" * background * percentage={
+	50
+}
+ * /> */
+.CircularProgressbar.CircularProgressbar-inverted
+	.CircularProgressbar-background {
+	fill: #3e98c7;
+}
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
+	fill: #fff;
+}
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
+	stroke: #fff;
+}
+.CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
+	stroke: transparent;
+}
+.btn-readmore {
+	background-color: transparent;
+	border: none;
+	color: #fd7e14;
+	outline: none;
+}
+.btn-readmore:focus {
+	outline: none;
+}
+@media (max-width: 1023px) {
+	#react-teacher-feedback-detail .bottom-header,
+	#react-teacher-classrooms .bottom-header {
+		display: none;
+	}
+	.wrapper-w-by-desktop {
+		width: 100%;
+	}
+	.profilesidebar-show-only-mobile {
+		display: block;
+	}
+	.ProfileSidebar.active {
+		left: 0;
+		overflow: hidden;
+		z-index: 9999;
+	}
+	.ProfileSidebar {
+		position: absolute;
+		left: -300px;
+		top: 0;
+		min-width: 100%;
+		transition: 0.1s ease;
+		padding-right: calc(100% - 300px);
+		height: 100%;
+	}
+	.sidebar-overlay {
+		left: 300px !important;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		right: 0px;
+		background: rgba(0, 0, 0, 0.25);
+		display: none;
+	}
+	.toggle-sidebar {
+		position: relative;
+		z-index: 9999;
+	}
+	.ProfileSidebar.active .sidebar-overlay {
+		display: block;
+	}
+	.page-mt-50 {
+		margin-top: 50px;
+	}
+	.wrap-w-100-flex-1 {
+		width: 100%;
+		flex: 1;
+	}
+}
+
+.rating-stars {
+	position: relative;
+	display: inline-block;
+}
+
+.rating-stars .empty-stars {
+	color: #e1e1e1;
+	white-space: nowrap;
+}
+
+.rating-stars .filled-stars {
+	color: #f9dc5c;
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.ProfileSidebar .profile-sidebar .user__navigation .w-100 {
+	height: 100%;
+}
