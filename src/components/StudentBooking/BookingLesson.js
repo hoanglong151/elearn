@@ -2,10 +2,9 @@ import React, { useState, useEffect, useReducer, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'react-select';
 import ListSchedule from './ListSchedule';
-import { getListTeacher } from '~src/api/studentAPI';
+import { getListTeacherSchedule } from '~src/api/studentAPI';
 import { getLevelPurposeOptions } from '~src/api/optionAPI';
 import Pagination from 'react-js-pagination';
-
 import BookingLessonModal from '../BookingLessonModal';
 import ListNationModal from '~components/ListNationModal';
 
@@ -185,7 +184,7 @@ const BookingLesson = () => {
 
 	const getAPI = async params => {
 		setLoading(true);
-		const res = await getListTeacher(params);
+		const res = await getListTeacherSchedule(params);
 		if (res.Code === 1) {
 			setTeacherList(res.Data);
 			setPageSize(res.PageSize);
@@ -293,7 +292,6 @@ const BookingLesson = () => {
 	const onSearch = (e, page) => {
 		setTeacherList(null);
 		e && e.preventDefault();
-
 		let x = [];
 		if (!!state.startTime && !!state.endTime) {
 			let min = parseInt(state.startTime.getHours());
@@ -454,11 +452,11 @@ const BookingLesson = () => {
 				init: function() {
 					let today = new Date();
 					today.setDate(today.getDate() - 1);
-					this.appendSlide(getNextNumberDay(today, 14));
+					this.appendSlide(getNextNumberDay(today, 44));
 				},
 				click: slideClickCallback,
 				reachEnd: function(event) {
-					if (this.slides.length === 0 || this.slides.length > 14) return;
+					if (this.slides.length === 0 || this.slides.length > 44) return;
 					let lastDate = new Date(
 						this.slides[this.slides.length - 1].dataset.date,
 					);
@@ -662,13 +660,13 @@ const BookingLesson = () => {
 													}
 													showTimeSelect
 													showTimeSelectOnly
-													timeIntervals={60}
+													timeIntervals={30}
 													timeCaption="Thời gian từ"
 													timeFormat="HH:mm"
 													dateFormat="HH:mm"
 													minTime={
 														dayjs().isSame(dayjs(state.date), 'date')
-															? new Date().setHours(new Date().getHours() + 1)
+															? new Date().setHours(new Date().getHours() + 30)
 															: new Date().setHours(5)
 													}
 													maxTime={new Date().setHours(22)}
@@ -679,7 +677,6 @@ const BookingLesson = () => {
 												<DatePicker
 													selected={state.endTime}
 													onChange={date => {
-														console.log(date);
 														dispatch({
 															type: 'STATE_CHANGE',
 															payload: { key: 'endTime', value: date },
@@ -687,7 +684,7 @@ const BookingLesson = () => {
 													}}
 													showTimeSelect
 													showTimeSelectOnly
-													timeIntervals={60}
+													timeIntervals={30}
 													timeCaption="Thời gian đến"
 													timeFormat="HH:mm"
 													dateFormat="HH:mm"
@@ -868,6 +865,7 @@ const BookingLesson = () => {
 																			)}
 																			Start={state.startTime}
 																			End={state.endTime}
+																			ScheduleListData={item.schedule}
 																			handleBooking={onHandleBooking}
 																			modalRef={modalRef}
 																			onTouchBooking={() => {

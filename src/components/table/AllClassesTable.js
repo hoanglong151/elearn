@@ -50,6 +50,11 @@ const AllClassRow = ({ data, showStudentModal }) => {
 		ScheduleTimeVN = '',
 		ScheduleTimeUTC = '',
 		LessionMaterial = '',
+		FileAudio = '',
+		FileAudio1 = '',
+		FileAudio2 = '',
+		LinkMaterials = '',
+		TeacherGuide = '',
 		StudentName = '',
 		BookingID = '',
 		LessionName = '',
@@ -57,6 +62,7 @@ const AllClassRow = ({ data, showStudentModal }) => {
 		StudentUID,
 		DocumentName = '',
 		GenderID,
+		FinishedType,
 	} = data;
 
 	const handleEnterClass = async e => {
@@ -115,25 +121,83 @@ const AllClassRow = ({ data, showStudentModal }) => {
 					<span className="tx-gray-500">{ScheduleTimeUTC}</span>
 				</div>
 			</td>
+			<td className="clr-time">
+				{!!FileAudio && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> File Audio 1:
+						</span>
+						<span className="tx-gray-500">
+							<a href={FileAudio}>Download</a>
+						</span>
+					</div>
+				)}
+				{!!FileAudio1 && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> File Audio 2:
+						</span>
+						<span className="tx-gray-500">
+							<a href={FileAudio1}>Download</a>
+						</span>
+					</div>
+				)}
+				{!!FileAudio2 && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> File Audio 3:
+						</span>
+						<span className="tx-gray-500">
+							<a href={FileAudio2}>Download</a>
+						</span>
+					</div>
+				)}
+				{!!LinkMaterials && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> Link Materials:
+						</span>
+						<span className="tx-gray-500">
+							<a href={LinkMaterials}>View</a>
+						</span>
+					</div>
+				)}
+				{!!TeacherGuide && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> Teacher Guide:
+						</span>
+						<span className="tx-gray-500">
+							<a href={TeacherGuide}>Download</a>
+						</span>
+					</div>
+				)}
+			</td>
 			<td className="clr-status">
 				<span
 					className={`badge badge-${
-						Status === 1
+						FinishedType === 5
 							? 'primary tx-white'
-							: Status === 2
+							: FinishedType === 1
 							? 'success'
 							: 'danger'
 					} pd-5`}
 				>
-					{Status === 1
+					{FinishedType === 0
 						? 'BOOKED'
-						: Status === 2
-						? 'FINISHED'
-						: Status === 3
-						? 'TEACHER OFF'
-						: Status === 4
-						? 'STUDENT OFF'
-						: 'IT PROBLEM'}
+						: FinishedType === 1
+						? 'As Schedule'
+						: FinishedType === 2
+						? 'Student No Show'
+						: FinishedType === 3
+						? 'Teacher No Show'
+						: FinishedType === 4
+						? 'IT Problem'
+						: FinishedType === 5
+						? 'Teacher Late'
+						: FinishedType === 6
+						? 'Teacher Cancel'
+						: 'Student Cancel'}
 				</span>
 				{/* {Status === 1 && <span className="badge badge-warning pd-5">BOOKED</span>}
                 {Status === 2 && <span className="badge badge-success pd-5">FINISHED</span>} */}
@@ -315,6 +379,7 @@ const AllClassesTable = ({ showStudentModal }) => {
 									<th className="clr-lesson">Lesson</th>
 									<th className="clr-student">Student </th>
 									<th className="clr-time">Schedule </th>
+									<th className="clr-time">File Audio </th>
 									<th className="clr-status">Status</th>
 									<th className="clr-finishType">Finish Type</th>
 									<th className="clr-actions">Actions</th>

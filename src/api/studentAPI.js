@@ -449,3 +449,26 @@ export const getCoursesInfoAPI = async () => {
 	}
 	return result;
 };
+
+export const getListTeacherSchedule = async params => {
+	let result;
+	try {
+		let res = await instance.get(path + '/GetListTeacherSchedule', {
+			params: {
+				UID: appSettings.UID,
+				Nation: params.Nation,
+				LevelPurpose: params.LevelPurpose,
+				Gender: params.Gender,
+				Date: params.Date,
+				Start: params.Start,
+				End: params.End,
+				Search: params.Search,
+				Page: params.Page,
+			},
+		});
+		result = res.data;
+	} catch (error) {
+		return error.message ? error.message : (result = '');
+	}
+	return result;
+};

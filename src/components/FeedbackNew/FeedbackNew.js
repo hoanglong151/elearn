@@ -185,6 +185,7 @@ const FeedbackNew = () => {
 				setPageSize(res.PageSize);
 				setTotalResult(res.TotalResult);
 			}
+			setPage(params.Page);
 		} catch (err) {
 			console.log('Err: ', err);
 		}
@@ -213,7 +214,7 @@ const FeedbackNew = () => {
 	};
 
 	useEffect(() => {
-		getAllFeedback();
+		getAllFeedback({ Page: 1 });
 		getDetailStatisticSkill();
 		getDetailStatisticSchedule();
 	}, []);
@@ -295,7 +296,7 @@ const FeedbackNew = () => {
 				<div className="wrapper-w-by-desktop">
 					{!loading && (
 						<>
-							<div className="d-sm-flex align-items-center justify-content-between mg-b-30">
+							<div className="d-sm-flex align-items-center justify-content-between">
 								<h4 className="mg-b-0 gradient-heading">
 									<i className="fas fa-comment-dots"></i>
 									{t('teacher’sfeedback')}

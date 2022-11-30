@@ -25,6 +25,7 @@ import common_en from '../../public/static/locales/en/language.json';
 import common_vi from '../../public/static/locales/vi/language.json';
 import ProfileSidebarNoDomTeacher from '../ProfileSidebarNoDomTeacher';
 import HeaderNoDomTeacher from '../HeaderNoDomTeacher';
+import Select from 'react-select';
 
 i18next.init({
 	interpolation: { escapeValue: false },
@@ -41,6 +42,14 @@ i18next.init({
 		},
 	},
 });
+
+const optionsSelect = [
+	{ value: 1, label: 'As Schedule' },
+	{ value: 2, label: 'Student no show' },
+	{ value: 3, label: 'Teacher no show' },
+	{ value: 4, label: 'IT problems' },
+	{ value: 5, label: 'Teacher late' },
+];
 
 const initialState = {
 	isLoading: true,
@@ -109,7 +118,7 @@ const TeacherFeedbackDetailNew = () => {
 	const listFeedBack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	const { t, i18n } = useTranslation('common');
 	const [feedBacks4Skill, setFeedbacks4Skill] = useState({
-		FinishedType: 0,
+		FinishedType: null,
 		Rate: 0,
 		SpeakingPoint: null,
 		ListeningPoint: null,
@@ -120,6 +129,7 @@ const TeacherFeedbackDetailNew = () => {
 		Vocabulary: null,
 		Grammar: null,
 		SentenceDevelopmentAndSpeak: null,
+		NextId: 0,
 	});
 
 	const [feedbackDetail, setFeedbackDetail] = useState();
@@ -202,6 +212,7 @@ const TeacherFeedbackDetailNew = () => {
 	}, []);
 
 	const handleChangeSelect = (name, value) => {
+		console.log('DTAA: ', name, value);
 		setFeedbacks4Skill({ ...feedBacks4Skill, [name]: value });
 	};
 
@@ -292,60 +303,65 @@ const TeacherFeedbackDetailNew = () => {
 	// }, []);
 
 	const handleSubmitFeedback = async () => {
-		if (
-			feedBacks4Skill.SpeakingPoint === 0 ||
-			feedBacks4Skill.ListeningPoint === 0
-		) {
-			toast.error('Please pick Feedback Speaking And Listening');
-		} else {
-			let DATA_SUBMIT = {
-				...feedBacks4Skill,
-				Note: !!feedBacks4Skill.Note ? feedBacks4Skill.Note : state.note,
-			};
-			const params = new URLSearchParams(window.location.search);
-			// if (params.has('BookingID') || params.has('EvaluationID')) {
-			// 	const res = await getTeacherFeedbackDetail({
-			// 		BookingID:
-			// 			parseInt(params.get('BookingID')) ||
-			// 			parseInt(params.get('EvaluationID')),
-			// 	});
-			console.log('data: ', DATA_SUBMIT, feedbackDetail);
-			try {
-				if (
-					feedbackDetail.Pronunciation == null &&
-					feedbackDetail.Vocabulary == null &&
-					feedbackDetail.Grammar == null &&
-					feedbackDetail.SentenceDevelopmentAndSpeak == null &&
-					feedbackDetail.SpeakingPoint == 0 &&
-					feedbackDetail.ListeningPoint == 0 &&
-					feedbackDetail.ReadingPoint == 0 &&
-					feedbackDetail.WritingPoint == 0
-				) {
-					const res = await getAddEvaluation(DATA_SUBMIT);
-					if (res.Code == 1) {
-						toast.success(res.Message || 'Thành công');
+		if (!!feedBacks4Skill.FinishedType) {
+			if (
+				feedBacks4Skill.SpeakingPoint === 0 ||
+				feedBacks4Skill.ListeningPoint === 0
+			) {
+				toast.error('Please pick Feedback Speaking And Listening');
+			} else {
+				let DATA_SUBMIT = {
+					...feedBacks4Skill,
+					Note: !!feedBacks4Skill.Note ? feedBacks4Skill.Note : state.note,
+					FinishedType: parseInt(feedBacks4Skill.FinishedType),
+				};
+				const params = new URLSearchParams(window.location.search);
+				// if (params.has('BookingID') || params.has('EvaluationID')) {
+				// 	const res = await getTeacherFeedbackDetail({
+				// 		BookingID:
+				// 			parseInt(params.get('BookingID')) ||
+				// 			parseInt(params.get('EvaluationID')),
+				// 	});
+				console.log('data: ', DATA_SUBMIT, feedbackDetail);
+				try {
+					if (
+						feedbackDetail.Pronunciation == null &&
+						feedbackDetail.Vocabulary == null &&
+						feedbackDetail.Grammar == null &&
+						feedbackDetail.SentenceDevelopmentAndSpeak == null &&
+						feedbackDetail.SpeakingPoint == null &&
+						feedbackDetail.ListeningPoint == null &&
+						feedbackDetail.ReadingPoint == null &&
+						feedbackDetail.WritingPoint == null
+					) {
+						const res = await getAddEvaluation(DATA_SUBMIT);
+						if (res.Code == 1) {
+							toast.success(res.Message || 'Thành công');
+						}
+					} else {
+						const res = await getUpdateEvaluation(DATA_SUBMIT);
+						if (res.Code == 1) {
+							toast.success(res.Message || 'Thành công');
+						}
 					}
-				} else {
-					const res = await getUpdateEvaluation(DATA_SUBMIT);
-					if (res.Code == 1) {
-						toast.success(res.Message || 'Thành công');
-					}
+					// 	if (params.has('BookingID')) {
+					// 		const res = await getAddEvaluation(DATA_SUBMIT);
+					// 		if (res.Code == 1) {
+					// 			toast(res.Message || 'Thành công');
+					// 		}
+					// 	}
+					// if (params.has('EvaluationID')) {
+					// 	const res = await getUpdateEvaluation(DATA_SUBMIT);
+					// 	if (res.Code == 1) {
+					// 		toast(res.Message || 'Thành công');
+					// 	}
+					// }
+				} catch (err) {
+					console.log('Err: ', err);
 				}
-				// 	if (params.has('BookingID')) {
-				// 		const res = await getAddEvaluation(DATA_SUBMIT);
-				// 		if (res.Code == 1) {
-				// 			toast(res.Message || 'Thành công');
-				// 		}
-				// 	}
-				// if (params.has('EvaluationID')) {
-				// 	const res = await getUpdateEvaluation(DATA_SUBMIT);
-				// 	if (res.Code == 1) {
-				// 		toast(res.Message || 'Thành công');
-				// 	}
-				// }
-			} catch (err) {
-				console.log('Err: ', err);
 			}
+		} else {
+			toast.error('Please select FinishedType');
 		}
 	};
 
@@ -452,12 +468,87 @@ const TeacherFeedbackDetailNew = () => {
 															<i className="fas fa-lightbulb tx-primary open st-icon wd-20 mg-r-5"></i>
 															Finished type:
 														</span>
-														<span className="">
+														{/* <span className="">
 															{!!feedbackDetail &&
 															!!feedbackDetail.FinishedTypeString
 																? feedbackDetail.FinishedTypeString
 																: ''}
-														</span>
+														</span> */}
+														<div className="flex-grow-1">
+															<Select
+																value={
+																	optionsSelect[
+																		optionsSelect.findIndex(
+																			item =>
+																				item.value ==
+																				feedbackDetail?.FinishedType,
+																		)
+																	]
+																}
+																onChange={e =>
+																	handleChangeSelect('FinishedType', e.value)
+																}
+																options={optionsSelect}
+															/>
+														</div>
+														{/* <select
+															onChange={e =>
+																handleChangeSelect(
+																	'FinishedType',
+																	e.target.value,
+																)
+															}
+															style={{
+																padding: '2px',
+																borderRadius: '4px',
+																border: '1px solid #c0ccda',
+															}}
+															disabled={
+																!!feedbackDetail &&
+																feedbackDetail.Pronunciation == null &&
+																feedbackDetail.Vocabulary == null &&
+																feedbackDetail.Grammar == null &&
+																feedbackDetail.SentenceDevelopmentAndSpeak ==
+																	null &&
+																feedbackDetail.SpeakingPoint == null &&
+																feedbackDetail.ListeningPoint == null &&
+																feedbackDetail.ReadingPoint == null &&
+																feedbackDetail.WritingPoint == null
+																	? false
+																	: true
+															}
+														>
+															<option
+																selected={feedBacks4Skill.FinishedType == 1}
+																value="1"
+															>
+																As Schedule
+															</option>
+															<option
+																selected={feedBacks4Skill.FinishedType == 2}
+																value="2"
+															>
+																Student no show
+															</option>
+															<option
+																selected={feedBacks4Skill.FinishedType == 3}
+																value="3"
+															>
+																Teacher no show
+															</option>
+															<option
+																selected={feedBacks4Skill.FinishedType == 4}
+																value="4"
+															>
+																IT problems
+															</option>
+															<option
+																selected={feedBacks4Skill.FinishedType == 5}
+																value="5"
+															>
+																Teacher late
+															</option>
+														</select> */}
 													</div>
 												</div>
 											</div>
@@ -523,12 +614,12 @@ const TeacherFeedbackDetailNew = () => {
 								</div>
 							</div>
 						</div>
-						<button
+						{/* <button
 							onClick={handleSubmitFeedback}
 							className="desktop btn btn-icon btn-warning mt-2 w-100"
 						>
 							<i className="fas fa-save"></i> Save
-						</button>
+						</button> */}
 					</div>
 					<div className="col-xl-9 col-lg-8">
 						<div className="row">
@@ -538,32 +629,32 @@ const TeacherFeedbackDetailNew = () => {
 										<h5 className="mg-b-0">
 											Student’s Performance and Behavior in the Class
 										</h5>
-										<div>
+										{/* <div>
 											<button
 												className="btn btn-icon btn-warning mg-r-15"
 												onClick={() => setEditMode(!state.editMode)}
 											>
 												<i className="fas fa-edit mg-r-5"></i> Edit feedback
 											</button>
-										</div>
+										</div> */}
 									</div>
 									<div className="card-body">
-										{state.editMode ? (
-											<>
-												<StatelessTextarea
-													rows={3}
-													className="form-control"
-													placeholder="General feedback......"
-													defaultValue={state?.note ?? ''}
-													value={feedBacks4Skill.Note}
-													onChange={e =>
-														setFeedbacks4Skill({
-															...feedBacks4Skill,
-															Note: e.target.value,
-														})
-													}
-												></StatelessTextarea>
-											</>
+										{/* {state.editMode ? (
+											<> */}
+										<StatelessTextarea
+											rows={3}
+											className="form-control"
+											placeholder="General feedback......"
+											defaultValue={state?.note ?? ''}
+											value={feedBacks4Skill.Note}
+											onChange={e =>
+												setFeedbacks4Skill({
+													...feedBacks4Skill,
+													Note: e.target.value,
+												})
+											}
+										></StatelessTextarea>
+										{/* </>
 										) : (
 											<>
 												<div
@@ -575,7 +666,7 @@ const TeacherFeedbackDetailNew = () => {
 													}}
 												></div>
 											</>
-										)}
+										)} */}
 									</div>
 								</div>
 							</div>
@@ -598,44 +689,44 @@ const TeacherFeedbackDetailNew = () => {
 													<tr>
 														<th></th>
 														<th>
-															<p className="point">1</p>
-															<p>Fully insufficient</p>
+															<p className="point">Fully insufficient</p>
+															<p>1</p>
 														</th>
 														<th>
-															<p className="point">2</p>
-															<p>Poor</p>
+															<p className="point">Poor</p>
+															<p>2</p>
 														</th>
 														<th>
-															<p className="point">3</p>
-															<p>Very unsatisfactory</p>
+															<p className="point">Very unsatisfactory</p>
+															<p>3</p>
 														</th>
 														<th>
-															<p className="point">4</p>
-															<p>Unsatisfactory</p>
+															<p className="point">Unsatisfactory</p>
+															<p>4</p>
 														</th>
 														<th>
-															<p className="point">5</p>
-															<p>Pass</p>
+															<p className="point">Pass</p>
+															<p>5</p>
 														</th>
 														<th>
-															<p className="point">6</p>
-															<p>Satisfactory</p>
+															<p className="point">Satisfactory</p>
+															<p>6</p>
 														</th>
 														<th>
-															<p className="point">7</p>
-															<p>Good</p>
+															<p className="point">Good</p>
+															<p>7</p>
 														</th>
 														<th>
-															<p className="point">8</p>
-															<p>Very Good</p>
+															<p className="point">Very Good</p>
+															<p>8</p>
 														</th>
 														<th>
-															<p className="point">9</p>
-															<p>Outstanding</p>
+															<p className="point">Outstanding</p>
+															<p>9</p>
 														</th>
 														<th>
-															<p className="point">10</p>
-															<p>Excellent</p>
+															<p className="point">Excellent</p>
+															<p>10</p>
 														</th>
 													</tr>
 												</thead>
@@ -784,12 +875,42 @@ const TeacherFeedbackDetailNew = () => {
 										</div>
 									</div>
 								</div>
-								<button
-									onClick={handleSubmitFeedback}
-									className="tablet btn btn-icon btn-warning mt-3 w-100"
-								>
-									<i className="fas fa-save"></i> Save
-								</button>
+								{!!feedbackDetail &&
+								feedbackDetail.Pronunciation == null &&
+								feedbackDetail.Vocabulary == null &&
+								feedbackDetail.Grammar == null &&
+								feedbackDetail.SentenceDevelopmentAndSpeak == null &&
+								feedbackDetail.SpeakingPoint == null &&
+								feedbackDetail.ListeningPoint == null &&
+								feedbackDetail.ReadingPoint == null &&
+								feedbackDetail.WritingPoint == null ? (
+									<button
+										onClick={handleSubmitFeedback}
+										className="btn btn-icon btn-warning mr-2 button-next-feedback"
+										style={{ backgroundColor: '#fc7e13', color: '#fff' }}
+									>
+										<i className="fas fa-save"></i> Submit feedback
+									</button>
+								) : (
+									<button
+										onClick={handleSubmitFeedback}
+										className="btn btn-icon btn-warning mr-2 button-next-feedback"
+										style={{ backgroundColor: '#f6da5a', color: '#000' }}
+									>
+										<i className="fas fa-edit"></i> Edit feedback
+									</button>
+								)}
+
+								{feedBacks4Skill.NextLink !== '' ? (
+									<a
+										rel="noopener"
+										href={feedBacks4Skill.NextLink}
+										className="btn btn-icon btn-warning button-next-feedback"
+										style={{ backgroundColor: '#fb7c13', color: '#fff' }}
+									>
+										<i className="fas fa-arrow-right"></i> Next
+									</a>
+								) : null}
 							</div>
 							{/* <div className="col-12">
 							<div className="card  mg-b-15">

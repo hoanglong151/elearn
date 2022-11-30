@@ -15,6 +15,7 @@ const ListSchedule = ({
 	date,
 	Start,
 	End,
+	ScheduleListData,
 	handleBooking,
 	onBookTeacherUID,
 	onBookStudyTimeID,
@@ -76,19 +77,20 @@ const ListSchedule = ({
 	};
 
 	const getAPI = async () => {
-		setLoading(true);
-		const res = await GetScheduleTeacherAPI({
-			TeacherUID,
-			Date: date,
-		});
-		if (res.Code === 1) {
-			setSchedule(res.Data);
-		}
-		setLoading(false);
+		// setLoading(true);
+		// const res = await GetScheduleTeacherAPI({
+		// 	TeacherUID,
+		// 	Date: date,
+		// });
+		// if (res.Code === 1) {
+		// 	setSchedule(res.Data);
+		// }
+		// setLoading(false);
+		setSchedule(ScheduleListData);
 	};
-	// useEffect(() => {
-	// 	getAPI();
-	// }, [date]);
+	useEffect(() => {
+		getAPI();
+	}, [date]);
 
 	useEffect(() => {
 		let newSchedule = [...scheduleList];
@@ -154,39 +156,41 @@ const ListSchedule = ({
 						}
 					});
 					return (
-						<li className={status} key={index}>
-							<span className="time">{item}</span>
-							<span className="status">
-								{status == 'available' ? (
-									<button
-										disabled={opening}
-										className="open-lessionwish"
-										// data-toggle="modal"
-										// data-target="#md-book-schedule"
-										onClick={() =>
-											onHandleBooking(
-												StudyTimeID,
-												LessionName,
-												TeacherUID,
-												TeacherIMG,
-												TeacherName,
-												Rate,
-												moment(start).format('DD/MM/YYYY'),
-												moment(start).format('HH:mm A'),
-												moment(end).format('HH:mm A'),
-												BookingID,
-											)
-										}
-									>
-										{opening ? 'checking..' : 'Đang mở'}
-									</button>
-								) : status == 'registed' ? (
-									'Đã đăng ký'
-								) : (
-									''
-								)}
-							</span>
-						</li>
+						status == 'available' && (
+							<li className={status} key={index}>
+								<span className="time">{item}</span>
+								<span className="status">
+									{status == 'available' ? (
+										<button
+											disabled={opening}
+											className="open-lessionwish"
+											data-toggle="modal"
+											data-target="#md-book-schedule"
+											onClick={() =>
+												onHandleBooking(
+													StudyTimeID,
+													LessionName,
+													TeacherUID,
+													TeacherIMG,
+													TeacherName,
+													Rate,
+													moment(start).format('DD/MM/YYYY'),
+													moment(start).format('HH:mm A'),
+													moment(end).format('HH:mm A'),
+													BookingID,
+												)
+											}
+										>
+											{opening ? 'checking..' : 'Đang mở'}
+										</button>
+									) : status == 'registed' ? (
+										'Đã đăng ký'
+									) : (
+										''
+									)}
+								</span>
+							</li>
+						)
 					);
 				})}
 		</>

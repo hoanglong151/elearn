@@ -17,7 +17,7 @@ import HeaderNoDomTeacher from '../HeaderNoDomTeacher';
 const TeacherClassRoomsNew = () => {
 	const [studentId, setStudentId] = React.useState(null);
 	const mdStudentInfo = React.useRef(true);
-	const [activeTab, setActiveTab] = React.useState('upcoming');
+	const [activeTab, setActiveTab] = React.useState('missing');
 	const showStudentModal = studentId => {
 		setStudentId(studentId);
 		$(mdStudentInfo.current).modal('show');

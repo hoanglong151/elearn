@@ -593,6 +593,7 @@ const Dashboard = () => {
 		</>
 	);
 };
+// Test
 ReactDOM.render(
 	<Dashboard />,
 	document.getElementById('react-account-dashboard'),

@@ -21,6 +21,11 @@ const UpcomingRow = ({ data, showStudentModal }) => {
 		LessionMaterial,
 		GenderID,
 		SpecialRequest,
+		FileAudio = '',
+		FileAudio1 = '',
+		FileAudio2 = '',
+		LinkMaterials = '',
+		TeacherGuide = '',
 	} = data;
 	const handleEnterClass = async e => {
 		e.preventDefault();
@@ -100,6 +105,58 @@ const UpcomingRow = ({ data, showStudentModal }) => {
 					</OverlayTrigger>
 				)}
 			</td>
+			<td className="clr-time">
+				{!!FileAudio && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> File Audio 1:
+						</span>
+						<span className="tx-gray-500">
+							<a href={FileAudio}>Download</a>
+						</span>
+					</div>
+				)}
+				{!!FileAudio1 && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> File Audio 2:
+						</span>
+						<span className="tx-gray-500">
+							<a href={FileAudio1}>Download</a>
+						</span>
+					</div>
+				)}
+				{!!FileAudio2 && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> File Audio 3:
+						</span>
+						<span className="tx-gray-500">
+							<a href={FileAudio2}>Download</a>
+						</span>
+					</div>
+				)}
+				{!!LinkMaterials && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> Link Materials:
+						</span>
+						<span className="tx-gray-500">
+							<a href={LinkMaterials}>View</a>
+						</span>
+					</div>
+				)}
+				{!!TeacherGuide && (
+					<div className="mg-b-5">
+						<span className=" mg-r-5 tx-nowrap">
+							<i className="tx-primary"></i> Teacher Guide:
+						</span>
+						<span className="tx-gray-500">
+							<a href={TeacherGuide}>Download</a>
+						</span>
+					</div>
+				)}
+			</td>
 			<td className="clr-status">
 				<span
 					className={`badge badge-${
@@ -177,6 +234,7 @@ const UpCommingTable = ({ showStudentModal }) => {
 							<th className="clr-lesson">Lesson</th>
 							<th className="clr-student">Student</th>
 							<th className="clr-student">Note</th>
+							<th className="clr-time">File Audio</th>
 							<th className="clr-status">Status</th>
 							<th className="clr-action">Actions</th>
 						</tr>
