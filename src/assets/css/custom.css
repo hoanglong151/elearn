@@ -6051,6 +6051,7 @@ input.time-only[readonly] {
 	padding: 5px 30px;
 	color: #fff;
 	margin-bottom: 15px;
+	height: 32px;
 }
 .main-title:before {
 	content: '';
@@ -6061,7 +6062,7 @@ input.time-only[readonly] {
 	height: 0;
 	border-left: 8px solid #fd7e14;
 	border-right: 8px solid #fff;
-	border-top: 15px solid #fff;
+	border-top: 16px solid #fff;
 	border-bottom: 16px solid #fd7e14;
 }
 .slide-tab-content {

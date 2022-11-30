@@ -33,6 +33,12 @@ const ChartEverageSkill = props => {
 		}
 		return data;
 	}, [detailStatisticSkill]);
+	// const fakeData = [
+	// 	{ name: 'Speaking', pv: 1 },
+	// 	{ name: 'Listening', pv: 2 },
+	// 	{ name: 'Writing', pv: 3 },
+	// 	{ name: 'Reading', pv: 4 },
+	// ];
 	useEffect(() => {
 		const getElement = document.querySelector('.chart-higher');
 		setHeight(getElement.clientHeight);

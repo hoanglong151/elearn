@@ -10,6 +10,7 @@ import {
 	FILL_RATING,
 	FILL_FEEDBACK,
 } from '~components/common/Constant/toast';
+import { useTranslation } from 'react-i18next';
 
 const initialState = {
 	rating: 0,
@@ -26,6 +27,7 @@ const RatingLessonModal = ({
 	const ratingLessonError = () => toast.error(FETCH_ERROR, toastInit);
 	const ratingLessonAlert1 = () => toast.error(FILL_RATING, toastInit);
 	const ratingLessonAlert2 = () => toast.error(FILL_FEEDBACK, toastInit);
+	const { t, i18n } = useTranslation('common');
 
 	const fetchAPI = async params => {
 		const res = await ratingLessonAPI(params);
@@ -112,7 +114,9 @@ const RatingLessonModal = ({
 								>
 									<span aria-hidden="true">&times;</span>
 								</button>
-								<h4 className="tx-danger tx-center">Đánh giá buổi học</h4>
+								<h4 className="tx-danger tx-center">
+									{t('evaluate-the-lesson')}
+								</h4>
 								<div className="image-fb tx-center pd-y-30">
 									<img
 										src="../assets/img/feedback-image.svg"
@@ -121,7 +125,7 @@ const RatingLessonModal = ({
 									/>
 								</div>
 								<p className="mg-b-0 tx-center title">
-									Buổi học của bạn với giáo viên {TeacherName} như thế nào ?
+									{t('how-note-1', { TeacherName: TeacherName })}
 								</p>
 								<div className="rating">
 									<input type="radio" name="rating" id="rating-5" />
@@ -451,7 +455,7 @@ const RatingLessonModal = ({
 								<div className="row metronic-form">
 									<div className="form-group col-12">
 										<label className="tx-center d-block">
-											Nhận xét của bạn (Vui lòng viết bằng Tiếng Anh):
+											{t('note-feedback')}:
 										</label>
 										<textarea
 											name="message"
@@ -469,14 +473,14 @@ const RatingLessonModal = ({
 									className="btn btn-light"
 									data-dismiss="modal"
 								>
-									Đóng
+									{t('close')}
 								</button>
 								<button
 									type="button"
 									className="btn btn-primary"
 									onClick={onSubmitRating}
 								>
-									Gửi phản hồi
+									{t('sendEvaluation')}
 								</button>
 							</div>
 						</form>

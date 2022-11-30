@@ -24,95 +24,86 @@ function Example(props) {
 const ChartSchedule = props => {
 	const { detailStatisticSchedule } = props;
 	const { t, i18n } = useTranslation('common');
-	const totalPercentBooked = useMemo(() => {
+	const totalBooked = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return (
-				(detailStatisticSchedule.Status0 /
-					detailStatisticSchedule.TotalLesson) *
-				100
-			);
+			return detailStatisticSchedule.Status0;
 		}
 	}, [detailStatisticSchedule]);
-	const totalPercentAsSchedule = useMemo(() => {
+	const totalAsSchedule = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return (
-				(detailStatisticSchedule.Status1 /
-					detailStatisticSchedule.TotalLesson) *
-				100
-			);
+			return detailStatisticSchedule.Status1;
 		}
 	}, [detailStatisticSchedule]);
-	const totalPercentStudentAbsent = useMemo(() => {
+	const totalStudentAbsent = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return (
-				(detailStatisticSchedule.Status2 /
-					detailStatisticSchedule.TotalLesson) *
-				100
-			);
+			return detailStatisticSchedule.Status2;
 		}
 	}, [detailStatisticSchedule]);
-	const totalPercentTeacherLate = useMemo(() => {
+	const totalTeacherLate = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return (
-				(detailStatisticSchedule.Status5 /
-					detailStatisticSchedule.TotalLesson) *
-				100
-			);
+			return detailStatisticSchedule.Status5;
 		}
 	}, [detailStatisticSchedule]);
-	const totalPercent = useMemo(() => {
+	const total = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return (
-				totalPercentBooked +
-				totalPercentAsSchedule +
-				totalPercentStudentAbsent +
-				totalPercentTeacherLate
-			);
+			return detailStatisticSchedule.TotalLesson;
 		}
-	}, [
-		totalPercentBooked,
-		totalPercentAsSchedule,
-		totalPercentStudentAbsent,
-		totalPercentTeacherLate,
-	]);
+	}, [detailStatisticSchedule]);
 	const createLabel = () => {
 		return (
 			<div className="wrapper-chart-schedule">
 				<div className="schedule-item">
-					<span
-						className="color-status"
-						style={{ backgroundColor: '#e96b02' }}
-					></span>
-					<span style={{ marginRight: '8px' }}>{t('as-schedule')}:</span>
-					<span>{detailStatisticSchedule?.Status1}</span>
+					<div>
+						<span
+							className="color-status"
+							style={{ backgroundColor: '#e96b02' }}
+						></span>
+						<span style={{ marginRight: '8px' }}>{t('as-schedule')}:</span>
+					</div>
+					<span>
+						{detailStatisticSchedule?.Status1 +
+							detailStatisticSchedule?.Status5}
+					</span>
 				</div>
 				<div className="schedule-item">
-					<span
-						className="color-status"
-						style={{ backgroundColor: '#3e98c7' }}
-					></span>
-					<span style={{ marginRight: '8px' }}>{t('booked')}:</span>
+					<div>
+						<span
+							className="color-status"
+							style={{ backgroundColor: '#3e98c7' }}
+						></span>
+						<span style={{ marginRight: '8px' }}>{t('booked')}:</span>
+					</div>
 					<span>{detailStatisticSchedule?.Status0}</span>
 				</div>
 				<div className="schedule-item">
-					<span
-						className="color-status"
-						style={{ backgroundColor: '#f00' }}
-					></span>
-					<span style={{ marginRight: '8px' }}>{t('student-no-show')}:</span>
+					<div>
+						<span
+							className="color-status"
+							style={{ backgroundColor: '#f00' }}
+						></span>
+						<span style={{ marginRight: '8px' }}>{t('student-no-show')}:</span>
+					</div>
 					<span>{detailStatisticSchedule?.Status3}</span>
 				</div>
-				<div className="schedule-item">
-					<span
-						className="color-status"
-						style={{ backgroundColor: '#1d9e0e' }}
-					></span>
-					<span style={{ marginRight: '8px' }}>{t('teacher-late')}:</span>
+				{/* <div className="schedule-item">
+					<div>
+						<span
+							className="color-status"
+							style={{ backgroundColor: '#1d9e0e' }}
+						></span>
+						<span style={{ marginRight: '8px' }}>{t('teacher-late')}:</span>
+					</div>
 					<span>{detailStatisticSchedule?.Status5}</span>
-				</div>
+				</div> */}
 				<div className="schedule-item">
-					<span style={{ marginRight: '8px' }}>{t('totallessons')}:</span>
-					<span>{detailStatisticSchedule?.TotalLesson}</span>
+					<span style={{ marginRight: '8px' }}>{t('remaininglessons')}:</span>
+					<span>
+						{detailStatisticSchedule?.TotalLesson -
+							(detailStatisticSchedule?.Status0 +
+								detailStatisticSchedule?.Status1 +
+								detailStatisticSchedule?.Status3 +
+								detailStatisticSchedule?.Status5)}
+					</span>
 				</div>
 			</div>
 		);
@@ -122,8 +113,7 @@ const ChartSchedule = props => {
 		<div className="chart-higher">
 			<Example label={createLabel()}>
 				<CircularProgressbarWithChildren
-					value={totalPercent}
-					text={!!totalPercent ? `${totalPercent.toFixed(2)}%` : ''}
+					value={total}
 					styles={buildStyles({
 						textColor: '#fd7e14',
 						pathColor: '#fd7e14',
@@ -133,32 +123,33 @@ const ChartSchedule = props => {
 				>
 					{/* Foreground path */}
 					<CircularProgressbarWithChildren
-						value={
-							totalPercentBooked +
-							totalPercentStudentAbsent +
-							totalPercentTeacherLate
-						}
+						value={totalBooked + totalStudentAbsent + totalTeacherLate}
 						styles={buildStyles({
 							trailColor: 'transparent',
 							strokeLinecap: 'butt',
 						})}
 					>
 						<CircularProgressbarWithChildren
-							value={totalPercentStudentAbsent + totalPercentTeacherLate}
+							value={totalStudentAbsent + totalTeacherLate}
 							styles={buildStyles({
 								trailColor: 'transparent',
 								strokeLinecap: 'butt',
 								pathColor: '#f00',
 							})}
 						>
-							<CircularProgressbarWithChildren
-								value={totalPercentTeacherLate}
+							{/* <CircularProgressbarWithChildren
+								value={totalTeacherLate}
 								styles={buildStyles({
 									trailColor: 'transparent',
 									strokeLinecap: 'butt',
 									pathColor: '#1d9e0e',
 								})}
-							/>
+							> */}
+							<div className="chart-schedule-title">
+								<p>{total}</p>
+								<p>Lessons</p>
+							</div>
+							{/* </CircularProgressbarWithChildren> */}
 						</CircularProgressbarWithChildren>
 					</CircularProgressbarWithChildren>
 				</CircularProgressbarWithChildren>

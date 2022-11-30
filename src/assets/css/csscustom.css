@@ -288,7 +288,7 @@ nav div ul li a {
 	display: flex;
 	align-items: center;
 	gap: 8px;
-	min-height: 420px;
+	min-height: 380px;
 }
 #react-feedback
 	.wrapper-chart
@@ -306,8 +306,14 @@ nav div ul li a {
 	width: 50%;
 	height: 100%;
 }
+#react-feedback .wrapper-chart .wrapper-chart-schedule {
+	width: 250px;
+}
 #react-feedback .wrapper-chart .wrapper-chart-schedule .schedule-item {
 	margin-bottom: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 #react-feedback .wrapper-chart .wrapper-chart-schedule .color-status {
 	width: 45px;
@@ -684,6 +690,18 @@ nav div ul li a {
 	height: 100%;
 }
 
+.chart-schedule-title {
+	text-align: center;
+	font-size: 32px;
+	font-weight: 500;
+	color: #fd7e14;
+	line-height: 42px;
+}
+
+.chart-schedule-title p {
+	margin: 0px;
+}
+
 .button-next-feedback {
 	margin-top: 12px;
 }
@@ -691,5 +709,16 @@ nav div ul li a {
 @media (max-width: 1023px) {
 	.button-next-feedback {
 		width: 100%;
+	}
+	.chart-schedule-title {
+		font-size: 24px;
+		line-height: 32px;
+	}
+}
+
+@media (max-width: 767px) {
+	.chart-schedule-title {
+		font-size: 18px;
+		line-height: 28px;
 	}
 }

@@ -172,6 +172,26 @@ const FeedbackNew = () => {
 	const [rate, setRate] = useState(0);
 
 	// Fake data Feedback
+	// {
+	// 		ID: 52612,
+	// 		TotalRow: 51,
+	// 		TeacherUID: 63740,
+	// 		TeacherName: 'Hồng  Nghi Nancy',
+	// 		TeacherIMG:
+	// 			'http://app.e-learn.com.vn/Upload/imageform/02771682-cf91-421c-a9d1-703042f61713993DPA681LFBIQK6UIMSMWAT9JANKI6ZRJ9X4L0H.png',
+	// 		DocumentName: 'Everybody Up',
+	// 		ScheduleTimeVN: '08/10/2022 19:00 - 19:25',
+	// 		Note:
+	// 			'con thông minh, rất năng lượng và tích cực trong buổi học, ngoan và nhạy bén, chăm chỉ thực hành theo hướng dẫn của cô trong buổi học, tương tác tốt với giáo viên. Con hoàn thành xuất sắc buổi học hôm nay, tiếp nhận và phản hồi tốt một số câu hỏi thông dụng từ cô. Con nắm bài rất tốt về các từ vựng, mẫu câu trong bài và tự vận dụng đặt câu khá tốt. Con thực hành phát âm tương đối ổn, chú ý cách phát âm mạo từ "the" trước các danh từ bắt đầu bằng nguyên âm con nhé (the afternoon, the evening). Chú ý phát âm các từ sau: fire, makes, these,....',
+	// 		SpeakingPoint: 2,
+	// 		ListeningPoint: 3,
+	// 		ReadingPoint: 1,
+	// 		WritingPoint: 9,
+	// 		Material: 'EVERYBODY UP 3 3_123 People In Town Lesson 2',
+	// 		MaterialLink: '/Upload/exercise/3aa9ad0e-f46b-4a3a-951a-6ccc56935190.pdf',
+	// 		StudentRate: 4,
+	// 		StudentEvaluation: null,
+	// 	},
 
 	const [listFeedback, setListFeedback] = useState([]);
 	const [detailStatisticSkill, setDetailStatisticSkill] = useState();

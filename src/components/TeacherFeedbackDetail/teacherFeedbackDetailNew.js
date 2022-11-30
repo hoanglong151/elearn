@@ -303,65 +303,71 @@ const TeacherFeedbackDetailNew = () => {
 	// }, []);
 
 	const handleSubmitFeedback = async () => {
-		if (!!feedBacks4Skill.FinishedType) {
-			if (
-				feedBacks4Skill.SpeakingPoint === 0 ||
-				feedBacks4Skill.ListeningPoint === 0
-			) {
-				toast.error('Please pick Feedback Speaking And Listening');
-			} else {
-				let DATA_SUBMIT = {
-					...feedBacks4Skill,
-					Note: !!feedBacks4Skill.Note ? feedBacks4Skill.Note : state.note,
-					FinishedType: parseInt(feedBacks4Skill.FinishedType),
-				};
-				const params = new URLSearchParams(window.location.search);
-				// if (params.has('BookingID') || params.has('EvaluationID')) {
-				// 	const res = await getTeacherFeedbackDetail({
-				// 		BookingID:
-				// 			parseInt(params.get('BookingID')) ||
-				// 			parseInt(params.get('EvaluationID')),
-				// 	});
-				console.log('data: ', DATA_SUBMIT, feedbackDetail);
-				try {
-					if (
-						feedbackDetail.Pronunciation == null &&
-						feedbackDetail.Vocabulary == null &&
-						feedbackDetail.Grammar == null &&
-						feedbackDetail.SentenceDevelopmentAndSpeak == null &&
-						feedbackDetail.SpeakingPoint == null &&
-						feedbackDetail.ListeningPoint == null &&
-						feedbackDetail.ReadingPoint == null &&
-						feedbackDetail.WritingPoint == null
-					) {
-						const res = await getAddEvaluation(DATA_SUBMIT);
-						if (res.Code == 1) {
-							toast.success(res.Message || 'Thành công');
+		if (!!feedBacks4Skill.Note) {
+			if (!!feedBacks4Skill.FinishedType) {
+				if (
+					feedBacks4Skill.SpeakingPoint === null ||
+					feedBacks4Skill.ListeningPoint === null
+				) {
+					toast.error('Please pick Feedback Speaking And Listening');
+				} else {
+					let DATA_SUBMIT = {
+						...feedBacks4Skill,
+						Note: !!feedBacks4Skill.Note ? feedBacks4Skill.Note : state.note,
+						FinishedType: parseInt(feedBacks4Skill.FinishedType),
+					};
+					const params = new URLSearchParams(window.location.search);
+					// if (params.has('BookingID') || params.has('EvaluationID')) {
+					// 	const res = await getTeacherFeedbackDetail({
+					// 		BookingID:
+					// 			parseInt(params.get('BookingID')) ||
+					// 			parseInt(params.get('EvaluationID')),
+					// 	});
+					console.log('data: ', DATA_SUBMIT, feedbackDetail);
+					try {
+						if (
+							feedbackDetail.Pronunciation == null &&
+							feedbackDetail.Vocabulary == null &&
+							feedbackDetail.Grammar == null &&
+							feedbackDetail.SentenceDevelopmentAndSpeak == null &&
+							feedbackDetail.SpeakingPoint == null &&
+							feedbackDetail.ListeningPoint == null &&
+							feedbackDetail.ReadingPoint == null &&
+							feedbackDetail.WritingPoint == null
+						) {
+							const res = await getAddEvaluation(DATA_SUBMIT);
+							if (res.Code == 1) {
+								toast.success(res.Message || 'Thành công');
+							}
+						} else {
+							const res = await getUpdateEvaluation(DATA_SUBMIT);
+							if (res.Code == 1) {
+								toast.success(res.Message || 'Thành công');
+							}
 						}
-					} else {
-						const res = await getUpdateEvaluation(DATA_SUBMIT);
-						if (res.Code == 1) {
-							toast.success(res.Message || 'Thành công');
-						}
+						// 	if (params.has('BookingID')) {
+						// 		const res = await getAddEvaluation(DATA_SUBMIT);
+						// 		if (res.Code == 1) {
+						// 			toast(res.Message || 'Thành công');
+						// 		}
+						// 	}
+						// if (params.has('EvaluationID')) {
+						// 	const res = await getUpdateEvaluation(DATA_SUBMIT);
+						// 	if (res.Code == 1) {
+						// 		toast(res.Message || 'Thành công');
+						// 	}
+						// }
+					} catch (err) {
+						console.log('Err: ', err);
 					}
-					// 	if (params.has('BookingID')) {
-					// 		const res = await getAddEvaluation(DATA_SUBMIT);
-					// 		if (res.Code == 1) {
-					// 			toast(res.Message || 'Thành công');
-					// 		}
-					// 	}
-					// if (params.has('EvaluationID')) {
-					// 	const res = await getUpdateEvaluation(DATA_SUBMIT);
-					// 	if (res.Code == 1) {
-					// 		toast(res.Message || 'Thành công');
-					// 	}
-					// }
-				} catch (err) {
-					console.log('Err: ', err);
 				}
+			} else {
+				toast.error('Please select FinishedType');
 			}
 		} else {
-			toast.error('Please select FinishedType');
+			toast.error(
+				'Please write Student’s Performance and Behavior in the Class',
+			);
 		}
 	};
 
@@ -627,7 +633,10 @@ const TeacherFeedbackDetailNew = () => {
 								<div className="card mg-b-15">
 									<div className="card-header">
 										<h5 className="mg-b-0">
-											Student’s Performance and Behavior in the Class
+											Student’s Performance and Behavior in the Class{' '}
+											<span className="required" style={{ color: 'red' }}>
+												*
+											</span>
 										</h5>
 										{/* <div>
 											<button

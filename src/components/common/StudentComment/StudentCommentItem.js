@@ -163,7 +163,7 @@ const StudentCommentItem = ({
 							aria-expanded={open}
 							className="btn-readmore"
 						>
-							Xem chi tiết <i className="fas fa-arrow-right"></i>
+							{t('view-details')} <i className="fas fa-arrow-right"></i>
 						</button>
 					</div>
 				</div>
@@ -173,27 +173,29 @@ const StudentCommentItem = ({
 					<div className="row">
 						<div className="col-md-6 col-sm-12">
 							{' '}
-							<h5 className="mg-b-0 main-title">THÔNG TIN KHÓA HỌC</h5>
+							<h5 className="mg-b-0 main-title">{t('courseinformation')}</h5>
 							<div className="infomation__wrap">
 								<div className="st-time">
 									<p className="st-teacher-text">
 										<i className="fa fa-book st-icon wd-20 mg-r-5"></i>
 										<span>
-											Khóa học: <span>{DocumentName}</span>
+											{t('courseplan')}: <span>{DocumentName}</span>
 										</span>
 									</p>
 								</div>
 								<div className="st-time">
 									<p className="st-time-text">
 										<i className="fa fa-user-clock st-icon wd-20 mg-r-5"></i>
-										<span className="tx-black tx-normal">Lịch học: </span>
+										<span className="tx-black tx-normal">
+											{t('lessonschedule')}:{' '}
+										</span>
 										<span>{ScheduleTimeVN}</span>
 									</p>
 								</div>
 								<div className="st-time">
 									<p className="st-teacher-text">
 										<i className="fas fa-chalkboard-teacher st-icon wd-20 mg-r-5"></i>
-										<span>Giáo viên:</span>{' '}
+										<span>{t('teacher')}:</span>{' '}
 										<span className="st-tengv">{TeacherName}</span>
 									</p>
 								</div>
@@ -201,7 +203,7 @@ const StudentCommentItem = ({
 									<p className="st-teacher-text">
 										<i className="fa fa-book-open st-icon wd-20 mg-r-5"></i>
 										<span>
-											Tài liệu:{' '}
+											{t('document')}:{' '}
 											<a href={MaterialLink} target="_blank" rel="noreferrer">
 												{Material}
 											</a>{' '}
@@ -210,7 +212,7 @@ const StudentCommentItem = ({
 								</div>
 							</div>
 						</div>
-						<div className="col-md-6 col-sm-12">
+						{/* <div className="col-md-6 col-sm-12">
 							<div className="st-thangdanhgia">
 								<h5 className="main-title">Phản hồi</h5>
 								{(StudentRate == 0 || StudentRate) && (
@@ -244,12 +246,12 @@ const StudentCommentItem = ({
 									</div>
 								)}
 							</div>
-						</div>
+						</div> */}
 					</div>
 					<div className="col-12">
 						<div className="card">
 							<div className="card-header">
-								<h5 className="mg-b-0 main-title">NHẬN XÉT</h5>
+								<h5 className="mg-b-0 main-title">{t('nhanxet')}</h5>
 							</div>
 							<div className="card-body">
 								<div className="mg-b-30">
@@ -408,10 +410,40 @@ const StudentCommentItem = ({
 								</div>
 								<div className="mg-b-30 mg-t-30">
 									<div className="st-title-danhgia mg-b-15">
-										<h5 className="pd-b-10 bd-b">
+										<h5 className="pd-b-10 bd-b main-title">
 											{t('student’sfeedbackaboutthelesson')}
 										</h5>
 									</div>
+									{(StudentRate == 0 || StudentRate) && (
+										<div className="d-block st-rating mg-b-15">
+											<div className="cell text-left">
+												<i className="fas fa-user-graduate st-icon wd-20 mg-r-5"></i>
+												<span className="mg-r-5">{t('student')}:</span>
+												<div className="d-inline-block st-noidung-rating">
+													<div className="rating-stars">
+														<span className="empty-stars">
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+														</span>
+														<span
+															className="filled-stars"
+															style={{ width: `${StudentRate * 20}%` }}
+														>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+															<i className="star fa fa-star"></i>
+														</span>
+													</div>
+													{renderRatingStars(StudentRate)}
+												</div>
+											</div>
+										</div>
+									)}
 									{!!StudentEvaluation ? (
 										<div className="st-item-danhgia tx-gray-500">
 											<p
@@ -423,16 +455,14 @@ const StudentCommentItem = ({
 										</div>
 									) : (
 										<>
-											<p className="tx-danger">
-												Bạn chưa đánh giá về lớp học này
-											</p>
+											<p className="tx-danger">{t('dontfeedback')}</p>
 											<button
 												className="btn btn-primary mg-r-10"
 												data-toggle="modal"
 												data-target="#js-md-rate"
 												// onClick={handleOpen}
 											>
-												Đánh Giá
+												{t('rating')}
 											</button>
 											<RatingLessonModal
 												BookingID={ID}
