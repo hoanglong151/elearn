@@ -189,7 +189,9 @@ const BookingLesson = () => {
 			setTeacherList(res.Data);
 			setPageSize(res.PageSize);
 			setTotalResult(res.TotalResult);
-		} else errorToast();
+		} else {
+			toast.error(res.data.Message, toastInit);
+		}
 		setLoading(false);
 	};
 

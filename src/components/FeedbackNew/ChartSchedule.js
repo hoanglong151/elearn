@@ -31,7 +31,7 @@ const ChartSchedule = props => {
 	}, [detailStatisticSchedule]);
 	const totalAsSchedule = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return detailStatisticSchedule.Status1;
+			return detailStatisticSchedule.Status1 + detailStatisticSchedule.Status5;
 		}
 	}, [detailStatisticSchedule]);
 	const totalStudentAbsent = useMemo(() => {
@@ -113,7 +113,7 @@ const ChartSchedule = props => {
 		<div className="chart-higher">
 			<Example label={createLabel()}>
 				<CircularProgressbarWithChildren
-					value={total}
+					value={totalAsSchedule + totalBooked + totalStudentAbsent}
 					styles={buildStyles({
 						textColor: '#fd7e14',
 						pathColor: '#fd7e14',
