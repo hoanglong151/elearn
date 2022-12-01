@@ -43,6 +43,7 @@ const ListSchedule = ({
 		setOpening(true);
 		try {
 			const res = await getLessonBookAPI({ StudyTimeID, Date: date });
+			console.log('RES: ', res);
 			if (res.Code === 1) {
 				setTimeout(() => {
 					handleBooking(
@@ -59,9 +60,9 @@ const ListSchedule = ({
 					);
 				}, 100);
 				// $(modalRef.current).modal('show');
-				setTimeout(() => {
-					onTouchBooking && onTouchBooking();
-				}, 200);
+				// setTimeout(() => {
+				// 	onTouchBooking && onTouchBooking();
+				// }, 200);
 			} else {
 				toast.error(
 					res?.Message ??

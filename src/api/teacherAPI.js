@@ -46,7 +46,7 @@ export const getAddEvaluation = async (params = {}) => {
 	try {
 		let res = await instance.get(
 			path +
-				`/AddEvaluation?ElearnBookingID=${params.ElearnBookingID}&Note=${params.Note}&FinishedType=0&Rate=0&SpeakingPoint=${params.SpeakingPoint}&ListeningPoint=${params.ListeningPoint}&ReadingPoint=${params.ReadingPoint}&WritingPoint=${params.WritingPoint}&Pronunciation&Vocabulary&Grammar&SentenceDevelopmentAndSpeak`,
+				`/AddEvaluation?ElearnBookingID=${params.ElearnBookingID}&Note=${params.Note}&FinishedType=${params.FinishedType}&Rate=0&SpeakingPoint=${params.SpeakingPoint}&ListeningPoint=${params.ListeningPoint}&ReadingPoint=${params.ReadingPoint}&WritingPoint=${params.WritingPoint}&Pronunciation&Vocabulary&Grammar&SentenceDevelopmentAndSpeak`,
 		);
 		result = res.data;
 	} catch (error) {
@@ -60,7 +60,7 @@ export const getUpdateEvaluation = async (params = {}) => {
 	try {
 		let res = await instance.get(
 			path +
-				`/UpdateEvaluation?EvaluationID=${params.EvaluationID}&Pronunciation&Vocabulary=&Grammar=&SentenceDevelopmentAndSpeak&Note=${params.Note}&SpeakingPoint=${params.SpeakingPoint}&ListeningPoint=${params.ListeningPoint}&ReadingPoint=${params.ReadingPoint}&WritingPoint=${params.WritingPoint}&TeacherRating`,
+				`/UpdateEvaluation?EvaluationID=${params.EvaluationID}&Pronunciation&Vocabulary=&Grammar=&SentenceDevelopmentAndSpeak&Note=${params.Note}&SpeakingPoint=${params.SpeakingPoint}&ListeningPoint=${params.ListeningPoint}&ReadingPoint=${params.ReadingPoint}&WritingPoint=${params.WritingPoint}&FinishedType=${params.FinishedType}&TeacherRating`,
 		);
 		result = res.data;
 	} catch (error) {

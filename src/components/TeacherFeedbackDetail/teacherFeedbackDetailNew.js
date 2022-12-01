@@ -482,6 +482,18 @@ const TeacherFeedbackDetailNew = () => {
 														</span> */}
 														<div className="flex-grow-1">
 															<Select
+																isDisabled={
+																	!!feedbackDetail &&
+																	(feedbackDetail.Pronunciation != null ||
+																		feedbackDetail.Vocabulary != null ||
+																		feedbackDetail.Grammar != null ||
+																		feedbackDetail.SentenceDevelopmentAndSpeak !=
+																			null ||
+																		feedbackDetail.SpeakingPoint != null ||
+																		feedbackDetail.ListeningPoint != null ||
+																		feedbackDetail.ReadingPoint != null ||
+																		feedbackDetail.WritingPoint != null)
+																}
 																value={
 																	optionsSelect[
 																		optionsSelect.findIndex(

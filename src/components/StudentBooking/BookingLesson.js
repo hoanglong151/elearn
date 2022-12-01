@@ -190,7 +190,7 @@ const BookingLesson = () => {
 			setPageSize(res.PageSize);
 			setTotalResult(res.TotalResult);
 		} else {
-			toast.error(res.data.Message, toastInit);
+			toast.error(res.Message, toastInit);
 		}
 		setLoading(false);
 	};
@@ -834,6 +834,7 @@ const BookingLesson = () => {
 																		</p>
 																	</div>
 																</a>
+
 																<div className="tutor-schedule d-block custom-student">
 																	<BookingLessonModal
 																		style={{ color: '#000', textAlign: 'left' }}

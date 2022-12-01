@@ -26,22 +26,38 @@ const ChartSchedule = props => {
 	const { t, i18n } = useTranslation('common');
 	const totalBooked = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return detailStatisticSchedule.Status0;
+			return (
+				(detailStatisticSchedule.Status0 /
+					detailStatisticSchedule.TotalLesson) *
+				100
+			);
 		}
 	}, [detailStatisticSchedule]);
 	const totalAsSchedule = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return detailStatisticSchedule.Status1 + detailStatisticSchedule.Status5;
+			return (
+				((detailStatisticSchedule.Status1 + detailStatisticSchedule.Status5) /
+					detailStatisticSchedule.TotalLesson) *
+				100
+			);
 		}
 	}, [detailStatisticSchedule]);
 	const totalStudentAbsent = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return detailStatisticSchedule.Status2;
+			return (
+				(detailStatisticSchedule.Status2 /
+					detailStatisticSchedule.TotalLesson) *
+				100
+			);
 		}
 	}, [detailStatisticSchedule]);
 	const totalTeacherLate = useMemo(() => {
 		if (!!detailStatisticSchedule) {
-			return detailStatisticSchedule.Status5;
+			return (
+				(detailStatisticSchedule.Status5 /
+					detailStatisticSchedule.TotalLesson) *
+				100
+			);
 		}
 	}, [detailStatisticSchedule]);
 	const total = useMemo(() => {
@@ -113,6 +129,7 @@ const ChartSchedule = props => {
 		<div className="chart-higher">
 			<Example label={createLabel()}>
 				<CircularProgressbarWithChildren
+					// totalAsSchedule + totalBooked + totalStudentAbsent
 					value={totalAsSchedule + totalBooked + totalStudentAbsent}
 					styles={buildStyles({
 						textColor: '#fd7e14',
@@ -146,6 +163,7 @@ const ChartSchedule = props => {
 								})}
 							> */}
 							<div className="chart-schedule-title">
+								{/* total */}
 								<p>{total}</p>
 								<p>Lessons</p>
 							</div>
