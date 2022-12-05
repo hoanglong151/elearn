@@ -306,6 +306,40 @@ const TeacherFeedbackDetailNew = () => {
 		if (!!feedBacks4Skill.Note) {
 			if (!!feedBacks4Skill.FinishedType) {
 				if (
+					feedBacks4Skill.FinishedType == 2 ||
+					feedBacks4Skill.FinishedType == 3 ||
+					feedBacks4Skill.FinishedType == 4
+				) {
+					let DATA_SUBMIT = {
+						...feedBacks4Skill,
+						Note: !!feedBacks4Skill.Note ? feedBacks4Skill.Note : state.note,
+						FinishedType: parseInt(feedBacks4Skill.FinishedType),
+					};
+					try {
+						if (
+							feedbackDetail.Pronunciation == null &&
+							feedbackDetail.Vocabulary == null &&
+							feedbackDetail.Grammar == null &&
+							feedbackDetail.SentenceDevelopmentAndSpeak == null &&
+							feedbackDetail.SpeakingPoint == null &&
+							feedbackDetail.ListeningPoint == null &&
+							feedbackDetail.ReadingPoint == null &&
+							feedbackDetail.WritingPoint == null
+						) {
+							const res = await getAddEvaluation(DATA_SUBMIT);
+							if (res.Code == 1) {
+								toast.success(res.Message || 'Thành công');
+							}
+						} else {
+							const res = await getUpdateEvaluation(DATA_SUBMIT);
+							if (res.Code == 1) {
+								toast.success(res.Message || 'Thành công');
+							}
+						}
+					} catch (err) {
+						console.log('Err: ', err);
+					}
+				} else if (
 					feedBacks4Skill.SpeakingPoint === null ||
 					feedBacks4Skill.ListeningPoint === null
 				) {
@@ -317,12 +351,6 @@ const TeacherFeedbackDetailNew = () => {
 						FinishedType: parseInt(feedBacks4Skill.FinishedType),
 					};
 					const params = new URLSearchParams(window.location.search);
-					// if (params.has('BookingID') || params.has('EvaluationID')) {
-					// 	const res = await getTeacherFeedbackDetail({
-					// 		BookingID:
-					// 			parseInt(params.get('BookingID')) ||
-					// 			parseInt(params.get('EvaluationID')),
-					// 	});
 					console.log('data: ', DATA_SUBMIT, feedbackDetail);
 					try {
 						if (
@@ -345,18 +373,6 @@ const TeacherFeedbackDetailNew = () => {
 								toast.success(res.Message || 'Thành công');
 							}
 						}
-						// 	if (params.has('BookingID')) {
-						// 		const res = await getAddEvaluation(DATA_SUBMIT);
-						// 		if (res.Code == 1) {
-						// 			toast(res.Message || 'Thành công');
-						// 		}
-						// 	}
-						// if (params.has('EvaluationID')) {
-						// 	const res = await getUpdateEvaluation(DATA_SUBMIT);
-						// 	if (res.Code == 1) {
-						// 		toast(res.Message || 'Thành công');
-						// 	}
-						// }
 					} catch (err) {
 						console.log('Err: ', err);
 					}
@@ -754,7 +770,12 @@ const TeacherFeedbackDetailNew = () => {
 												<tbody>
 													<tr>
 														<td className="title">
-															Speaking <span className="required">*</span>
+															Speaking{' '}
+															{feedBacks4Skill.FinishedType != 2 &&
+																feedBacks4Skill.FinishedType != 3 &&
+																feedBacks4Skill.FinishedType != 4 && (
+																	<span className="required">*</span>
+																)}
 														</td>
 														{listFeedBack.map(data => {
 															return (
@@ -788,7 +809,12 @@ const TeacherFeedbackDetailNew = () => {
 													</tr>
 													<tr>
 														<td className="title">
-															Listening <span className="required">*</span>
+															Listening
+															{feedBacks4Skill.FinishedType != 2 &&
+																feedBacks4Skill.FinishedType != 3 &&
+																feedBacks4Skill.FinishedType != 4 && (
+																	<span className="required">*</span>
+																)}
 														</td>
 														{listFeedBack.map(data => {
 															return (
@@ -932,6 +958,27 @@ const TeacherFeedbackDetailNew = () => {
 										<i className="fas fa-arrow-right"></i> Next
 									</a>
 								) : null}
+								<div className="wrapper-note-feedback-detail">
+									<p className="notes">Notes:</p>
+									<div>
+										<ol>
+											<li>
+												You do not need to put ratings for "Student No Show",
+												"Teacher No Show" or "IT Problem" classes
+											</li>
+											<li>
+												<a
+													className="link-guide"
+													href="https://app.e-learn.com.vn/Upload/Rating_Score_Descriptors_and_Guide.pdf"
+													target="_blank"
+													rel="noreferrer"
+												>
+													Rating Score Descriptors and Guide
+												</a>
+											</li>
+										</ol>
+									</div>
+								</div>
 							</div>
 							{/* <div className="col-12">
 							<div className="card  mg-b-15">

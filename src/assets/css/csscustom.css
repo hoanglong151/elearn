@@ -710,6 +710,35 @@ nav div ul li a {
 	z-index: 1000;
 }
 
+.wrapper-note-feedback-detail {
+	margin-left: 8px;
+}
+
+.wrapper-note-feedback-detail .notes {
+	color: #1d2b4d;
+	font-weight: 500;
+	text-decoration: underline;
+	font-size: 16px;
+	margin-top: 12px;
+}
+
+.wrapper-note-feedback-detail ol li {
+	font-size: 17px;
+	margin: 5px 0;
+	color: #000;
+}
+
+.wrapper-note-feedback-detail ol li a {
+	font-weight: 500;
+	text-decoration: underline;
+	color: #000;
+	transition: all 0.15s linear;
+}
+
+.wrapper-note-feedback-detail ol li a:hover {
+	color: #fd7e14;
+}
+
 @media (max-width: 1023px) {
 	.button-next-feedback {
 		width: 100%;
