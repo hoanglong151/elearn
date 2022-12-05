@@ -25,6 +25,8 @@ const BookingLessonModal = (
 		DocumentName = '',
 		BookingID,
 		onBook,
+		DocumentID,
+		DocumentDetailID,
 	},
 	ref,
 ) => {
@@ -65,8 +67,8 @@ const BookingLessonModal = (
 				TeacherUID,
 				Date: date,
 				StudyTimeID,
-				DocumentID: bookState.DocumentID,
-				DocumentDetailID: bookState.ID,
+				DocumentID: DocumentID,
+				DocumentDetailID: DocumentDetailID,
 				SpecialRequest: state,
 			});
 			$('#md-book-schedule').fadeOut(500, function() {
@@ -84,6 +86,7 @@ const BookingLessonModal = (
 	// 	console.log('test 2');
 	// 	getLessonToBookingAPI();
 	// }, [parseInt(StudyTimeID) ?? 0, date]);
+	console.log('LessionName: ', LessionName);
 	return (
 		<div
 			className="modal fade"
@@ -131,9 +134,9 @@ const BookingLessonModal = (
 											<span className="badge badge-warning mg-r-5">
 												Incoming
 											</span>{' '}
-											{/* <span className="no-hl course-name tx-bold">
-												{bookState.LessionName}
-											</span> */}
+											<span className="no-hl course-name tx-bold">
+												{LessionName}
+											</span>
 										</h5>
 										<div className="course-information tx-14">
 											<span className="mg-r-15 tx-gray-600 tx-medium d-inline-block">

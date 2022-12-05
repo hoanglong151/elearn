@@ -309,7 +309,7 @@ const TeacherFeedbackDetailNew = () => {
 					feedBacks4Skill.SpeakingPoint === null ||
 					feedBacks4Skill.ListeningPoint === null
 				) {
-					toast.error('Please pick Feedback Speaking And Listening');
+					toast.error("Please rate the student's learning skills");
 				} else {
 					let DATA_SUBMIT = {
 						...feedBacks4Skill,
@@ -695,7 +695,7 @@ const TeacherFeedbackDetailNew = () => {
 								<div className="card">
 									<div className="card-header">
 										<h5 className="mg-b-0">
-											{t('students-learning-performance')}
+											Student's learning skills performance
 										</h5>
 									</div>
 									<div className="card-body">
@@ -1082,7 +1082,7 @@ const TeacherFeedbackDetailNew = () => {
 
 ReactDOM.render(
 	<I18nextProvider i18n={i18next}>
-		<TeacherFeedbackDetailNew />,
+		<TeacherFeedbackDetailNew />
 	</I18nextProvider>,
 	document.getElementById('react-teacher-feedback-detail'),
 );

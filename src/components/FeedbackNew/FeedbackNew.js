@@ -9,6 +9,7 @@ import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 import common_en from '../../public/static/locales/en/language.json';
 import common_vi from '../../public/static/locales/vi/language.json';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { getFeedbackOverviewAPI } from '~src/api/studentAPI';
 import {
@@ -198,16 +199,19 @@ const FeedbackNew = () => {
 	const [detailStatisticSchedule, setDetailStatisticSchedule] = useState();
 
 	const getAllFeedback = async params => {
+		// toast.success('Thành công');
 		try {
 			const res = await getListEvaluation(params);
 			if (res.Code == 1) {
 				setListFeedback(res.Data);
 				setPageSize(res.PageSize);
 				setTotalResult(res.TotalResult);
+				return res;
 			}
 			setPage(params.Page);
 		} catch (err) {
 			console.log('Err: ', err);
+			return err;
 		}
 	};
 
@@ -303,6 +307,17 @@ const FeedbackNew = () => {
 
 	return (
 		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={2000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<div className="Header">
 				<HeaderNoDom />
 			</div>
@@ -482,6 +497,10 @@ const FeedbackNew = () => {
 											StudentRate={item.StudentRate}
 											StudentEvaluation={item.StudentEvaluation}
 											ID={item.ID}
+											page={page}
+											fromDate={fromDate}
+											toDate={toDate}
+											getAllFeedback={getAllFeedback}
 										/>
 									))
 								) : (

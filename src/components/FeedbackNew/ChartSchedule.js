@@ -99,7 +99,7 @@ const ChartSchedule = props => {
 						></span>
 						<span style={{ marginRight: '8px' }}>{t('student-no-show')}:</span>
 					</div>
-					<span>{detailStatisticSchedule?.Status3}</span>
+					<span>{detailStatisticSchedule?.Status2}</span>
 				</div>
 				{/* <div className="schedule-item">
 					<div>
@@ -117,7 +117,7 @@ const ChartSchedule = props => {
 						{detailStatisticSchedule?.TotalLesson -
 							(detailStatisticSchedule?.Status0 +
 								detailStatisticSchedule?.Status1 +
-								detailStatisticSchedule?.Status3 +
+								detailStatisticSchedule?.Status2 +
 								detailStatisticSchedule?.Status5)}
 					</span>
 				</div>

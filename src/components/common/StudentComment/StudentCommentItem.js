@@ -29,6 +29,10 @@ const StudentCommentItem = ({
 	StudentRate,
 	StudentEvaluation,
 	ID,
+	page,
+	fromDate,
+	toDate,
+	getAllFeedback,
 }) => {
 	const [state, setState] = useState({});
 	const { t, i18n } = useTranslation('common');
@@ -459,7 +463,7 @@ const StudentCommentItem = ({
 											<button
 												className="btn btn-primary mg-r-10"
 												data-toggle="modal"
-												data-target="#js-md-rate"
+												data-target={`#js-md-rate-${ID}`}
 												// onClick={handleOpen}
 											>
 												{t('rating')}
@@ -469,6 +473,10 @@ const StudentCommentItem = ({
 												TeacherUID={TeacherUID}
 												TeacherName={TeacherName}
 												callback={onCallbackRating}
+												page={page}
+												fromDate={fromDate}
+												toDate={toDate}
+												getAllFeedback={getAllFeedback}
 											/>
 										</>
 									)}

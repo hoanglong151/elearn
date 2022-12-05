@@ -45,6 +45,9 @@ const ListSchedule = ({
 			const res = await getLessonBookAPI({ StudyTimeID, Date: date });
 			console.log('RES: ', res);
 			if (res.Code === 1) {
+				const LessionName = res.Data.LessionName;
+				const DocumentID = res.Data.DocumentID;
+				const DocumentDetailID = res.Data.ID;
 				setTimeout(() => {
 					handleBooking(
 						StudyTimeID,
@@ -57,6 +60,8 @@ const ListSchedule = ({
 						start,
 						end,
 						BookingID,
+						DocumentID,
+						DocumentDetailID,
 					);
 				}, 100);
 				// $(modalRef.current).modal('show');

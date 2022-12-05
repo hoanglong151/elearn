@@ -21,6 +21,10 @@ const RatingLessonModal = ({
 	TeacherUID,
 	TeacherName,
 	callback,
+	page,
+	fromDate,
+	toDate,
+	getAllFeedback,
 }) => {
 	const [state, setState] = useState(initialState);
 	const ratingLesson = () => toast.success(RATING_SUCCESS, toastInit);
@@ -35,6 +39,24 @@ const RatingLessonModal = ({
 		if (result === 1) {
 			//Success
 			// ratingLesson();
+			const DateTimeFormat = new Intl.DateTimeFormat('fr-CA', {
+				year: 'numeric',
+				month: '2-digit',
+				day: '2-digit',
+			});
+			await getAllFeedback({
+				Page: page || 1,
+				FromDate:
+					!!fromDate.length > 0
+						? DateTimeFormat.format(new Date(fromDate))
+						: '',
+				ToDate:
+					!!toDate.length > 0 ? DateTimeFormat.format(new Date(toDate)) : '',
+			});
+			$('.modal-backdrop')[0].setAttribute('class', '');
+			$(`#js-md-rate-${BookingID}`).fadeOut(500, function() {
+				$(`#js-md-rate-${BookingID}`).modal('hide');
+			});
 			toast.success('Thành công');
 		} else {
 			//Fail
@@ -42,22 +64,71 @@ const RatingLessonModal = ({
 			toast.error('Thất bại');
 		}
 		callback &&
-			callback(result, state.message, state.rating, BookingID, TeacherUID);
+			callback(
+				result,
+				res.Message,
+				params.Rate,
+				params.BookingID,
+				params.TeacherUID,
+			);
 	};
 
 	const handleChange = e => {
 		const target = e.target;
 		const key = target.getAttribute('name');
 		const value =
-			key === 'rating' ? parseInt(target.getAttribute('value')) : target.value;
-		setState({
-			...state,
-			[key]: value,
-		});
+			key === `rating-${BookingID}`
+				? parseInt(target.getAttribute('value'))
+				: target.value;
+		if (key === `rating-${BookingID}`) {
+			setState({
+				...state,
+				// [key]: value,
+				rating: value,
+			});
+		} else {
+			setState({
+				...state,
+				// [key]: value,
+				message: value,
+			});
+		}
 	};
-
+	console.log('State: ', state);
+	useEffect(() => {
+		switch (state.rating) {
+			case 0:
+				break;
+			case 1:
+				const getDD = document.querySelector('.emoji-wrapper > .emoji');
+				console.log('getDD: ', getDD);
+				document.querySelector(
+					`.emoji-wrapper-${BookingID} > .emoji`,
+				).style.transform = 'translateY(-100px)';
+				break;
+			case 2:
+				document.querySelector(
+					`.emoji-wrapper-${BookingID} > .emoji`,
+				).style.transform = 'translateY(-200px)';
+				break;
+			case 3:
+				document.querySelector(
+					`.emoji-wrapper-${BookingID} > .emoji`,
+				).style.transform = 'translateY(-300px)';
+				break;
+			case 4:
+				document.querySelector(
+					`.emoji-wrapper-${BookingID} > .emoji`,
+				).style.transform = 'translateY(-400px)';
+				break;
+			case 5:
+				document.querySelector(
+					`.emoji-wrapper-${BookingID} > .emoji`,
+				).style.transform = 'translateY(-500px)';
+				break;
+		}
+	}, [state]);
 	const onSubmitRating = () => {
-		console.log('Adu: ', state);
 		if (state.rating === 0) {
 			// ratingLessonAlert1();
 			toast.error('Xin hãy đánh giá cho giáo viên!');
@@ -72,9 +143,6 @@ const RatingLessonModal = ({
 				Rate: state.rating,
 				Evaluation: state.message,
 			});
-			$('#js-md-rate').fadeOut(500, function() {
-				$('#js-md-rate').modal('hide');
-			});
 		}
 	};
 
@@ -85,7 +153,7 @@ const RatingLessonModal = ({
 
 	return (
 		<>
-			<ToastContainer
+			{/* <ToastContainer
 				position="top-right"
 				autoClose={2000}
 				hideProgressBar={false}
@@ -95,12 +163,13 @@ const RatingLessonModal = ({
 				pauseOnFocusLoss
 				draggable
 				pauseOnHover
-			/>
+				id={BookingID}
+			/> */}
 			<div
 				className="modal effect-scale"
 				tabIndex="-1"
 				role="dialog"
-				id="js-md-rate"
+				id={`js-md-rate-${BookingID}`}
 			>
 				<div className="modal-dialog modal-dialog-centered" role="document">
 					<div className="modal-content">
@@ -128,45 +197,65 @@ const RatingLessonModal = ({
 									{t('how-note-1', { TeacherName: TeacherName })}
 								</p>
 								<div className="rating">
-									<input type="radio" name="rating" id="rating-5" />
+									<input
+										type="radio"
+										name={`rating-${BookingID}`}
+										id={`rating-5-${BookingID}`}
+									/>
 									<label
-										name="rating"
-										htmlFor="rating-5"
+										name={`rating-${BookingID}`}
+										htmlFor={`rating-5-${BookingID}`}
 										value={5}
 										onClick={handleChange}
 									></label>
-									<input type="radio" name="rating" id="rating-4" />
+									<input
+										type="radio"
+										name={`rating-${BookingID}`}
+										id={`rating-4-${BookingID}`}
+									/>
 									<label
-										name="rating"
-										htmlFor="rating-4"
+										name={`rating-${BookingID}`}
+										htmlFor={`rating-4-${BookingID}`}
 										value={4}
 										onClick={handleChange}
 									></label>
-									<input type="radio" name="rating" id="rating-3" />
+									<input
+										type="radio"
+										name={`rating-${BookingID}`}
+										id={`rating-3-${BookingID}`}
+									/>
 									<label
-										name="rating"
-										htmlFor="rating-3"
+										name={`rating-${BookingID}`}
+										htmlFor={`rating-3-${BookingID}`}
 										value={3}
 										onClick={handleChange}
 									></label>
-									<input type="radio" name="rating" id="rating-2" />
+									<input
+										type="radio"
+										name={`rating-${BookingID}`}
+										id={`rating-2-${BookingID}`}
+									/>
 									<label
-										name="rating"
-										htmlFor="rating-2"
+										name={`rating-${BookingID}`}
+										htmlFor={`rating-2-${BookingID}`}
 										value={2}
 										onClick={handleChange}
 									></label>
-									<input type="radio" name="rating" id="rating-1" />
+									<input
+										type="radio"
+										name={`rating-${BookingID}`}
+										id={`rating-1-${BookingID}`}
+									/>
 									<label
-										name="rating"
-										htmlFor="rating-1"
+										name={`rating-${BookingID}`}
+										htmlFor={`rating-1-${BookingID}`}
 										value={1}
 										onClick={handleChange}
 									></label>
-									<div className="emoji-wrapper">
+									<div className={`emoji-wrapper emoji-wrapper-${BookingID}`}>
 										<div className="emoji">
 											<svg
-												className="rating-0"
+												className={`rating-0-${BookingID}`}
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512"
 											>
@@ -229,7 +318,7 @@ const RatingLessonModal = ({
 												/>
 											</svg>
 											<svg
-												className="rating-1"
+												className={`rating-1-${BookingID}`}
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512"
 											>
@@ -276,7 +365,7 @@ const RatingLessonModal = ({
 												/>
 											</svg>
 											<svg
-												className="rating-2"
+												className={`rating-2-${BookingID}`}
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512"
 											>
@@ -315,7 +404,7 @@ const RatingLessonModal = ({
 												/>
 											</svg>
 											<svg
-												className="rating-3"
+												className={`rating-3-${BookingID}`}
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512"
 											>
@@ -366,7 +455,7 @@ const RatingLessonModal = ({
 												/>
 											</svg>
 											<svg
-												className="rating-4"
+												className={`rating-4-${BookingID}`}
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512"
 											>
@@ -409,7 +498,7 @@ const RatingLessonModal = ({
 												/>
 											</svg>
 											<svg
-												className="rating-5"
+												className={`rating-5-${BookingID}`}
 												xmlns="http://www.w3.org/2000/svg"
 												viewBox="0 0 512 512"
 											>
@@ -458,7 +547,7 @@ const RatingLessonModal = ({
 											{t('note-feedback')}:
 										</label>
 										<textarea
-											name="message"
+											name={`message-${BookingID}`}
 											rows="5"
 											className="form-control"
 											onChange={handleChange}

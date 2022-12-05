@@ -223,6 +223,8 @@ const BookingLesson = () => {
 		start,
 		end,
 		BookingID,
+		DocumentID,
+		DocumentDetailID,
 	) => {
 		setStateBookLesson({
 			...stateBookLesson,
@@ -236,6 +238,8 @@ const BookingLesson = () => {
 			start,
 			end,
 			BookingID,
+			DocumentID,
+			DocumentDetailID,
 		});
 	};
 
@@ -834,7 +838,10 @@ const BookingLesson = () => {
 																		</p>
 																	</div>
 																</a>
-
+																{console.log(
+																	'stateBookLesson: ',
+																	stateBookLesson,
+																)}
 																<div className="tutor-schedule d-block custom-student">
 																	<BookingLessonModal
 																		style={{ color: '#000', textAlign: 'left' }}
@@ -848,6 +855,10 @@ const BookingLesson = () => {
 																		start={stateBookLesson.start}
 																		end={stateBookLesson.end}
 																		BookingID={stateBookLesson.BookingID}
+																		DocumentID={stateBookLesson.DocumentID}
+																		DocumentDetailID={
+																			stateBookLesson.DocumentDetailID
+																		}
 																		onBook={onBook}
 																		ref={modalRef}
 																	/>
