@@ -159,6 +159,10 @@ nav div ul li a {
 	text-align: center;
 }
 
+.wrapper-feedback-detail-teacher .point-mark {
+	font-size: 15px;
+}
+
 .fb-wrap-item {
 	padding: 30px;
 	background: #fff;
@@ -731,11 +735,6 @@ nav div ul li a {
 .wrapper-note-feedback-detail ol li a {
 	font-weight: 500;
 	text-decoration: underline;
-	color: #000;
-	transition: all 0.15s linear;
-}
-
-.wrapper-note-feedback-detail ol li a:hover {
 	color: #fd7e14;
 }
 

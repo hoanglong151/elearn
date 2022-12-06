@@ -727,43 +727,43 @@ const TeacherFeedbackDetailNew = () => {
 														<th></th>
 														<th>
 															<p className="point">Fully insufficient</p>
-															<p>1</p>
+															<p className="point-mark">1</p>
 														</th>
 														<th>
 															<p className="point">Poor</p>
-															<p>2</p>
+															<p className="point-mark">2</p>
 														</th>
 														<th>
 															<p className="point">Very unsatisfactory</p>
-															<p>3</p>
+															<p className="point-mark">3</p>
 														</th>
 														<th>
 															<p className="point">Unsatisfactory</p>
-															<p>4</p>
+															<p className="point-mark">4</p>
 														</th>
 														<th>
 															<p className="point">Pass</p>
-															<p>5</p>
+															<p className="point-mark">5</p>
 														</th>
 														<th>
 															<p className="point">Satisfactory</p>
-															<p>6</p>
+															<p className="point-mark">6</p>
 														</th>
 														<th>
 															<p className="point">Good</p>
-															<p>7</p>
+															<p className="point-mark">7</p>
 														</th>
 														<th>
 															<p className="point">Very Good</p>
-															<p>8</p>
+															<p className="point-mark">8</p>
 														</th>
 														<th>
 															<p className="point">Outstanding</p>
-															<p>9</p>
+															<p className="point-mark">9</p>
 														</th>
 														<th>
 															<p className="point">Excellent</p>
-															<p>10</p>
+															<p className="point-mark">10</p>
 														</th>
 													</tr>
 												</thead>
