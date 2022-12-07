@@ -85,12 +85,17 @@ const initialState = {
 	selectedLevelPurpose: [],
 	date: new Date(),
 	startTime: dayjs(new Date())
-		.hour(6)
-		.minute(0)
+		.hour(
+			new Date().getMinutes() > 30
+				? new Date().getHours()
+				: new Date().getHours(),
+			+1,
+		)
+		.minute(new Date().getMinutes() > 30 ? 0 : 30)
 		.toDate(),
 	endTime: dayjs(new Date())
-		.hour(22)
-		.minute(30)
+		.hour(23)
+		.minute(0)
 		.toDate(),
 	searchText: '',
 	nation: nationArr[0],
@@ -210,6 +215,45 @@ const BookingLesson = () => {
 
 	const updateDateSelected = date => {
 		dispatch({ type: 'STATE_CHANGE', payload: { key: 'date', value: date } });
+		dispatch({
+			type: 'STATE_CHANGE',
+			payload: {
+				key: 'startTime',
+				value: dayjs(new Date())
+					.hour(
+						new Date().getMinutes() > 30
+							? new Date().getHours() + 1
+							: new Date().getHours(),
+					)
+					.minute(new Date().getMinutes() > 30 ? 0 : 30)
+					.toDate(),
+			},
+			// new Date().setHours(
+			// 														new Date().getHours(),
+			// 														new Date().getMinutes(),
+			// 												  )
+		});
+		dispatch({
+			type: 'STATE_CHANGE',
+			payload: {
+				key: 'endTime',
+				value: dayjs(new Date())
+					.hour(23)
+					.minute(0)
+					.toDate(),
+			},
+		});
+		// dispatch('STATE_CHANGE', {
+		// 	...state,
+		// 	startTime: dayjs(new Date())
+		// 		.hour(6)
+		// 		.minute(0)
+		// 		.toDate(),
+		// 	endTime: dayjs(new Date())
+		// 		.hour(23)
+		// 		.minute(0)
+		// 		.toDate(),
+		// });
 	};
 
 	const onHandleBooking = (
@@ -354,9 +398,13 @@ const BookingLesson = () => {
 			Gender: state?.gender?.value ?? '0',
 			Date: state.date ? dayjs(state.date).format('DD/MM/YYYY') : '',
 			Start: !!state.startTime
-				? `${pad(state.startTime.getHours())}:00`
+				? `${pad(state.startTime.getHours())}:${pad(
+						state.startTime.getMinutes(),
+				  )}`
 				: '00:00',
-			End: !!state.endTime ? `${pad(state.endTime.getHours())}:00` : '23:00',
+			End: !!state.endTime
+				? `${pad(state.endTime.getHours())}:${pad(state.endTime.getMinutes())}`
+				: '23:00',
 			Search: state.searchText,
 			Page: page,
 		});
@@ -494,6 +542,7 @@ const BookingLesson = () => {
 			if (selected) {
 				const date = selected.dataset.date;
 				dateDisplay.value = moment(new Date(date)).format('dddd, DD/MM/YYYY');
+
 				updateDateSelected(new Date(date));
 			}
 		}
@@ -516,7 +565,15 @@ const BookingLesson = () => {
 
 		dispatch({
 			type: 'STATE_CHANGE',
-			payload: { key: 'startTime', value: new Date(rs) },
+			payload: {
+				key: 'startTime',
+				value: new Date().setHours(
+					new Date().getMinutes() > 30
+						? new Date().getHours() + 1
+						: new Date().getHours(),
+					new Date().getMinutes() > 30 ? 0 : 30,
+				),
+			},
 		});
 
 		return () => {
@@ -672,10 +729,13 @@ const BookingLesson = () => {
 													dateFormat="HH:mm"
 													minTime={
 														dayjs().isSame(dayjs(state.date), 'date')
-															? new Date().setHours(new Date().getHours() + 1)
+															? new Date().setHours(
+																	new Date().getHours(),
+																	new Date().getMinutes(),
+															  )
 															: new Date().setHours(5)
 													}
-													maxTime={new Date().setHours(22)}
+													maxTime={new Date().setHours(23, 0)}
 													className="form-control"
 												/>
 											</div>
@@ -696,10 +756,13 @@ const BookingLesson = () => {
 													dateFormat="HH:mm"
 													minTime={
 														dayjs().isSame(dayjs(state.date), 'date')
-															? new Date().setHours(new Date().getHours() + 1)
+															? new Date().setHours(
+																	new Date().getHours(),
+																	new Date().getMinutes(),
+															  )
 															: new Date().setHours(5)
 													}
-													maxTime={new Date().setHours(22)}
+													maxTime={new Date().setHours(23, 0)}
 													className="form-control"
 												/>
 											</div>
@@ -842,10 +905,6 @@ const BookingLesson = () => {
 																		</p>
 																	</div>
 																</a>
-																{console.log(
-																	'stateBookLesson: ',
-																	stateBookLesson,
-																)}
 																<div className="tutor-schedule d-block custom-student">
 																	<BookingLessonModal
 																		style={{ color: '#000', textAlign: 'left' }}
