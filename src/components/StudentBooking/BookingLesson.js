@@ -89,8 +89,8 @@ const initialState = {
 		.minute(0)
 		.toDate(),
 	endTime: dayjs(new Date())
-		.hour(23)
-		.minute(0)
+		.hour(22)
+		.minute(30)
 		.toDate(),
 	searchText: '',
 	nation: nationArr[0],
@@ -672,7 +672,7 @@ const BookingLesson = () => {
 													dateFormat="HH:mm"
 													minTime={
 														dayjs().isSame(dayjs(state.date), 'date')
-															? new Date().setHours(new Date().getHours() + 30)
+															? new Date().setHours(new Date().getHours() + 1)
 															: new Date().setHours(5)
 													}
 													maxTime={new Date().setHours(22)}
@@ -694,7 +694,11 @@ const BookingLesson = () => {
 													timeCaption="Thời gian đến"
 													timeFormat="HH:mm"
 													dateFormat="HH:mm"
-													minTime={new Date().setHours(5)}
+													minTime={
+														dayjs().isSame(dayjs(state.date), 'date')
+															? new Date().setHours(new Date().getHours() + 1)
+															: new Date().setHours(5)
+													}
 													maxTime={new Date().setHours(22)}
 													className="form-control"
 												/>
