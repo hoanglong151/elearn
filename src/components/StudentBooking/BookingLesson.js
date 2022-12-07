@@ -344,6 +344,7 @@ const BookingLesson = () => {
 		e && e.preventDefault();
 		let x = [];
 		if (!!state.startTime && !!state.endTime) {
+			console.log('state.startTime: ', state.startTime);
 			let min = parseInt(state.startTime.getHours());
 			let max = parseInt(state.endTime.getHours());
 
@@ -567,11 +568,13 @@ const BookingLesson = () => {
 			type: 'STATE_CHANGE',
 			payload: {
 				key: 'startTime',
-				value: new Date().setHours(
-					new Date().getMinutes() > 30
-						? new Date().getHours() + 1
-						: new Date().getHours(),
-					new Date().getMinutes() > 30 ? 0 : 30,
+				value: new Date(
+					new Date().setHours(
+						new Date().getMinutes() > 30
+							? new Date().getHours() + 1
+							: new Date().getHours(),
+						new Date().getMinutes() > 30 ? 0 : 30,
+					),
 				),
 			},
 		});
