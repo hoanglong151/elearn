@@ -10,6 +10,7 @@ import {
 	FILL_NOTES,
 	MAX_200,
 } from '~components/common/Constant/toast';
+import { useTranslation } from 'react-i18next';
 
 import styles from '~components/RequireLessonModal.module.scss';
 
@@ -31,6 +32,7 @@ const RequireLessonModal = ({
 	const [state, setState] = useState(
 		SpecialRequest == null ? '' : SpecialRequest,
 	);
+	const { t, i18n } = useTranslation('common');
 	const requireLesson = () => toast.success(REQUEST_SUCCESS, toastInit);
 	const requireLessonFail = () => toast.error(FETCH_ERROR, toastInit);
 	const requireLessonAlert1 = () => toast.warn(FILL_NOTES, toastInit);
@@ -142,19 +144,19 @@ const RequireLessonModal = ({
 													className="feather-16 mg-r-5"
 													data-feather="clock"
 												></i>
-												{`Bắt đầu: ${start}`}
+												{`${t('start')}: ${start}`}
 											</span>
 											<span className="mg-r-15 tx-gray-600 tx-medium d-inline-block">
 												<i
 													className="feather-16 mg-r-5"
 													data-feather="clock"
 												></i>
-												{`Kết thúc: ${end}`}
+												{`${t('end')}: ${end}`}
 											</span>
 										</div>
 										{SpecialRequest && (
 											<div className="course-note mg-t-15">
-												<h6 className="mg-b-3">Ghi chú:</h6>
+												<h6 className="mg-b-3">{t('note')}:</h6>
 												<p className="tx-14 mg-b-0 word-break">
 													{' '}
 													{SpecialRequest}{' '}
@@ -163,7 +165,7 @@ const RequireLessonModal = ({
 										)}
 										{DocumentName && LessionMaterial && (
 											<div className="course-docs mg-t-15">
-												<h6 className="mg-b-3">Tài liệu:</h6>
+												<h6 className="mg-b-3">{t('materials')}:</h6>
 												<div>
 													<a
 														href={LessionMaterial}
@@ -177,11 +179,9 @@ const RequireLessonModal = ({
 										)}
 										<div className="required-list mg-t-15 bd-t pd-t-15">
 											<div className="required-text-box metronic-form">
-												<label className="tx-medium">
-													Ghi chú cho giáo viên:
-												</label>
+												<label className="tx-medium">{t('noteteacher')}:</label>
 												<label className="tx-danger d-block">
-													Vui lòng viết bằng Tiếng Anh (tối đa 200 ký tự)
+													{t('200characters')}
 												</label>
 												<div className="form-group mg-b-5-f">
 													<textarea
@@ -212,14 +212,14 @@ const RequireLessonModal = ({
 								className="btn btn-light"
 								data-dismiss="modal"
 							>
-								Đóng
+								{t('close')}
 							</button>
 							<button
 								type="button"
 								className="btn btn-primary"
 								onClick={onSubmitRequire}
 							>
-								Sửa yêu cầu
+								{t('changerequirement')}
 							</button>
 						</div>
 					</form>

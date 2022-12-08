@@ -738,6 +738,15 @@ nav div ul li a {
 	color: #fd7e14;
 }
 
+.course-rate {
+	display: flex;
+	align-items: center;
+}
+
+.text-feedback-course {
+	margin-bottom: 0;
+}
+
 @media (max-width: 1023px) {
 	.button-next-feedback {
 		width: 100%;
