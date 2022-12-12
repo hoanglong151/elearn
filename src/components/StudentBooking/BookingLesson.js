@@ -77,7 +77,7 @@ const nationArr = [
 		value: '4',
 	},
 ];
-
+let startTime = 0;
 const initialState = {
 	nation: [],
 	gender: genderArr[0],
@@ -143,7 +143,18 @@ const BookingLesson = () => {
 	const [onBookState, setOnBookState] = useState(initialOnBookState);
 	const [stateBookLesson, setStateBookLesson] = useState(initialBookLesson);
 	const [learnTime, setLearnTime] = useState([]);
-
+	console.log(
+		'STATE: ',
+		dayjs(new Date())
+			.hour(
+				new Date().getMinutes() > 30
+					? new Date().getHours()
+					: new Date().getHours(),
+				+1,
+			)
+			.minute(new Date().getMinutes() > 30 ? 0 : 30)
+			.toDate(),
+	);
 	const [page, setPage] = useState(1);
 	const [pageSize, setPageSize] = useState(0);
 	const [totalResult, setTotalResult] = useState(0);
@@ -214,25 +225,27 @@ const BookingLesson = () => {
 	};
 
 	const updateDateSelected = date => {
+		console.log('date: ', new Date(startTime).getHours());
 		dispatch({ type: 'STATE_CHANGE', payload: { key: 'date', value: date } });
-		dispatch({
-			type: 'STATE_CHANGE',
-			payload: {
-				key: 'startTime',
-				value: dayjs(new Date())
-					.hour(
-						new Date().getMinutes() > 30
-							? new Date().getHours() + 1
-							: new Date().getHours(),
-					)
-					.minute(new Date().getMinutes() > 30 ? 0 : 30)
-					.toDate(),
-			},
-			// new Date().setHours(
-			// 														new Date().getHours(),
-			// 														new Date().getMinutes(),
-			// 												  )
-		});
+		if (date.getDate() == new Date().getDate()) {
+			if (new Date().getHours() > new Date(startTime).getHours()) {
+				dispatch({
+					type: 'STATE_CHANGE',
+					payload: {
+						key: 'startTime',
+						value: dayjs(new Date())
+							.hour(
+								new Date().getMinutes() > 30
+									? new Date().getHours() + 1
+									: new Date().getHours(),
+							)
+							.minute(new Date().getMinutes() > 30 ? 0 : 30)
+							.toDate(),
+					},
+				});
+			}
+		}
+
 		dispatch({
 			type: 'STATE_CHANGE',
 			payload: {
@@ -344,7 +357,6 @@ const BookingLesson = () => {
 		e && e.preventDefault();
 		let x = [];
 		if (!!state.startTime && !!state.endTime) {
-			console.log('state.startTime: ', state.startTime);
 			let min = parseInt(state.startTime.getHours());
 			let max = parseInt(state.endTime.getHours());
 
@@ -539,11 +551,11 @@ const BookingLesson = () => {
 		todayBtn.addEventListener('click', chooseToday);
 
 		function setDateDisplay() {
+			console.log('stateTime----------------: ', startTime);
 			const selected = this.el.querySelector('.swiper-slide.selected');
 			if (selected) {
 				const date = selected.dataset.date;
 				dateDisplay.value = moment(new Date(date)).format('dddd, DD/MM/YYYY');
-
 				updateDateSelected(new Date(date));
 			}
 		}
@@ -564,20 +576,13 @@ const BookingLesson = () => {
 			rs = rs + 3600000 - (rs % 3600000);
 		}
 
-		dispatch({
-			type: 'STATE_CHANGE',
-			payload: {
-				key: 'startTime',
-				value: new Date(
-					new Date().setHours(
-						new Date().getMinutes() > 30
-							? new Date().getHours() + 1
-							: new Date().getHours(),
-						new Date().getMinutes() > 30 ? 0 : 30,
-					),
-				),
-			},
-		});
+		// dispatch({
+		// 	type: 'STATE_CHANGE',
+		// 	payload: {
+		// 		key: 'startTime',
+		// 		value: new Date(rs),
+		// 	},
+		// });
 
 		return () => {
 			modalRef.current && (modalRef.current = false);
@@ -718,12 +723,13 @@ const BookingLesson = () => {
 											<div className="col-12 col-sm-6 col-md-2 item">
 												<DatePicker
 													selected={state.startTime}
-													onChange={date =>
+													onChange={date => {
+														startTime = date;
 														dispatch({
 															type: 'STATE_CHANGE',
 															payload: { key: 'startTime', value: date },
-														})
-													}
+														});
+													}}
 													showTimeSelect
 													showTimeSelectOnly
 													timeIntervals={30}

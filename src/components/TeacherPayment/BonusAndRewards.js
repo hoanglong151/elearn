@@ -74,24 +74,35 @@ const fakeData = [
 
 const RenderRow = ({ data, ...others }) => {
 	debugger;
-	const { StudentReferral, TeacherReferral, Rewards, ReasonforOtherBonus, Deductions, ReasonforDeduction } = data;
+	const {
+		StudentReferral,
+		TeacherReferral,
+		Rewards,
+		ReasonforOtherBonus,
+		Deductions,
+		ReasonforDeduction,
+	} = data;
 	return (
 		<tr>
 			<td data-title="No." className="tx-center">
 				{others.number + 1 || 0}
 			</td>
 			<td data-title="Student Referral" className="tx-nowrap">
-			<NumberFormat
+				<NumberFormat
 					value={`${StudentReferral}`}
 					displayType={'text'}
 					thousandSeparator={true}
-					suffix={'$'}
+					// Ký tự $ sau số tiền
+					// suffix={'$'}
 				/>
 			</td>
 
-			<td data-title="Teacher
-			Referral" className="tx-center">
-			<NumberFormat
+			<td
+				data-title="Teacher
+			Referral"
+				className="tx-center"
+			>
+				<NumberFormat
 					value={`${TeacherReferral}`}
 					displayType={'text'}
 					thousandSeparator={true}
@@ -99,21 +110,21 @@ const RenderRow = ({ data, ...others }) => {
 				/>
 			</td>
 			<td data-title="Rewards" className="tx-center">
-			<NumberFormat
+				<NumberFormat
 					value={`${Rewards}`}
 					displayType={'text'}
 					thousandSeparator={true}
 					suffix={'$'}
 				/>
-				</td>
+			</td>
 			<td data-title="Reason for OtherBonus" className="tx-center">
 				{ReasonforOtherBonus}
 			</td>
-			
+
 			<td data-title="Deductions" className="tx-center">
 				<NumberFormat
 					value={`${Deductions}`}
-					displayType={'text'}   
+					displayType={'text'}
 					thousandSeparator={true}
 					suffix={'$'}
 				/>
@@ -133,8 +144,7 @@ const BonusAndRewards = () => {
 	const [totalResult, setTotalResult] = useState(0);
 	const loadClassesAPI = async () => {
 		setIsLoading(true);
-		try
-		{
+		try {
 			const params = {
 				Page: parseInt(pageNumber), //Int
 				FromDate: '',
@@ -183,7 +193,7 @@ const BonusAndRewards = () => {
 						</Accordion.Toggle>
 						<Accordion.Collapse eventKey="0">
 							<Card.Body>
-									<div className="mg-t-30">
+								<div className="mg-t-30">
 									<table className="table responsive-table-vertical table-schedule-log table-hover ">
 										<thead className="thead-primary">
 											<tr className="gv-bg-table">
