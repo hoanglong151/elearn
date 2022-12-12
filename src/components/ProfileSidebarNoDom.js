@@ -47,7 +47,6 @@ const ProfileSidebarNoDom = () => {
 										: '../assets/img/default-avatar.png'
 								}`}
 								onError={e => {
-									e.target.onerror = null;
 									e.target.src = '../assets/img/default-avatar.png';
 								}}
 								className="rounded-circle"

@@ -32,16 +32,17 @@ const BookingLessonModal = (
 ) => {
 	const [state, setState] = useState('');
 	const [bookState, setBookState] = useState(null);
-	const bookingToastFail = () => toast.error(FETCH_ERROR, toastInit);
+	const bookingToastFail = text => toast.error(text, toastInit);
 	const bookingToastFail2 = text => toast.error(text, toastInit);
 	const requireLessonAlert = () => toast.warn(MAX_200, toastInit);
 
 	const fetchAPI = async params => {
 		const res = await bookingLessonAPI(params);
-		if (res.Code === 1)
+		if (res.Code === 1) {
 			onBook && onBook(TeacherUID, StudyTimeID, date, res.Code);
-		else if (!!res && res.Message) bookingToastFail2(res.Message);
-		else bookingToastFail();
+			toast.success(res.Message);
+		} else if (!!res && res.Message) bookingToastFail2(res.Message);
+		else bookingToastFail(res.Message);
 	};
 
 	const getLessonToBookingAPI = async () => {

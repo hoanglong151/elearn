@@ -69,15 +69,11 @@ const ListSchedule = ({
 				// 	onTouchBooking && onTouchBooking();
 				// }, 200);
 			} else {
-				toast.error(
-					res?.Message ??
-						'Không thể đặt buổi học này, vui lòng chọn buổi khác !!',
-					toastInit,
-				);
+				toast.error(res?.Message, toastInit);
 			}
 		} catch (error) {
 			console.log(error);
-			toast.error('Lỗi đặt lịch học, vui lòng thử lại sau !!', toastInit);
+			toast.error(res.Message, toastInit);
 		}
 		setOpening(false);
 	};
@@ -111,7 +107,7 @@ const ListSchedule = ({
 		if (index !== -1) {
 			newSchedule[index].bookStatus = true;
 			setSchedule(newSchedule);
-			bookingToast();
+			// bookingToast();
 		}
 	}, [onBookTeacherUID, onBookStudyTimeID, onBookDate]);
 

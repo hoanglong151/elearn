@@ -472,6 +472,14 @@ nav div ul li a {
 	max-width: 110px;
 	padding: 0;
 }
+#example-collapse-text .wrapper-lesson-history thead th {
+	background-color: #ffc000;
+	color: #fff;
+	width: unset;
+	min-width: unset;
+	max-width: unset;
+	padding: 0;
+}
 #react-teacher-feedback-detail
 	.wrapper-feedback-detail-teacher
 	.table-striped
@@ -781,6 +789,12 @@ nav div ul li a {
 
 .btn-rate-now:focus {
 	outline: none;
+}
+
+.wrapper-lesson-history th {
+	width: 0;
+	min-width: 0;
+	max-width: 0;
 }
 
 @media (max-width: 1023px) {
