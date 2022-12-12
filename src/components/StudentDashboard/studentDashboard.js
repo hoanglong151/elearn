@@ -11,7 +11,6 @@ import { TextDocument } from '@styled-icons/entypo/TextDocument';
 import LessonHistoryCard from '~components/LessonHistoryCard';
 import LessonUpcomingCard from '~components/LessonUpcomingCard';
 
-import RatingLessonModal from '~components/RatingLessonModal';
 import RequireLessonModal from '~components/RequireLessonModal';
 import CancelBookingLessonModal from '~components/CancelBookingLessonModal';
 import PopUpCancelLesson from '~components/PopUpCancelLesson';
@@ -39,6 +38,7 @@ import common_en from '../../public/static/locales/en/language.json';
 import common_vi from '../../public/static/locales/vi/language.json';
 import ProfileSidebarNoDom from '../ProfileSidebarNoDom';
 import HeaderNoDom from '../HeaderNoDom';
+import RatingLessonModalDashboard from '../RatingLessonModalDashboard';
 i18next.init({
 	interpolation: { escapeValue: false },
 	lng: 'vi',
@@ -129,7 +129,7 @@ const Dashboard = () => {
 	const [courseInfo, setCourseInfo] = useState(null);
 	const [loadingCourseInfo, setLoadingCourseInfo] = useState(false);
 
-	const cancelToastFail = () => toast.error(FETCH_ERROR, toastInit);
+	const cancelToastFail = message => toast.error(message, toastInit);
 
 	const handleRatingLesson = (BookingID, TeacherUID, TeacherName) => {
 		setStateRatingLesson({
@@ -218,18 +218,28 @@ const Dashboard = () => {
 					reason,
 				});
 				$('#md-cancel-schedule-popup').modal('show');
-			} else cancelToastFail(); //Cancel Lesson Fail
+			} else {
+				cancelToastFail();
+			} //Cancel Lesson Fail
 		}
 	};
 
-	const cbRatingLesson = (result, message, rating, BookingID, TeacherUID) => {
+	const cbRatingLesson = (
+		result,
+		message,
+		rating,
+		evaluation,
+		BookingID,
+		TeacherUID,
+	) => {
 		if (result === 1) {
 			//Rating Success
 			let newState = { ...state };
 			const index = newState.LessionHistory.findIndex(
 				item => item.BookingID === BookingID && item.TeacherUID === TeacherUID,
 			);
-			newState.LessionHistory[index].Rate = rating;
+			newState.LessionHistory[index].StudentRate = rating;
+			newState.LessionHistory[index].StudentEvaluation = evaluation;
 			setState(newState);
 		}
 	};
@@ -608,28 +618,33 @@ const Dashboard = () => {
 										) : !!state.LessionHistory &&
 										  state.LessionHistory.length > 0 ? (
 											state.LessionHistory.map(item => (
-												<LessonHistoryCard
-													key={item.BookingID}
-													BookingID={item.BookingID}
-													TeacherUID={item.TeacherUID}
-													avatar={item.TeacherIMG}
-													TeacherName={item.TeacherName}
-													LessionName={item.LessionName}
-													Status={item.Status}
-													start={convertDateFromTo(item.Schedule).fromTime}
-													end={convertDateFromTo(item.Schedule).endTime}
-													date={convertDateFromTo(item.Schedule).date}
-													Rate={item.Rate}
-													onHandleRatingLesson={handleRatingLesson}
-													note={item.Note}
-													ListeningPoint={item.ListeningPoint}
-													ReadingPoint={item.ReadingPoint}
-													SpeakingPoint={item.SpeakingPoint}
-													WritingPoint={item.WritingPoint}
-													StudentRate={item.StudentRate}
-													onCallbackRating={cbRatingLesson}
-													getAllFeedback={getAPI}
-												/>
+												<>
+													<LessonHistoryCard
+														key={item.BookingID}
+														BookingID={item.BookingID}
+														TeacherUID={item.TeacherUID}
+														avatar={item.TeacherIMG}
+														TeacherName={item.TeacherName}
+														LessionName={item.LessionName}
+														Status={item.Status}
+														start={convertDateFromTo(item.Schedule).fromTime}
+														end={convertDateFromTo(item.Schedule).endTime}
+														date={convertDateFromTo(item.Schedule).date}
+														Rate={item.Rate}
+														onHandleRatingLesson={handleRatingLesson}
+														note={item.Note}
+														ListeningPoint={item.ListeningPoint}
+														ReadingPoint={item.ReadingPoint}
+														SpeakingPoint={item.SpeakingPoint}
+														WritingPoint={item.WritingPoint}
+														DocumentName={item.DocumentName}
+														Schedule={item.Schedule}
+														LessionMaterial={item.LessionMaterial}
+														StudentRate={item.StudentRate}
+														StudentEvaluation={item.StudentEvaluation}
+														ID={item.ID}
+													/>
+												</>
 											))
 										) : (
 											<div className="empty-error tx-center mg-y-15 cr-item bg-white rounded-5 pd-15 shadow">
@@ -648,12 +663,34 @@ const Dashboard = () => {
 							</div>
 						</>
 					)}
-					{/* <RatingLessonModal
-						BookingID={stateRatingLesson.BookingID}
-						TeacherUID={stateRatingLesson.TeacherUID}
-						TeacherName={stateRatingLesson.TeacherName}
-						callback={cbRatingLesson}
-					/> */}
+
+					{/* {!!state.LessionHistory && state.LessionHistory.length > 0
+						? state.LessionHistory.map(item => {
+								return (
+									<RatingLessonModal
+										key={item.BookingID}
+										BookingID={item.BookingID}
+										TeacherUID={item.TeacherUID}
+										TeacherName={item.TeacherName}
+										callback={cbRatingLesson}
+									/>
+								);
+						  })
+						: null} */}
+
+					{!!state.LessionHistory && state.LessionHistory.length > 0
+						? state.LessionHistory.map(item => {
+								return (
+									<RatingLessonModalDashboard
+										key={item.BookingID}
+										BookingID={item.BookingID}
+										TeacherUID={item.TeacherUID}
+										TeacherName={item.TeacherName}
+										callback={cbRatingLesson}
+									/>
+								);
+						  })
+						: null}
 
 					<RequireLessonModal
 						BookingID={stateRequireLesson.BookingID}

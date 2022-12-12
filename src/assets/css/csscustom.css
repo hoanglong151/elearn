@@ -617,6 +617,15 @@ nav div ul li a {
 	color: #fd7e14;
 	outline: none;
 }
+.btn-readmore-title {
+	color: #000;
+	transition: all 0.15s linear;
+	font-weight: bold;
+}
+.btn-readmore-title:hover {
+	color: #fd7e14;
+}
+.btn-readmore-title:focus,
 .btn-readmore:focus {
 	outline: none;
 }
@@ -745,6 +754,33 @@ nav div ul li a {
 
 .text-feedback-course {
 	margin-bottom: 0;
+}
+
+.lesson-info .course-rate .rate-now {
+	display: block;
+	margin-top: 8px;
+	color: #fd7e14;
+	border-bottom: 1px solid #fd7e14;
+	font-size: 1rem;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	padding: 0;
+}
+
+.btn-rate-now {
+	display: block;
+	margin-top: 8px;
+	color: #fd7e14;
+	border-bottom: 1px solid #fd7e14;
+	font-size: 1rem;
+	background-color: transparent;
+	outline: none;
+	border: none;
+}
+
+.btn-rate-now:focus {
+	outline: none;
 }
 
 @media (max-width: 1023px) {

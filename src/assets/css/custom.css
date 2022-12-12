@@ -5691,12 +5691,16 @@ footer.footer a {
 .lesson-info .course-rate .rating {
 	width: auto;
 }
-.lesson-info .course-rate .rate-now {
-	display: inline-block;
-	margin-left: 15px;
-	color: #fd5e8e;
-	border-bottom: 1px solid #fd5e8e;
+
+.btn-rate-now {
+	display: block;
+	margin-top: 8px;
+	color: #fd7e14;
+	border-bottom: 1px solid #fd7e14;
 	font-size: 1rem;
+	background-color: transparent;
+	outline: none;
+	border: none;
 }
 .gradient-heading {
 	background: repeating-radial-gradient(

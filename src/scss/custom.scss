@@ -7090,13 +7090,21 @@ footer.footer {
 		}
 
 		.rate-now {
-			display: inline-block;
+			display: block;
 			margin-left: 15px;
 			color: $primary-color;
 			border-bottom: 1px solid $primary-color;
 			font-size: 0.875rem;
 		}
 	}
+}
+
+.btn-rate-now {
+	display: block;
+	margin-top: 8px;
+	color: $primary-color;
+	border-bottom: 1px solid $primary-color;
+	font-size: 0.875rem;
 }
 
 .gradient-heading {
@@ -9550,6 +9558,15 @@ input[type='month'].form-control {
 	background-color: transparent;
 	border: none;
 	color: #fd7e14;
+	outline: none;
+	&:focus {
+		outline: none;
+	}
+}
+.btn-readmore-title {
+	background-color: transparent;
+	border: none;
+	color: #000;
 	outline: none;
 	&:focus {
 		outline: none;

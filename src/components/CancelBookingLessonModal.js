@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import { cancelLessonAPI } from '../api/studentAPI';
+import { toast } from 'react-toastify';
+import { toastInit } from '~src/utils';
 
 const CancelBookingLessonModal = ({
 	BookingID,
@@ -17,14 +19,21 @@ const CancelBookingLessonModal = ({
 		/* start: -1 */
 		callback && callback(params.BookingID, -1);
 		const res = await cancelLessonAPI(params);
-		if (res.Code === 1)
+		if (res.Code === 1) {
 			callback &&
 				callback(params.BookingID, 1, LessionName, date, start, end, reason);
-		else callback && callback(params.BookingID, 0);
+			console.log('res 1: ', res);
+			toast.success(res.Message, toastInit);
+		} else {
+			console.log('res 2: ', res);
+			callback && callback(params.BookingID, 0);
+			toast.error(res.Message, toastInit);
+		}
 	};
 
 	const onSubmitCancelLesson = () => {
 		if (reason.length <= 0) {
+			toast.error('Vui lòng không để trống mục lý do', toastInit);
 			return;
 		} else {
 			getAPI({

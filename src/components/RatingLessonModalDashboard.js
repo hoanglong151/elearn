@@ -16,15 +16,11 @@ const initialState = {
 	rating: 0,
 	message: '',
 };
-const RatingLessonModal = ({
+const RatingLessonModalDashboard = ({
 	BookingID,
 	TeacherUID,
 	TeacherName,
 	callback,
-	page,
-	fromDate,
-	toDate,
-	getAllFeedback,
 }) => {
 	const [state, setState] = useState(initialState);
 	const ratingLesson = () => toast.success(RATING_SUCCESS, toastInit);
@@ -39,35 +35,22 @@ const RatingLessonModal = ({
 		if (result === 1) {
 			//Success
 			// ratingLesson();
-			const DateTimeFormat = new Intl.DateTimeFormat('fr-CA', {
-				year: 'numeric',
-				month: '2-digit',
-				day: '2-digit',
-			});
-			await getAllFeedback({
-				Page: page || 1,
-				FromDate:
-					!!fromDate.length > 0
-						? DateTimeFormat.format(new Date(fromDate))
-						: '',
-				ToDate:
-					!!toDate.length > 0 ? DateTimeFormat.format(new Date(toDate)) : '',
-			});
 			$('.modal-backdrop')[0].setAttribute('class', '');
 			$(`#js-md-rate-${BookingID}`).fadeOut(500, function() {
 				$(`#js-md-rate-${BookingID}`).modal('hide');
 			});
-			toast.success('Thành công');
+			toast.success(res.Message);
 		} else {
 			//Fail
 			// ratingLessonError();
-			toast.error('Thất bại');
+			toast.error(res.Message);
 		}
 		callback &&
 			callback(
 				result,
 				res.Message,
 				params.Rate,
+				params.Evaluation,
 				params.BookingID,
 				params.TeacherUID,
 			);
@@ -577,4 +560,4 @@ const RatingLessonModal = ({
 		</>
 	);
 };
-export default RatingLessonModal;
+export default RatingLessonModalDashboard;

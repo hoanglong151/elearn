@@ -249,7 +249,7 @@ const LessonUpcomingCard = ({
 									data-placement="top"
 								>
 									<div>
-										<i className="fas fa-times-circle"></i>
+										<i className="fas fa-times-circle mg-r-5"></i>
 										{t('cancelclass-1')}
 									</div>
 								</a>
@@ -261,7 +261,7 @@ const LessonUpcomingCard = ({
 									title="Bạn không thể hủy lớp 60 phút trước khi vào học !!"
 									data-placement="top"
 								>
-									<i className="fas fa-times-circle"></i>
+									<i className="fas fa-times-circle mg-r-5"></i>
 									{t('cancelclass-1')}
 								</button>
 							)}
