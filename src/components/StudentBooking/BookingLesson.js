@@ -242,19 +242,19 @@ const BookingLesson = () => {
 							.toDate(),
 					},
 				});
+
+				dispatch({
+					type: 'STATE_CHANGE',
+					payload: {
+						key: 'endTime',
+						value: dayjs(new Date())
+							.hour(23)
+							.minute(0)
+							.toDate(),
+					},
+				});
 			}
 		}
-
-		dispatch({
-			type: 'STATE_CHANGE',
-			payload: {
-				key: 'endTime',
-				value: dayjs(new Date())
-					.hour(23)
-					.minute(0)
-					.toDate(),
-			},
-		});
 		// dispatch('STATE_CHANGE', {
 		// 	...state,
 		// 	startTime: dayjs(new Date())
@@ -773,11 +773,6 @@ const BookingLesson = () => {
 													maxTime={new Date().setHours(23, 0)}
 													className="form-control"
 												/>
-												{console.log(
-													'state.date: ',
-													state.date,
-													dayjs().isSame(dayjs(state.date), 'date'),
-												)}
 											</div>
 										</div>
 									</div>
