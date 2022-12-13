@@ -130,7 +130,7 @@ const RatingLessonModal = ({
 		if (state.rating === 0) {
 			// ratingLessonAlert1();
 			toast.error('Xin hãy đánh giá cho giáo viên!');
-		} else if (state.message.length <= 0) {
+		} else if (!state.message.trim()) {
 			// ratingLessonAlert2();
 			toast.error('Xin hãy để lại lời nhắn cho giáo viên!');
 		} else {

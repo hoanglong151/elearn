@@ -87,9 +87,8 @@ const initialState = {
 	startTime: dayjs(new Date())
 		.hour(
 			new Date().getMinutes() > 30
-				? new Date().getHours()
+				? new Date().getHours() + 1
 				: new Date().getHours(),
-			+1,
 		)
 		.minute(new Date().getMinutes() > 30 ? 0 : 30)
 		.toDate(),
@@ -769,11 +768,16 @@ const BookingLesson = () => {
 																	new Date().getHours(),
 																	new Date().getMinutes(),
 															  )
-															: new Date().setHours(5)
+															: new Date().setHours(5, 30)
 													}
 													maxTime={new Date().setHours(23, 0)}
 													className="form-control"
 												/>
+												{console.log(
+													'state.date: ',
+													state.date,
+													dayjs().isSame(dayjs(state.date), 'date'),
+												)}
 											</div>
 										</div>
 									</div>
