@@ -287,6 +287,7 @@ const LessonHistory = () => {
 											FileAudio={item.FileAudio}
 											FileAudio1={item.FileAudio1}
 											FileAudio2={item.FileAudio2}
+											Note={item.Note}
 										/>
 									))
 								) : data.length == 0 ? (

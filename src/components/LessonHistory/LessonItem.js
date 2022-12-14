@@ -31,6 +31,7 @@ const LessonItem = ({
 	StudentEvaluation,
 	StudentRate,
 	ID,
+	Note,
 }) => {
 	const listFeedBack = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 	const { t, i18n } = useTranslation('common');
@@ -207,6 +208,18 @@ const LessonItem = ({
 													{t('teachers-general-feedback')}
 												</h5>
 											</div>
+											{Note ? (
+												<div className="st-item-danhgia tx-gray-500">
+													<p
+														className="word-break"
+														dangerouslySetInnerHTML={{
+															__html: decodeHTML(Note),
+														}}
+													></p>
+												</div>
+											) : (
+												''
+											)}
 										</div>
 										{!!ID ? (
 											<div className="st-danhgianguphap ">

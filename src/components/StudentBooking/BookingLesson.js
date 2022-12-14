@@ -741,7 +741,7 @@ const BookingLesson = () => {
 																	new Date().getHours(),
 																	new Date().getMinutes(),
 															  )
-															: new Date().setHours(5)
+															: new Date().setHours(5, 30)
 													}
 													maxTime={new Date().setHours(23, 0)}
 													className="form-control"

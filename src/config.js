@@ -1,5 +1,5 @@
 export const appSettings = {
-	baseURL: 'http://app-elearn.monamedia.net',
+	baseURL: 'https://app.e-learn.com.vn',
 	key: 'VnVOQG0zODlNb25hRGV2',
 	colors: {
 		second: '#fd5e8e',
