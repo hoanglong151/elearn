@@ -10,8 +10,8 @@ import { useTranslation } from 'react-i18next';
 function Example(props) {
 	return (
 		<>
-			<div style={{ display: 'flex' }}>
-				<div style={{ paddingRight: 16 }}>{props.children}</div>
+			<div className="wrapper-chart-schedule-mobile">
+				<div className="chart-schedule-mobile">{props.children}</div>
 				<div>
 					<h3 className="h5">{props.label}</h3>
 					<p>{props.description}</p>

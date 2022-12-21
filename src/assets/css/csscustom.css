@@ -807,9 +807,53 @@ nav div ul li a {
 	}
 }
 
+.chart-schedule-mobile {
+	padding-right: 16px;
+}
+
+.wrapper-chart-schedule-mobile {
+	display: flex;
+}
+#react-feedback .wrapper-chart {
+	min-height: unset !important;
+}
+
+@media (max-width: 1350px) {
+	#react-feedback .chart-schedule-mobile {
+		padding-right: 24px;
+	}
+	#react-feedback .wrapper-chart {
+		flex-wrap: wrap;
+		gap: 30px !important;
+	}
+	#react-feedback .wrapper-chart .chart {
+		width: 100% !important;
+	}
+}
+
+@media (max-width: 1023px) {
+	#react-feedback .wrapper-chart {
+		flex-wrap: wrap;
+		gap: 30px !important;
+	}
+	#react-feedback .chart-schedule-mobile {
+		padding-right: 24px;
+	}
+	#react-feedback .wrapper-chart .chart {
+		width: 100% !important;
+	}
+}
+
 @media (max-width: 767px) {
-	.chart-schedule-title {
-		font-size: 18px;
-		line-height: 28px;
+	#react-feedback .chart-schedule-title {
+		font-size: 32px;
+		line-height: 42px;
+	}
+	#react-feedback .wrapper-chart-schedule-mobile {
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+	#react-feedback .chart-schedule-mobile {
+		padding-right: 0;
 	}
 }
